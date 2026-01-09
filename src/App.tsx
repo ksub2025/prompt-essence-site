@@ -10,6 +10,7 @@ import Subsections from "./pages/Subsections";
 import Benefits from "./pages/Benefits";
 import Apply from "./pages/Apply";
 import Contact from "./pages/Contact";
+import Timeline from "./pages/Timeline";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/benefits" element={<Benefits />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/timeline" element={<Timeline />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
