@@ -6,46 +6,46 @@
 
 @layer base {
   :root {
-    --background: 20 10% 5%;
-    --foreground: 40 30% 92%;
+    --background: 60 10% 96%;
+    --foreground: 60 5% 12%;
 
-    --card: 20 8% 8%;
-    --card-foreground: 40 30% 92%;
+    --card: 60 10% 98%;
+    --card-foreground: 60 5% 12%;
 
-    --popover: 20 8% 8%;
-    --popover-foreground: 40 30% 92%;
+    --popover: 60 10% 98%;
+    --popover-foreground: 60 5% 12%;
 
-    --primary: 180 85% 55%;
-    --primary-foreground: 20 10% 5%;
+    --primary: 75 25% 40%;
+    --primary-foreground: 60 10% 98%;
 
-    --secondary: 20 8% 12%;
-    --secondary-foreground: 40 30% 92%;
+    --secondary: 60 8% 90%;
+    --secondary-foreground: 60 5% 20%;
 
-    --muted: 20 8% 15%;
-    --muted-foreground: 40 15% 60%;
+    --muted: 60 8% 92%;
+    --muted-foreground: 60 5% 45%;
 
-    --accent: 180 85% 55%;
-    --accent-foreground: 20 10% 5%;
+    --accent: 45 20% 85%;
+    --accent-foreground: 60 5% 15%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 40 30% 92%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 60 10% 98%;
 
-    --border: 20 8% 18%;
-    --input: 20 8% 18%;
-    --ring: 180 85% 55%;
+    --border: 60 10% 88%;
+    --input: 60 10% 88%;
+    --ring: 75 25% 40%;
 
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --hero-gradient: linear-gradient(135deg, hsl(180 85% 55% / 0.15), hsl(280 60% 50% / 0.1));
-    --section-gradient: linear-gradient(180deg, hsl(20 10% 5%), hsl(20 8% 8%));
-    --glow: 0 0 60px hsl(180 85% 55% / 0.3);
-    --text-gradient: linear-gradient(135deg, hsl(40 30% 92%), hsl(180 85% 70%));
+    --hero-gradient: linear-gradient(135deg, hsl(75 25% 40% / 0.08), hsl(45 30% 70% / 0.1));
+    --section-gradient: linear-gradient(180deg, hsl(60 10% 96%), hsl(60 10% 98%));
+    --glow: 0 4px 20px hsl(75 25% 40% / 0.15);
+    --text-gradient: linear-gradient(135deg, hsl(60 5% 12%), hsl(75 25% 35%));
   }
 
   .dark {
-    --background: 20 10% 5%;
-    --foreground: 40 30% 92%;
+    --background: 60 5% 8%;
+    --foreground: 60 10% 92%;
   }
 }
 
@@ -89,7 +89,7 @@
   }
 
   .glass-card {
-    @apply bg-card/50 backdrop-blur-xl border border-border/50 rounded-2xl;
+    @apply bg-card border border-border rounded-2xl shadow-sm;
   }
 
   .glow-effect {

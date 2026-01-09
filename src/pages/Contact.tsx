@@ -17,7 +17,7 @@ const Contact = () => {
     setSubmitted(true);
     toast({
       title: "Message Sent",
-      description: "Thank you for reaching out. We'll respond within 48 hours.",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
     });
   };
 
@@ -32,11 +32,11 @@ const Contact = () => {
             <div className="max-w-3xl">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Contact Us</p>
               <h1 className="section-headline mb-8">
-                Let's connect
+                Conectamur
               </h1>
               <p className="body-large">
-                Have questions about the competition? Want to partner with us? 
-                We'd love to hear from you.
+                Habesne quaestiones de programmate? Vis nobiscum cooperari? 
+                Libenter a te audiremus.
               </p>
             </div>
           </AnimatedSection>
@@ -57,7 +57,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-medium">hello@ignite.co</p>
+                      <p className="font-medium">hello@venturecapsule.co</p>
                     </div>
                   </div>
                 </div>
@@ -68,17 +68,17 @@ const Contact = () => {
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Headquarters</p>
-                      <p className="font-medium">San Francisco, CA</p>
+                      <p className="text-sm text-muted-foreground">Location</p>
+                      <p className="font-medium">Lorem Ipsum, LI</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="glass-card p-8">
-                  <h3 className="font-display text-xl font-semibold mb-4">Response Time</h3>
+                  <h3 className="font-display text-xl font-semibold mb-4">Tempus Responsi</h3>
                   <p className="text-muted-foreground">
-                    We typically respond within 48 hours during business days. 
-                    For urgent inquiries, please indicate so in your message.
+                    Typice intra 48 horas diebus negotialibus respondemus. 
+                    Pro quaestionibus urgentibus, indica in nuntio tuo.
                   </p>
                 </div>
               </div>
@@ -89,10 +89,10 @@ const Contact = () => {
               {submitted ? (
                 <div className="glass-card p-12 text-center">
                   <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
-                  <h2 className="font-display text-3xl font-bold mb-4">Message Sent</h2>
+                  <h2 className="font-display text-3xl font-bold mb-4">Nuntius Missus</h2>
                   <p className="text-muted-foreground">
-                    Thank you for reaching out. A member of our team will 
-                    get back to you within 48 hours.
+                    Gratias tibi pro contactu. Membrum turmae nostrae 
+                    intra 48 horas tibi respondebit.
                   </p>
                 </div>
               ) : (
@@ -101,8 +101,8 @@ const Contact = () => {
                     <label className="text-sm font-medium">Name *</label>
                     <Input 
                       required 
-                      placeholder="Your name"
-                      className="bg-background/50 border-border focus:border-primary"
+                      placeholder="Nomen tuum"
+                      className="bg-background border-border focus:border-primary"
                     />
                   </div>
 
@@ -111,8 +111,8 @@ const Contact = () => {
                     <Input 
                       required 
                       type="email"
-                      placeholder="your@email.com"
-                      className="bg-background/50 border-border focus:border-primary"
+                      placeholder="lorem@ipsum.com"
+                      className="bg-background border-border focus:border-primary"
                     />
                   </div>
 
@@ -120,8 +120,8 @@ const Contact = () => {
                     <label className="text-sm font-medium">Subject *</label>
                     <Input 
                       required 
-                      placeholder="What is this about?"
-                      className="bg-background/50 border-border focus:border-primary"
+                      placeholder="De quo agitur?"
+                      className="bg-background border-border focus:border-primary"
                     />
                   </div>
 
@@ -129,8 +129,8 @@ const Contact = () => {
                     <label className="text-sm font-medium">Message *</label>
                     <Textarea 
                       required 
-                      placeholder="Your message..."
-                      className="bg-background/50 border-border focus:border-primary min-h-[150px]"
+                      placeholder="Nuntius tuus..."
+                      className="bg-background border-border focus:border-primary min-h-[150px]"
                     />
                   </div>
 

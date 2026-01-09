@@ -8,50 +8,50 @@ import { Button } from "@/components/ui/button";
 const phases = [
   {
     number: "01",
-    title: "Application",
+    title: "Applicatio",
     duration: "2 weeks",
-    description: "Submit your idea through our streamlined application portal. Tell us about your vision, your team, and why your concept has the potential to change the world.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     details: [
-      "Complete online application form",
-      "Upload pitch deck (optional)",
-      "Provide team information",
-      "Initial screening by our review committee"
+      "Ut enim ad minim veniam",
+      "Quis nostrud exercitation",
+      "Ullamco laboris nisi",
+      "Aliquip ex ea commodo"
     ]
   },
   {
     number: "02",
-    title: "Selection",
+    title: "Selectio",
     duration: "3 weeks",
-    description: "Our panel of industry experts, investors, and past winners carefully evaluates each submission. We look for innovation, feasibility, and transformative potential.",
+    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     details: [
-      "Expert panel review",
-      "Technical feasibility assessment",
-      "Market potential analysis",
-      "Top 50 teams advance"
+      "Excepteur sint occaecat",
+      "Cupidatat non proident",
+      "Sunt in culpa qui officia",
+      "Deserunt mollit anim"
     ]
   },
   {
     number: "03",
-    title: "Mentorship",
+    title: "Mentoria",
     duration: "6 weeks",
-    description: "Selected teams are paired with world-class mentors who provide guidance, resources, and connections. This is where ideas become execution-ready ventures.",
+    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
     details: [
-      "1-on-1 mentor matching",
-      "Weekly workshop sessions",
-      "Access to expert network",
-      "Prototype development support"
+      "Totam rem aperiam",
+      "Eaque ipsa quae ab illo",
+      "Inventore veritatis",
+      "Quasi architecto beatae"
     ]
   },
   {
     number: "04",
-    title: "Finals",
+    title: "Finalis",
     duration: "1 week",
-    description: "The top 10 teams present their refined concepts to our grand jury. Winners receive funding, continued support, and access to our global network.",
+    description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur.",
     details: [
-      "Live pitch presentations",
-      "Q&A with jury panel",
-      "Public showcase event",
-      "Awards ceremony"
+      "Magni dolores eos qui",
+      "Ratione voluptatem sequi",
+      "Nesciunt neque porro",
+      "Quisquam est qui dolorem"
     ]
   }
 ];
@@ -66,15 +66,15 @@ const Structure = () => {
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Competition Structure</p>
+              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Program Structure</p>
               <h1 className="section-headline mb-8">
-                Your path from
+                Iter vestrum ab
                 <br />
-                idea to impact
+                idea ad impactum
               </h1>
               <p className="body-large">
-                Our four-phase process is designed to challenge, refine, and accelerate 
-                the most promising innovations. Here's what to expect.
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam 
+                corporis suscipit laboriosam nisi ut aliquid ex ea commodi.
               </p>
             </div>
           </AnimatedSection>
@@ -116,9 +116,9 @@ const Structure = () => {
         <div className="section-container">
           <AnimatedSection>
             <div className="text-center">
-              <h2 className="font-display text-3xl font-bold mb-6">Ready to begin?</h2>
+              <h2 className="font-display text-3xl font-bold mb-6">Paratus es incipere?</h2>
               <p className="body-large max-w-xl mx-auto mb-8">
-                The first step is simple. Submit your application and let us discover your potential.
+                Primus gradus simplex est. Applicationem tuam submitte et potentiam tuam inveniamus.
               </p>
               <Link to="/apply">
                 <Button variant="hero" size="xl" className="group">
