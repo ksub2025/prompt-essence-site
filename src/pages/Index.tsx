@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
+import HeroScene from "@/components/HeroScene";
 
 const Index = () => {
   return (
@@ -13,8 +14,11 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(75_25%_40%_/_0.06)_0%,_transparent_70%)]" />
+        {/* 3D Background */}
+        <HeroScene />
+        
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_hsl(60_10%_96%_/_0.4)_70%)] pointer-events-none" />
         
         <div className="section-container relative z-10">
           <motion.div
@@ -27,7 +31,7 @@ const Index = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block mb-6 px-4 py-2 rounded-full border border-primary/30 bg-primary/5"
+              className="inline-block mb-6 px-4 py-2 rounded-full border border-primary/30 bg-background/80 backdrop-blur-sm"
             >
               <span className="text-primary text-sm font-medium">Lorem Ipsum Dolor 2026</span>
             </motion.div>
@@ -38,7 +42,7 @@ const Index = () => {
               <span className="gradient-text">Elit Sed Do</span>
             </h1>
             
-            <p className="body-large max-w-2xl mx-auto mb-12">
+            <p className="body-large max-w-2xl mx-auto mb-12 bg-background/60 backdrop-blur-sm rounded-xl py-4 px-6">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do 
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
@@ -51,7 +55,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/structure">
-                <Button variant="heroOutline" size="xl">
+                <Button variant="heroOutline" size="xl" className="bg-background/60 backdrop-blur-sm">
                   How It Works
                 </Button>
               </Link>
