@@ -14,7 +14,7 @@ const Index = () => {
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(180_85%_55%_/_0.08)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(75_25%_40%_/_0.06)_0%,_transparent_70%)]" />
         
         <div className="section-container relative z-10">
           <motion.div
@@ -29,18 +29,18 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="inline-block mb-6 px-4 py-2 rounded-full border border-primary/30 bg-primary/5"
             >
-              <span className="text-primary text-sm font-medium">Applications Open for 2026</span>
+              <span className="text-primary text-sm font-medium">Lorem Ipsum Dolor 2026</span>
             </motion.div>
             
             <h1 className="hero-headline mb-8">
-              Where Bold Ideas
+              Consectetur Adipiscing
               <br />
-              <span className="gradient-text">Become Reality</span>
+              <span className="gradient-text">Elit Sed Do</span>
             </h1>
             
             <p className="body-large max-w-2xl mx-auto mb-12">
-              Join the premier innovation competition that transforms visionary concepts 
-              into world-changing ventures. Your breakthrough starts here.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do 
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -60,19 +60,19 @@ const Index = () => {
         </div>
       </section>
 
-      {/* What is IGNITE Section */}
+      {/* What is Section */}
       <section className="py-32">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">The Competition</p>
+              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">The Program</p>
               <h2 className="section-headline mb-8">
-                A launchpad for the next generation of innovators
+                Ut enim ad minim veniam quis nostrud
               </h2>
               <p className="body-large">
-                IGNITE is not just a competition—it's a transformative journey. We bring together 
-                the brightest minds, provide world-class mentorship, and create pathways to turn 
-                ambitious ideas into scalable solutions that shape the future.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </div>
           </AnimatedSection>
@@ -86,23 +86,23 @@ const Index = () => {
             {[
               {
                 icon: Lightbulb,
-                title: "Innovation First",
-                description: "We celebrate unconventional thinking and reward those who dare to challenge the status quo."
+                title: "Lorem Ipsum",
+                description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque."
               },
               {
                 icon: Target,
-                title: "Real Impact",
-                description: "Every project is evaluated on its potential to create meaningful, lasting change in the world."
+                title: "Dolor Sit Amet",
+                description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."
               },
               {
                 icon: Rocket,
-                title: "Launch Support",
-                description: "Winners receive funding, mentorship, and resources to take their ideas from concept to market."
+                title: "Consectetur Elit",
+                description: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur."
               },
               {
                 icon: Zap,
-                title: "Global Network",
-                description: "Connect with industry leaders, investors, and fellow innovators from around the world."
+                title: "Adipiscing Sed",
+                description: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit."
               }
             ].map((feature, index) => (
               <AnimatedSection key={feature.title} delay={index * 0.1}>
@@ -122,17 +122,18 @@ const Index = () => {
         <div className="section-container">
           <AnimatedSection>
             <div className="glass-card p-12 md:p-20 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(180_85%_55%_/_0.1)_0%,_transparent_50%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(75_25%_40%_/_0.06)_0%,_transparent_50%)]" />
               <div className="relative z-10">
                 <h2 className="section-headline mb-6">
-                  Ready to ignite your potential?
+                  Quis autem vel eum iure?
                 </h2>
                 <p className="body-large max-w-xl mx-auto mb-10">
-                  Applications close soon. Don't miss your chance to be part of something extraordinary.
+                  Temporibus autem quibusdam et aut officiis debitis aut rerum 
+                  necessitatibus saepe eveniet ut et voluptates.
                 </p>
                 <Link to="/apply">
                   <Button variant="hero" size="xl" className="group">
-                    Start Your Application
+                    Get Started
                     <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>

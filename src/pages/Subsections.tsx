@@ -6,33 +6,33 @@ import AnimatedSection from "@/components/AnimatedSection";
 const subsections = [
   {
     icon: Cpu,
-    title: "Technology & AI",
-    description: "Innovations in artificial intelligence, machine learning, robotics, and emerging technologies that push the boundaries of what's possible."
+    title: "Categoria Prima",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
   },
   {
     icon: Leaf,
-    title: "Sustainability",
-    description: "Solutions addressing climate change, renewable energy, circular economy, and environmental conservation for a greener future."
+    title: "Categoria Secunda",
+    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla."
   },
   {
     icon: Heart,
-    title: "Health & Wellness",
-    description: "Breakthroughs in healthcare, mental health, biotech, and wellness that improve quality of life and extend human potential."
+    title: "Categoria Tertia",
+    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
   },
   {
     icon: Banknote,
-    title: "Fintech & Economy",
-    description: "Revolutionary approaches to financial services, economic inclusion, blockchain, and the future of money and commerce."
+    title: "Categoria Quarta",
+    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
   },
   {
     icon: GraduationCap,
-    title: "Education",
-    description: "Transformative ideas in learning, skill development, accessibility, and the democratization of knowledge across all ages."
+    title: "Categoria Quinta",
+    description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur."
   },
   {
     icon: Globe,
-    title: "Social Impact",
-    description: "Initiatives focused on community development, social justice, humanitarian aid, and creating equitable opportunities for all."
+    title: "Categoria Sexta",
+    description: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur adipisci velit."
   }
 ];
 
@@ -48,13 +48,13 @@ const Subsections = () => {
             <div className="max-w-3xl">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Categories</p>
               <h1 className="section-headline mb-8">
-                Six tracks,
+                Sex tractus,
                 <br />
-                infinite possibilities
+                infinitae possibilitates
               </h1>
               <p className="body-large">
-                Choose the category that best aligns with your innovation. Each track 
-                features specialized mentors and tailored resources to maximize your impact.
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam 
+                corporis suscipit laboriosam nisi ut aliquid commodi consequatur.
               </p>
             </div>
           </AnimatedSection>
@@ -83,11 +83,10 @@ const Subsections = () => {
         <div className="section-container">
           <AnimatedSection>
             <div className="glass-card p-12 md:p-16 text-center">
-              <h2 className="font-display text-3xl font-bold mb-6">Cross-Disciplinary Innovations</h2>
+              <h2 className="font-display text-3xl font-bold mb-6">Innovationes Trans-Disciplinares</h2>
               <p className="body-large max-w-2xl mx-auto">
-                Don't fit neatly into one category? Many of the most impactful ideas span 
-                multiple domains. Apply under the track most central to your solution—our 
-                judges understand complexity.
+                Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse 
+                quam nihil molestiae consequatur vel illum qui dolorem eum fugiat.
               </p>
             </div>
           </AnimatedSection>

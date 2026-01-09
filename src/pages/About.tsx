@@ -14,13 +14,13 @@ const About = () => {
             <div className="max-w-3xl">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">About Us</p>
               <h1 className="section-headline mb-8">
-                Building the future,
+                Lorem ipsum dolor,
                 <br />
-                one idea at a time
+                sit amet consectetur
               </h1>
               <p className="body-large">
-                We believe that extraordinary ideas can come from anywhere. Our mission is 
-                to find them, nurture them, and help them change the world.
+                Adipiscing elit sed do eiusmod tempor incididunt ut labore 
+                et dolore magna aliqua enim ad minim veniam.
               </p>
             </div>
           </AnimatedSection>
@@ -40,13 +40,13 @@ const About = () => {
               <div>
                 <h2 className="font-display text-3xl font-bold mb-6">Our Mission</h2>
                 <p className="body-large mb-6">
-                  IGNITE was founded on a simple premise: the most transformative ideas often 
-                  lack the resources and support needed to reach their full potential.
+                  Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+                  commodo consequat duis aute irure dolor.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  We exist to bridge that gap. Through rigorous competition, expert mentorship, 
-                  and strategic investment, we identify and accelerate the innovations that will 
-                  define the next decade—whether in technology, sustainability, healthcare, or beyond.
+                  In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
+                  qui officia deserunt mollit anim id est laborum sed ut perspiciatis.
                 </p>
               </div>
             </AnimatedSection>
@@ -62,14 +62,13 @@ const About = () => {
               <div>
                 <h2 className="font-display text-3xl font-bold mb-6">Our Vision</h2>
                 <p className="body-large mb-6">
-                  We envision a world where brilliant ideas are never held back by 
-                  circumstance, geography, or lack of access to resources.
+                  Unde omnis iste natus error sit voluptatem accusantium 
+                  doloremque laudantium totam rem aperiam.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  By creating an inclusive, global platform for innovation, we're building 
-                  a future where the next breakthrough can come from anyone, anywhere. Our 
-                  alumni network spans six continents and includes founders who have raised 
-                  over $500 million in combined funding.
+                  Eaque ipsa quae ab illo inventore veritatis et quasi architecto 
+                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia 
+                  voluptas sit aspernatur aut odit aut fugit sed quia consequuntur.
                 </p>
               </div>
             </AnimatedSection>
@@ -91,16 +90,16 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Excellence",
-                description: "We pursue the highest standards in everything we do, from selection to mentorship to outcomes."
+                title: "Excellentia",
+                description: "Magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam."
               },
               {
-                title: "Integrity",
-                description: "Transparency and honesty guide every decision. We build trust through action."
+                title: "Integritas",
+                description: "Dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non."
               },
               {
-                title: "Impact",
-                description: "Ideas are only as valuable as the change they create. We focus on real-world results."
+                title: "Impactum",
+                description: "Numquam eius modi tempora incidunt ut labore et dolore magnam aliquam."
               }
             ].map((value, index) => (
               <AnimatedSection key={value.title} delay={index * 0.15}>

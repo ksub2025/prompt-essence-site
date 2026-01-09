@@ -17,7 +17,7 @@ const Apply = () => {
     setSubmitted(true);
     toast({
       title: "Application Received",
-      description: "Thank you for applying to IGNITE. We'll be in touch soon.",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     });
   };
 
@@ -32,11 +32,11 @@ const Apply = () => {
             <div className="max-w-3xl mx-auto text-center">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Apply Now</p>
               <h1 className="section-headline mb-8">
-                Take the first step
+                Primum gradum cape
               </h1>
               <p className="body-large">
-                This is where your journey begins. Tell us about your vision, 
-                and let's see if we can build the future together.
+                Hic est ubi iter tuum incipit. Dic nobis de visione tua, 
+                et videamus si futurum simul aedificare possumus.
               </p>
             </div>
           </AnimatedSection>
@@ -51,10 +51,10 @@ const Apply = () => {
               {submitted ? (
                 <div className="glass-card p-12 text-center">
                   <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
-                  <h2 className="font-display text-3xl font-bold mb-4">Application Submitted</h2>
+                  <h2 className="font-display text-3xl font-bold mb-4">Applicatio Submissa</h2>
                   <p className="text-muted-foreground">
-                    Thank you for applying to IGNITE 2026. Our team will review your 
-                    application and reach out within 2 weeks with next steps.
+                    Gratias tibi pro applicatione. Turma nostra applicationem tuam 
+                    recognoscet et intra duas hebdomadas cum proximis gradibus perveniet.
                   </p>
                 </div>
               ) : (
@@ -64,16 +64,16 @@ const Apply = () => {
                       <label className="text-sm font-medium">First Name *</label>
                       <Input 
                         required 
-                        placeholder="Your first name"
-                        className="bg-background/50 border-border focus:border-primary"
+                        placeholder="Lorem"
+                        className="bg-background border-border focus:border-primary"
                       />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Last Name *</label>
                       <Input 
                         required 
-                        placeholder="Your last name"
-                        className="bg-background/50 border-border focus:border-primary"
+                        placeholder="Ipsum"
+                        className="bg-background border-border focus:border-primary"
                       />
                     </div>
                   </div>
@@ -83,8 +83,8 @@ const Apply = () => {
                     <Input 
                       required 
                       type="email"
-                      placeholder="your@email.com"
-                      className="bg-background/50 border-border focus:border-primary"
+                      placeholder="lorem@ipsum.com"
+                      className="bg-background border-border focus:border-primary"
                     />
                   </div>
 
@@ -92,8 +92,8 @@ const Apply = () => {
                     <label className="text-sm font-medium">Project Name *</label>
                     <Input 
                       required 
-                      placeholder="What's your project called?"
-                      className="bg-background/50 border-border focus:border-primary"
+                      placeholder="Nomen Projecti"
+                      className="bg-background border-border focus:border-primary"
                     />
                   </div>
 
@@ -101,15 +101,15 @@ const Apply = () => {
                     <label className="text-sm font-medium">Category *</label>
                     <select 
                       required
-                      className="w-full h-10 px-3 rounded-md bg-background/50 border border-border text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="w-full h-10 px-3 rounded-md bg-background border border-border text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
                     >
                       <option value="">Select a category</option>
-                      <option value="tech">Technology & AI</option>
-                      <option value="sustainability">Sustainability</option>
-                      <option value="health">Health & Wellness</option>
-                      <option value="fintech">Fintech & Economy</option>
-                      <option value="education">Education</option>
-                      <option value="social">Social Impact</option>
+                      <option value="cat1">Categoria Prima</option>
+                      <option value="cat2">Categoria Secunda</option>
+                      <option value="cat3">Categoria Tertia</option>
+                      <option value="cat4">Categoria Quarta</option>
+                      <option value="cat5">Categoria Quinta</option>
+                      <option value="cat6">Categoria Sexta</option>
                     </select>
                   </div>
 
@@ -117,8 +117,8 @@ const Apply = () => {
                     <label className="text-sm font-medium">Tell us about your idea *</label>
                     <Textarea 
                       required 
-                      placeholder="Describe your innovation, its impact, and why it matters..."
-                      className="bg-background/50 border-border focus:border-primary min-h-[150px]"
+                      placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                      className="bg-background border-border focus:border-primary min-h-[150px]"
                     />
                   </div>
 
@@ -127,7 +127,7 @@ const Apply = () => {
                     <Input 
                       type="url"
                       placeholder="https://"
-                      className="bg-background/50 border-border focus:border-primary"
+                      className="bg-background border-border focus:border-primary"
                     />
                   </div>
 
@@ -137,7 +137,7 @@ const Apply = () => {
                   </Button>
 
                   <p className="text-center text-sm text-muted-foreground">
-                    By submitting, you agree to our terms and conditions.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
                 </form>
               )}
