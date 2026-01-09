@@ -40,7 +40,7 @@ const Timeline = () => {
           <div className="max-w-4xl mx-auto">
             {/* Month markers */}
             <AnimatedSection>
-              <div className="flex justify-between mb-12 px-4">
+              <div className="flex justify-center gap-32 md:gap-48 mb-16">
                 <span className="text-2xl font-display font-bold text-foreground">May</span>
                 <span className="text-2xl font-display font-bold text-foreground">June</span>
               </div>
