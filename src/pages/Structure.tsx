@@ -1,59 +1,35 @@
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ArrowRight, RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Button } from "@/components/ui/button";
 
-const phases = [
+const rounds = [
   {
     number: "01",
-    title: "Applicatio",
-    duration: "2 weeks",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    details: [
-      "Ut enim ad minim veniam",
-      "Quis nostrud exercitation",
-      "Ullamco laboris nisi",
-      "Aliquip ex ea commodo"
-    ]
+    title: "Round 1",
+    description: "The opening round of the competition where all participants submit their initial proposals.",
+    hasBringBack: false,
   },
   {
     number: "02",
-    title: "Selectio",
-    duration: "3 weeks",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    details: [
-      "Excepteur sint occaecat",
-      "Cupidatat non proident",
-      "Sunt in culpa qui officia",
-      "Deserunt mollit anim"
-    ]
+    title: "Round 2",
+    description: "Second round of evaluation with refined submissions from successful Round 1 participants.",
+    hasBringBack: true,
   },
   {
     number: "03",
-    title: "Mentoria",
-    duration: "6 weeks",
-    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-    details: [
-      "Totam rem aperiam",
-      "Eaque ipsa quae ab illo",
-      "Inventore veritatis",
-      "Quasi architecto beatae"
-    ]
+    title: "Round 3",
+    description: "Advanced round where participants further develop their projects with mentor guidance.",
+    hasBringBack: true,
   },
   {
     number: "04",
-    title: "Finalis",
-    duration: "1 week",
-    description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur.",
-    details: [
-      "Magni dolores eos qui",
-      "Ratione voluptatem sequi",
-      "Nesciunt neque porro",
-      "Quisquam est qui dolorem"
-    ]
-  }
+    title: "Final Round",
+    description: "The grand finale where top participants present their completed projects to the judging panel.",
+    hasBringBack: false,
+  },
 ];
 
 const Structure = () => {
@@ -66,47 +42,82 @@ const Structure = () => {
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Program Structure</p>
+              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Competition Structure</p>
               <h1 className="section-headline mb-8">
-                Iter vestrum ab
-                <br />
-                idea ad impactum
+                Round-Based Competition
               </h1>
               <p className="body-large">
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam 
-                corporis suscipit laboriosam nisi ut aliquid ex ea commodi.
+                This competition is a round-based competition with 4 rounds and 2 bring back rounds. 
+                The first round is normal, and then the next two rounds have bring back rounds until 
+                the final round. This results in multiple chances for participants to work upon their 
+                projects to the fullest.
               </p>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Explanation Card */}
+      <section className="py-12">
+        <div className="section-container">
+          <AnimatedSection>
+            <div className="glass-card p-8 md:p-12 max-w-4xl mx-auto">
+              <div className="flex items-start gap-6">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <RefreshCw className="w-7 h-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl font-semibold mb-4">What are Bring Back Rounds?</h3>
+                  <p className="text-muted-foreground leading-relaxed text-lg">
+                    Bring back rounds give eliminated participants a second chance to re-enter the competition. 
+                    Just like in the real world where startups fail and iterate before succeeding, our bring 
+                    back rounds allow you to refine your ideas and come back stronger.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Timeline of Rounds */}
       <section className="py-20">
         <div className="section-container">
-          <div className="space-y-12">
-            {phases.map((phase, index) => (
-              <AnimatedSection key={phase.number} delay={index * 0.1}>
-                <div className="glass-card p-8 md:p-12 grid lg:grid-cols-[200px_1fr] gap-8">
-                  <div>
-                    <span className="text-6xl font-display font-bold gradient-text">{phase.number}</span>
-                    <p className="text-muted-foreground mt-2">{phase.duration}</p>
-                  </div>
-                  <div>
-                    <h2 className="font-display text-3xl font-bold mb-4">{phase.title}</h2>
-                    <p className="body-large mb-6">{phase.description}</p>
-                    <ul className="space-y-2">
-                      {phase.details.map((detail) => (
-                        <li key={detail} className="flex items-center gap-3 text-muted-foreground">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Vertical line */}
+              <div className="absolute left-8 top-0 bottom-0 w-px bg-border hidden md:block" />
+
+              <div className="space-y-8">
+                {rounds.map((round, index) => (
+                  <AnimatedSection key={round.number} delay={index * 0.1}>
+                    <div className="flex gap-8">
+                      {/* Number circle */}
+                      <div className="relative z-10 flex-shrink-0 hidden md:flex">
+                        <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-display text-xl font-bold">
+                          {round.number}
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="glass-card p-8 flex-1">
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="md:hidden text-primary font-display font-bold">{round.number}.</span>
+                          <h3 className="font-display text-2xl font-semibold">{round.title}</h3>
+                          {round.hasBringBack && (
+                            <span className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full flex items-center gap-1">
+                              <RefreshCw className="w-3 h-3" />
+                              Bring Back
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-muted-foreground leading-relaxed">{round.description}</p>
+                      </div>
+                    </div>
+                  </AnimatedSection>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -115,15 +126,16 @@ const Structure = () => {
       <section className="py-20">
         <div className="section-container">
           <AnimatedSection>
-            <div className="text-center">
-              <h2 className="font-display text-3xl font-bold mb-6">Paratus es incipere?</h2>
-              <p className="body-large max-w-xl mx-auto mb-8">
-                Primus gradus simplex est. Applicationem tuam submitte et potentiam tuam inveniamus.
+            <div className="glass-card p-12 text-center">
+              <h2 className="font-display text-3xl font-bold mb-6">Ready to Compete?</h2>
+              <p className="body-large max-w-2xl mx-auto mb-8">
+                Join VentureCapsule and take advantage of our unique competition structure 
+                that gives you multiple opportunities to succeed.
               </p>
               <Link to="/apply">
-                <Button variant="hero" size="xl" className="group">
+                <Button size="lg" className="group">
                   Apply Now
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>

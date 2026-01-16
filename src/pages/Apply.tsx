@@ -1,151 +1,55 @@
-import { useState } from "react";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { DollarSign, Rocket, Users, Award, Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 
 const Apply = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const { toast } = useToast();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    toast({
-      title: "Application Received",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    });
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-
-      {/* Hero */}
-      <section className="pt-32 pb-12">
+      <section className="pt-32 pb-20">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Apply Now</p>
-              <h1 className="section-headline mb-8">
-                Primum gradum cape
-              </h1>
-              <p className="body-large">
-                Hic est ubi iter tuum incipit. Dic nobis de visione tua, 
-                et videamus si futurum simul aedificare possumus.
-              </p>
+              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Apply</p>
+              <h1 className="section-headline mb-8">Apply Now</h1>
+              <p className="body-large">Join VentureCapsule and start your journey in business, finance, and economics.</p>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Form */}
-      <section className="py-12 pb-32">
+      <section className="py-12">
         <div className="section-container">
           <AnimatedSection>
-            <div className="max-w-2xl mx-auto">
-              {submitted ? (
-                <div className="glass-card p-12 text-center">
-                  <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
-                  <h2 className="font-display text-3xl font-bold mb-4">Applicatio Submissa</h2>
-                  <p className="text-muted-foreground">
-                    Gratias tibi pro applicatione. Turma nostra applicationem tuam 
-                    recognoscet et intra duas hebdomadas cum proximis gradibus perveniet.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="glass-card p-8 md:p-12 space-y-8">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">First Name *</label>
-                      <Input 
-                        required 
-                        placeholder="Lorem"
-                        className="bg-background border-border focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Last Name *</label>
-                      <Input 
-                        required 
-                        placeholder="Ipsum"
-                        className="bg-background border-border focus:border-primary"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Email Address *</label>
-                    <Input 
-                      required 
-                      type="email"
-                      placeholder="lorem@ipsum.com"
-                      className="bg-background border-border focus:border-primary"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Project Name *</label>
-                    <Input 
-                      required 
-                      placeholder="Nomen Projecti"
-                      className="bg-background border-border focus:border-primary"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Category *</label>
-                    <select 
-                      required
-                      className="w-full h-10 px-3 rounded-md bg-background border border-border text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
-                    >
-                      <option value="">Select a category</option>
-                      <option value="cat1">Categoria Prima</option>
-                      <option value="cat2">Categoria Secunda</option>
-                      <option value="cat3">Categoria Tertia</option>
-                      <option value="cat4">Categoria Quarta</option>
-                      <option value="cat5">Categoria Quinta</option>
-                      <option value="cat6">Categoria Sexta</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Tell us about your idea *</label>
-                    <Textarea 
-                      required 
-                      placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-                      className="bg-background border-border focus:border-primary min-h-[150px]"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Portfolio or Website (optional)</label>
-                    <Input 
-                      type="url"
-                      placeholder="https://"
-                      className="bg-background border-border focus:border-primary"
-                    />
-                  </div>
-
-                  <Button type="submit" variant="hero" size="xl" className="w-full group">
-                    Submit Application
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </Button>
-
-                  <p className="text-center text-sm text-muted-foreground">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-                </form>
-              )}
+            <div className="glass-card p-8 md:p-12 max-w-3xl mx-auto">
+              <h2 className="font-display text-2xl font-bold mb-6 text-center">What You'll Get</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="flex items-center gap-3"><DollarSign className="w-5 h-5 text-primary flex-shrink-0" /><span className="text-muted-foreground">Cash prize</span></div>
+                <div className="flex items-center gap-3"><Rocket className="w-5 h-5 text-primary flex-shrink-0" /><span className="text-muted-foreground">Opportunity to expand your projects</span></div>
+                <div className="flex items-center gap-3"><Users className="w-5 h-5 text-primary flex-shrink-0" /><span className="text-muted-foreground">Guidance under professionals</span></div>
+                <div className="flex items-center gap-3"><Award className="w-5 h-5 text-primary flex-shrink-0" /><span className="text-muted-foreground">Certificate from global competition</span></div>
+                <div className="flex items-center gap-3 md:col-span-2 justify-center"><Globe className="w-5 h-5 text-primary flex-shrink-0" /><span className="text-muted-foreground">World-class extracurricular for your profile</span></div>
+              </div>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
+      <section className="py-20">
+        <div className="section-container">
+          <AnimatedSection>
+            <div className="glass-card p-12 md:p-20 text-center max-w-2xl mx-auto">
+              <p className="text-6xl mb-6">📝</p>
+              <h2 className="font-display text-3xl font-bold mb-4">Applications Opening Soon</h2>
+              <p className="text-muted-foreground text-lg mb-8">The application form will be available shortly. Check back soon to apply for VentureCapsule.</p>
+              <Link to="/contact"><Button variant="outline" size="lg">Contact Us for Updates</Button></Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
       <Footer />
     </div>
   );
