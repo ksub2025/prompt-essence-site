@@ -1,147 +1,73 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Lightbulb, Target, Rocket, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, Briefcase, TrendingUp, FileText, Users } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroScene from "@/components/HeroScene";
+
+const subsectionPreviews = [
+  { icon: Briefcase, title: "Business Pitching", path: "/subsections" },
+  { icon: TrendingUp, title: "Financial Literacy", path: "/subsections" },
+  { icon: FileText, title: "Case Studies", path: "/subsections" },
+  { icon: Users, title: "Professional Mentoring", path: "/subsections" },
+];
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-        {/* 3D Background */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroScene />
-        
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_hsl(60_10%_96%_/_0.4)_70%)] pointer-events-none" />
-        
         <div className="section-container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block mb-6 px-4 py-2 rounded-full border border-primary/30 bg-background/80 backdrop-blur-sm"
-            >
-              <span className="text-primary text-sm font-medium">Lorem Ipsum Dolor 2026</span>
-            </motion.div>
-            
-            <h1 className="hero-headline mb-8">
-              Consectetur Adipiscing
-              <br />
-              <span className="gradient-text">Elit Sed Do</span>
-            </h1>
-            
-            <p className="body-large max-w-2xl mx-auto mb-12 bg-background/60 backdrop-blur-sm rounded-xl py-4 px-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do 
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/apply">
-                <Button variant="hero" size="xl" className="group">
-                  Apply Now
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/structure">
-                <Button variant="heroOutline" size="xl" className="bg-background/60 backdrop-blur-sm">
-                  How It Works
-                </Button>
-              </Link>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-primary text-sm font-medium mb-6 uppercase tracking-widest">
+              Business • Finance • Economics
+            </motion.p>
+            <h1 className="hero-headline mb-8">VentureCapsule</h1>
+            <p className="body-large max-w-2xl mb-10">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/apply"><Button size="lg" className="group">Apply Now<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
+              <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* What is Section */}
-      <section className="py-32">
+      <section className="py-24 bg-muted/30">
         <div className="section-container">
           <AnimatedSection>
-            <div className="max-w-3xl">
-              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">The Program</p>
-              <h2 className="section-headline mb-8">
-                Ut enim ad minim veniam quis nostrud
-              </h2>
-              <p className="body-large">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <h2 className="section-headline mb-8">What is VentureCapsule?</h2>
+              <p className="body-large leading-relaxed">We are a business, finance and economics based competition that allows students to create, nurture and execute solutions to real life challenges within different subsections. This considers financial literacy, business pitching, case studies and measuring those with professionals as you get to foster new ideas and grow these solutions in our round based competition system.</p>
             </div>
           </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="py-20">
-        <div className="section-container">
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                icon: Lightbulb,
-                title: "Lorem Ipsum",
-                description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque."
-              },
-              {
-                icon: Target,
-                title: "Dolor Sit Amet",
-                description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."
-              },
-              {
-                icon: Rocket,
-                title: "Consectetur Elit",
-                description: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur."
-              },
-              {
-                icon: Zap,
-                title: "Adipiscing Sed",
-                description: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit."
-              }
-            ].map((feature, index) => (
-              <AnimatedSection key={feature.title} delay={index * 0.1}>
-                <div className="glass-card p-8 h-full hover:border-primary/30 transition-colors">
-                  <feature.icon className="w-10 h-10 text-primary mb-6" />
-                  <h3 className="font-display text-2xl font-semibold mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {subsectionPreviews.map((section, index) => (
+              <AnimatedSection key={section.title} delay={index * 0.1}>
+                <Link to={section.path}>
+                  <div className="glass-card p-8 text-center hover:border-primary/30 transition-all group cursor-pointer h-full">
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <section.icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
+                    </div>
+                    <h3 className="font-display text-lg font-semibold">{section.title}</h3>
+                  </div>
+                </Link>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32">
+      <section className="py-24">
         <div className="section-container">
           <AnimatedSection>
-            <div className="glass-card p-12 md:p-20 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(75_25%_40%_/_0.06)_0%,_transparent_50%)]" />
-              <div className="relative z-10">
-                <h2 className="section-headline mb-6">
-                  Quis autem vel eum iure?
-                </h2>
-                <p className="body-large max-w-xl mx-auto mb-10">
-                  Temporibus autem quibusdam et aut officiis debitis aut rerum 
-                  necessitatibus saepe eveniet ut et voluptates.
-                </p>
-                <Link to="/apply">
-                  <Button variant="hero" size="xl" className="group">
-                    Get Started
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </div>
+            <div className="glass-card p-12 md:p-16 text-center">
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">Ready to Build the Future?</h2>
+              <p className="body-large max-w-2xl mx-auto mb-8">Join VentureCapsule and transform your ideas into impactful solutions guided by industry professionals.</p>
+              <Link to="/apply"><Button size="lg" className="group">Get Started<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
             </div>
           </AnimatedSection>
         </div>

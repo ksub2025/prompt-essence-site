@@ -1,80 +1,43 @@
-import { ArrowRight, Award, Users, DollarSign, Sparkles, Mic, Network } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ArrowRight, DollarSign, Rocket, Users, Award, Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Button } from "@/components/ui/button";
 
 const benefits = [
-  {
-    icon: DollarSign,
-    title: "Beneficium I",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit tempor."
-  },
-  {
-    icon: Users,
-    title: "Beneficium II",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore magna."
-  },
-  {
-    icon: Network,
-    title: "Beneficium III",
-    description: "Ut enim ad minim veniam quis nostrud exercitation ullamco."
-  },
-  {
-    icon: Mic,
-    title: "Beneficium IV",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit."
-  },
-  {
-    icon: Sparkles,
-    title: "Beneficium V",
-    description: "Excepteur sint occaecat cupidatat non proident sunt in culpa."
-  },
-  {
-    icon: Award,
-    title: "Beneficium VI",
-    description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut."
-  }
+  { icon: DollarSign, title: "Cash Prize", description: "Win monetary rewards for your innovative solutions and hard work throughout the competition." },
+  { icon: Rocket, title: "Project Expansion", description: "Opportunity to expand your projects beyond the competition with incubation support." },
+  { icon: Users, title: "Professional Guidance", description: "Receive mentorship and guidance from experienced professionals in business and finance." },
+  { icon: Award, title: "Global Certificate", description: "Earn a certificate that shows you participated within a global scale competition." },
+  { icon: Globe, title: "World-Class Extracurricular", description: "Add a prestigious extracurricular activity to your profile that stands out." },
 ];
 
 const Benefits = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-
-      {/* Hero */}
       <section className="pt-32 pb-20">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Why Participate</p>
-              <h1 className="section-headline mb-8">
-                Plus quam certamen.
-                <br />
-                Catalyst futuri tui.
-              </h1>
-              <p className="body-large">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem 
-                accusantium doloremque laudantium totam rem aperiam.
-              </p>
+              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Benefits</p>
+              <h1 className="section-headline mb-8">Your Benefit From This</h1>
+              <p className="body-large">VentureCapsule offers more than just a competition experience — it's an opportunity to grow, learn, and build your future.</p>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Benefits Grid */}
       <section className="py-20">
         <div className="section-container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {benefits.map((benefit, index) => (
-              <AnimatedSection key={benefit.title} delay={index * 0.08}>
-                <div className="glass-card p-8 h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                    <benefit.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="font-display text-2xl font-semibold mb-3">{benefit.title}</h3>
-                  <p className="text-muted-foreground">{benefit.description}</p>
+              <AnimatedSection key={benefit.title} delay={index * 0.1}>
+                <div className="glass-card p-8 h-full hover:border-primary/30 transition-colors group">
+                  <benefit.icon className="w-12 h-12 text-primary mb-6 group-hover:scale-110 transition-transform" />
+                  <h3 className="font-display text-2xl font-semibold mb-4">{benefit.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -82,66 +45,17 @@ const Benefits = () => {
         </div>
       </section>
 
-      {/* Stats */}
       <section className="py-20">
         <div className="section-container">
           <AnimatedSection>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { value: "$2M+", label: "Datum" },
-                { value: "3,000+", label: "Alumni" },
-                { value: "85%", label: "Ratio" },
-                { value: "50+", label: "Regiones" }
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <p className="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">{stat.value}</p>
-                  <p className="text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
+            <div className="glass-card p-12 text-center">
+              <h2 className="font-display text-3xl font-bold mb-6">Ready to Get Started?</h2>
+              <p className="body-large max-w-2xl mx-auto mb-8">Don't miss out on this opportunity to grow your skills, build your network, and compete on a global stage.</p>
+              <Link to="/apply"><Button size="lg" className="group">Apply Now<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
             </div>
           </AnimatedSection>
         </div>
       </section>
-
-      {/* Testimonial style section */}
-      <section className="py-20">
-        <div className="section-container">
-          <AnimatedSection>
-            <div className="glass-card p-12 md:p-16">
-              <blockquote className="text-2xl md:text-3xl font-display leading-relaxed mb-8 text-center">
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do 
-                eiusmod tempor incididunt ut labore et dolore magna aliqua enim 
-                ad minim veniam quis nostrud."
-              </blockquote>
-              <div className="text-center">
-                <p className="text-foreground font-medium">Nomen Cognomen</p>
-                <p className="text-muted-foreground text-sm">Titulus, Societas • Annus MMXXIV</p>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20">
-        <div className="section-container">
-          <AnimatedSection>
-            <div className="text-center">
-              <h2 className="font-display text-3xl font-bold mb-6">Momentum tuum nunc est</h2>
-              <p className="body-large max-w-xl mx-auto mb-8">
-                Iunge innovatoribus qui cras formant. Applicationem tuam hodie incipe.
-              </p>
-              <Link to="/apply">
-                <Button variant="hero" size="xl" className="group">
-                  Apply Now
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
