@@ -9,6 +9,7 @@ import Structure from "./pages/Structure";
 import Subsections from "./pages/Subsections";
 import Benefits from "./pages/Benefits";
 import Apply from "./pages/Apply";
+import Waitlist from "./pages/Waitlist";
 import Contact from "./pages/Contact";
 import Timeline from "./pages/Timeline";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/subsections" element={<Subsections />} />
           <Route path="/benefits" element={<Benefits />} />
           <Route path="/apply" element={<Apply />} />
+          <Route path="/waitlist" element={<Waitlist />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/timeline" element={<Timeline />} />
           <Route path="*" element={<NotFound />} />

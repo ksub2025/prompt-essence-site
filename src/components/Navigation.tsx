@@ -42,8 +42,13 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link to="/waitlist">
+              <Button variant="outline" size="sm">
+                Join Waitlist
+              </Button>
+            </Link>
             <Link to="/apply">
               <Button variant="hero" size="sm">
                 Apply Now
@@ -83,11 +88,18 @@ const Navigation = () => {
                   {item.label}
                 </Link>
               ))}
-              <Link to="/apply" onClick={() => setIsOpen(false)}>
-                <Button variant="hero" className="w-full mt-4">
-                  Apply Now
-                </Button>
-              </Link>
+              <div className="flex flex-col gap-3 mt-4">
+                <Link to="/waitlist" onClick={() => setIsOpen(false)}>
+                  <Button variant="outline" className="w-full">
+                    Join Waitlist
+                  </Button>
+                </Link>
+                <Link to="/apply" onClick={() => setIsOpen(false)}>
+                  <Button variant="hero" className="w-full">
+                    Apply Now
+                  </Button>
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
