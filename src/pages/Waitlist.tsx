@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -10,7 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const waitlistSchema = z.object({
@@ -33,7 +32,6 @@ const countries = [
 
 const Waitlist = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<WaitlistFormData>({
@@ -46,43 +44,13 @@ const Waitlist = () => {
     },
   });
 
-  const onSubmit = async (data: WaitlistFormData) => {
-    setIsLoading(true);
-    try {
-      const { error } = await supabase.from("waitlist").insert({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        country: data.country,
-      });
-
-      if (error) {
-        if (error.code === "23505") {
-          toast({
-            title: "Already registered",
-            description: "This email is already on the waitlist.",
-            variant: "destructive",
-          });
-        } else {
-          throw error;
-        }
-      } else {
-        setSubmitted(true);
-        toast({
-          title: "Welcome to the waitlist!",
-          description: "We'll keep you updated on VentureCapsule.",
-        });
-      }
-    } catch (error) {
-      console.error("Waitlist error:", error);
-      toast({
-        title: "Something went wrong",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = (data: WaitlistFormData) => {
+    console.log("Waitlist form submitted:", data);
+    setSubmitted(true);
+    toast({
+      title: "Welcome to the waitlist!",
+      description: "We'll keep you updated on VentureCapsule.",
+    });
   };
 
   return (
@@ -180,18 +148,9 @@ const Waitlist = () => {
                       )}
                     />
 
-                    <Button type="submit" size="lg" className="w-full group" disabled={isLoading}>
-                      {isLoading ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Joining...
-                        </>
-                      ) : (
-                        <>
-                          Join Waitlist
-                          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
+                    <Button type="submit" size="lg" className="w-full group">
+                      Join Waitlist
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </form>
                 </Form>
