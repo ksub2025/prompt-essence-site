@@ -42,16 +42,11 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
             <Link to="/waitlist">
-              <Button variant="outline" size="sm">
-                Join Waitlist
-              </Button>
-            </Link>
-            <Link to="/apply">
               <Button variant="hero" size="sm">
-                Apply Now
+                Join Waitlist
               </Button>
             </Link>
           </div>
@@ -90,13 +85,8 @@ const Navigation = () => {
               ))}
               <div className="flex flex-col gap-3 mt-4">
                 <Link to="/waitlist" onClick={() => setIsOpen(false)}>
-                  <Button variant="outline" className="w-full">
-                    Join Waitlist
-                  </Button>
-                </Link>
-                <Link to="/apply" onClick={() => setIsOpen(false)}>
                   <Button variant="hero" className="w-full">
-                    Apply Now
+                    Join Waitlist
                   </Button>
                 </Link>
               </div>

@@ -51,7 +51,7 @@ const Benefits = () => {
             <div className="glass-card p-12 text-center">
               <h2 className="font-display text-3xl font-bold mb-6">Ready to Get Started?</h2>
               <p className="body-large max-w-2xl mx-auto mb-8">Don't miss out on this opportunity to grow your skills, build your network, and compete on a global stage.</p>
-              <Link to="/apply"><Button size="lg" className="group">Apply Now<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
+              <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
             </div>
           </AnimatedSection>
         </div>

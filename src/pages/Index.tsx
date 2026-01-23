@@ -29,7 +29,7 @@ const Index = () => {
             <h1 className="hero-headline mb-8">VentureCapsule</h1>
             <p className="body-large max-w-2xl mb-10">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/apply"><Button size="lg" className="group">Apply Now<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
+              <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
               <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
             </div>
           </motion.div>
@@ -67,7 +67,7 @@ const Index = () => {
             <div className="glass-card p-12 md:p-16 text-center">
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">Ready to Build the Future?</h2>
               <p className="body-large max-w-2xl mx-auto mb-8">Join VentureCapsule and transform your ideas into impactful solutions guided by industry professionals.</p>
-              <Link to="/apply"><Button size="lg" className="group">Get Started<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
+              <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
             </div>
           </AnimatedSection>
         </div>
