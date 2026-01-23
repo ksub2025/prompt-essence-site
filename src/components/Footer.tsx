@@ -9,7 +9,7 @@ const Footer = () => {
             Venture Capsule
           </Link>
           <p className="text-muted-foreground text-sm">
-            © 2026 Venture Capsule. Lorem ipsum dolor sit amet.
+            © 2026 Venture Capsule.
           </p>
         </div>
       </div>
