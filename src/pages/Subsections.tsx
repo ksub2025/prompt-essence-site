@@ -12,12 +12,12 @@ const Subsections = () => {
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Subsections</p>
+              <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Pathways</p>
               <h1 className="section-headline mb-8">
-                Our Subsections
+                Four Unique Challenges
               </h1>
               <p className="body-large">
-                Explore the different pathways available in VentureCapsule.
+                From building businesses to managing crises, each pathway tests different aspects of entrepreneurship, finance, and strategic thinking.
               </p>
             </div>
           </AnimatedSection>
