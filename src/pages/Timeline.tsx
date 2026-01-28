@@ -69,7 +69,7 @@ const Timeline = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-20">
+      <section className="pt-32 pb-12">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
@@ -85,51 +85,47 @@ const Timeline = () => {
         </div>
       </section>
 
-      {/* Desktop Timeline */}
-      <section className="py-20 hidden md:block">
-        <div className="section-container">
+      {/* Desktop Timeline - Clean horizontal */}
+      <section className="py-16 hidden lg:block overflow-x-auto">
+        <div className="max-w-7xl mx-auto px-8">
           <AnimatedSection>
-            <div className="relative">
+            <div className="relative pt-48 pb-8">
               {/* Main horizontal line */}
-              <div className="absolute left-0 right-0 top-1/2 h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20 -translate-y-1/2" />
+              <div className="absolute left-0 right-0 top-48 h-0.5 bg-border" />
               
-              <div className="flex justify-between items-center relative">
+              {/* Events container */}
+              <div className="flex justify-between relative">
                 {timelineEvents.map((event, index) => {
                   const Icon = event.icon;
                   return (
-                    <div
-                      key={event.id}
-                      className={`flex flex-col items-center relative ${
-                        event.position === "top" ? "flex-col" : "flex-col-reverse"
-                      }`}
-                    >
-                      {/* Content card */}
-                      <div
-                        className={`glass-card p-4 w-36 text-center ${
-                          event.position === "top" ? "mb-6" : "mt-6"
-                        } ${event.isResults ? "border-primary/50 bg-primary/5" : ""}`}
-                      >
-                        <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl mb-2 ${
+                    <div key={event.id} className="flex flex-col items-center relative" style={{ width: `${100 / timelineEvents.length}%` }}>
+                      {/* Card above line */}
+                      <div className={`glass-card p-4 w-32 text-center mb-4 ${
+                        event.isResults ? "border-primary/50 ring-2 ring-primary/20" : ""
+                      }`}>
+                        <div className={`inline-flex items-center justify-center w-9 h-9 rounded-lg mb-2 ${
                           event.isBringBack 
                             ? "bg-accent text-accent-foreground" 
                             : event.isResults 
                               ? "bg-primary text-primary-foreground"
                               : "bg-primary/10 text-primary"
                         }`}>
-                          <Icon className="w-5 h-5" />
+                          <Icon className="w-4 h-4" />
                         </div>
-                        <h3 className="font-display font-semibold text-sm mb-1">{event.title}</h3>
-                        <p className="text-xs text-muted-foreground">{event.date}</p>
+                        <h3 className="font-display font-semibold text-xs leading-tight mb-1">{event.title}</h3>
+                        <p className="text-[10px] text-muted-foreground leading-tight">{event.date}</p>
                       </div>
                       
-                      {/* Vertical connector line */}
-                      <div className={`w-px h-8 bg-primary/40 ${
-                        event.position === "top" ? "order-last" : "order-first"
-                      }`} />
+                      {/* Vertical connector */}
+                      <div className="w-px h-6 bg-border" />
                       
                       {/* Node dot */}
-                      <div className={`w-4 h-4 rounded-full border-4 border-primary bg-background z-10 ${
-                        event.isResults ? "bg-primary" : ""
+                      <div className={`w-3 h-3 rounded-full border-2 ${
+                        event.isResults 
+                          ? "bg-primary border-primary" 
+                          : event.isBringBack
+                            ? "bg-accent border-accent"
+                            : "bg-background border-primary"
                       }`} />
                     </div>
                   );
@@ -140,34 +136,64 @@ const Timeline = () => {
         </div>
       </section>
 
-      {/* Mobile Timeline - Vertical */}
-      <section className="py-12 md:hidden">
+      {/* Tablet Timeline */}
+      <section className="py-12 hidden md:block lg:hidden">
         <div className="section-container">
-          <div className="relative max-w-sm mx-auto">
-            {/* Vertical line */}
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-primary/20" />
-            
-            <div className="space-y-6">
+          <AnimatedSection>
+            <div className="grid grid-cols-4 gap-4">
               {timelineEvents.map((event, index) => {
                 const Icon = event.icon;
                 return (
-                  <AnimatedSection key={event.id} delay={index * 0.1}>
-                    <div className="flex gap-6 items-start">
+                  <div key={event.id} className={`glass-card p-4 text-center ${
+                    event.isResults ? "border-primary/50 ring-2 ring-primary/20" : ""
+                  }`}>
+                    <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg mb-3 ${
+                      event.isBringBack 
+                        ? "bg-accent text-accent-foreground" 
+                        : event.isResults 
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-primary/10 text-primary"
+                    }`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-display font-semibold text-sm mb-1">{event.title}</h3>
+                    <p className="text-xs text-muted-foreground">{event.date}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Mobile Timeline - Vertical list */}
+      <section className="py-8 md:hidden">
+        <div className="section-container">
+          <div className="relative max-w-sm mx-auto">
+            {/* Vertical line */}
+            <div className="absolute left-5 top-2 bottom-2 w-0.5 bg-border" />
+            
+            <div className="space-y-4">
+              {timelineEvents.map((event, index) => {
+                const Icon = event.icon;
+                return (
+                  <AnimatedSection key={event.id} delay={index * 0.05}>
+                    <div className="flex gap-4 items-center">
                       {/* Node */}
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 z-10 ${
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 z-10 ${
                         event.isBringBack 
                           ? "bg-accent text-accent-foreground" 
                           : event.isResults 
                             ? "bg-primary text-primary-foreground"
                             : "bg-primary/10 text-primary border border-primary/20"
                       }`}>
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-4 h-4" />
                       </div>
                       
                       {/* Content */}
-                      <div className={`glass-card p-5 flex-1 ${event.isResults ? "border-primary/50" : ""}`}>
-                        <h3 className="font-display font-semibold text-lg mb-1">{event.title}</h3>
-                        <p className="text-sm text-muted-foreground">{event.date}</p>
+                      <div className={`glass-card p-4 flex-1 ${event.isResults ? "border-primary/50" : ""}`}>
+                        <h3 className="font-display font-semibold text-sm">{event.title}</h3>
+                        <p className="text-xs text-muted-foreground">{event.date}</p>
                       </div>
                     </div>
                   </AnimatedSection>
@@ -179,21 +205,21 @@ const Timeline = () => {
       </section>
 
       {/* Legend */}
-      <section className="py-12">
+      <section className="py-8">
         <div className="section-container">
           <AnimatedSection>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-primary/10 border border-primary/20" />
-                <span className="text-muted-foreground">Main Rounds</span>
+                <div className="w-3 h-3 rounded-full bg-primary/10 border-2 border-primary" />
+                <span className="text-muted-foreground text-xs">Main Rounds</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-accent" />
-                <span className="text-muted-foreground">Bring-Back Rounds</span>
+                <div className="w-3 h-3 rounded-full bg-accent" />
+                <span className="text-muted-foreground text-xs">Bring-Back Rounds</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-primary" />
-                <span className="text-muted-foreground">Results</span>
+                <div className="w-3 h-3 rounded-full bg-primary" />
+                <span className="text-muted-foreground text-xs">Results</span>
               </div>
             </div>
           </AnimatedSection>
