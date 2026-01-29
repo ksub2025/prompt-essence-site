@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, Mail, MapPin, CheckCircle } from "lucide-react";
+import { Send, Mail, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -60,26 +60,6 @@ const Contact = () => {
                       <p className="font-medium">venturecapsuletm@gmail.com</p>
                     </div>
                   </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Location</p>
-                      <p className="font-medium">Lorem Ipsum, LI</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="glass-card p-8">
-                  <h3 className="font-display text-xl font-semibold mb-4">Tempus Responsi</h3>
-                  <p className="text-muted-foreground">
-                    Typice intra 48 horas diebus negotialibus respondemus. 
-                    Pro quaestionibus urgentibus, indica in nuntio tuo.
-                  </p>
                 </div>
               </div>
             </AnimatedSection>
