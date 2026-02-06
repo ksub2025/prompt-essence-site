@@ -31,9 +31,10 @@ const Index = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".hero-line", {
-        y: 40,
-        opacity: 0,
+      gsap.set(".hero-line", { opacity: 0, y: 40 });
+      gsap.to(".hero-line", {
+        y: 0,
+        opacity: 1,
         duration: 1,
         stagger: 0.15,
         ease: "power3.out"
@@ -50,12 +51,12 @@ const Index = () => {
         <HeroScene />
         <div className="section-container relative z-10">
           <div ref={heroRef} className="max-w-4xl">
-            <p className="hero-line text-primary text-sm font-medium mb-6 uppercase tracking-widest opacity-0">
+            <p className="hero-line text-primary text-sm font-medium mb-6 uppercase tracking-widest">
               Business • Finance • Economics
             </p>
-            <h1 className="hero-line hero-headline mb-8 font-headline opacity-0">Venture Capsule</h1>
-            <p className="hero-line body-large max-w-2xl mb-10 font-body opacity-0">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
-            <div className="hero-line flex flex-wrap gap-4 opacity-0">
+            <h1 className="hero-line hero-headline mb-8 font-headline">Venture Capsule</h1>
+            <p className="hero-line body-large max-w-2xl mb-10 font-body">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
+            <div className="hero-line flex flex-wrap gap-4">
               <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
               <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
             </div>
