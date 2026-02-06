@@ -6,8 +6,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const VaultReveal = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const leftDoorRef = useRef<HTMLDivElement>(null);
+  const rightDoorRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleSpan1Ref = useRef<HTMLSpanElement>(null);
+  const titleSpan2Ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    // Ensure all refs are available
+    if (
+      !sectionRef.current ||
+      !leftDoorRef.current ||
+      !rightDoorRef.current ||
+      !titleRef.current ||
+      !titleSpan1Ref.current ||
+      !titleSpan2Ref.current
+    ) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -16,23 +33,32 @@ const VaultReveal = () => {
           end: "+=500",
           scrub: true,
           pin: true,
+          pinSpacing: true,
         },
       });
 
       // Doors opening simultaneously
-      tl.to(".door-left", {
-        rotationY: -14,
-        ease: "power2.inOut",
-      }, 0);
+      tl.to(
+        leftDoorRef.current,
+        {
+          rotationY: -14,
+          ease: "power2.inOut",
+        },
+        0
+      );
 
-      tl.to(".door-right", {
-        rotationY: 14,
-        ease: "power2.inOut",
-      }, 0);
+      tl.to(
+        rightDoorRef.current,
+        {
+          rotationY: 14,
+          ease: "power2.inOut",
+        },
+        0
+      );
 
       // Title emergence with 3D depth
       tl.from(
-        ".vault-title span",
+        [titleSpan1Ref.current, titleSpan2Ref.current],
         {
           y: 60,
           rotationX: -25,
@@ -45,15 +71,20 @@ const VaultReveal = () => {
       );
 
       // Final settle
-      tl.to(".vault-title", {
-        rotationX: 0,
-        z: 0,
-        duration: 0.2,
-        ease: "power2.out",
-      });
+      tl.to(
+        titleRef.current,
+        {
+          rotationX: 0,
+          z: 0,
+          duration: 0.2,
+          ease: "power2.out",
+        }
+      );
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -66,20 +97,24 @@ const VaultReveal = () => {
       <div className="absolute inset-0 z-30 flex">
         {/* Left door */}
         <div
-          className="door-left flex-1"
+          ref={leftDoorRef}
+          className="flex-1"
           style={{
             background: "linear-gradient(to bottom, #7A1818, #8B1E1E)",
-            boxShadow: "inset 0 0 40px rgba(0,0,0,0.25), 0 40px 80px rgba(0,0,0,0.25)",
+            boxShadow:
+              "inset 0 0 40px rgba(0,0,0,0.25), 0 40px 80px rgba(0,0,0,0.25)",
             transformStyle: "preserve-3d",
             transformOrigin: "left center",
           }}
         />
         {/* Right door */}
         <div
-          className="door-right flex-1"
+          ref={rightDoorRef}
+          className="flex-1"
           style={{
             background: "linear-gradient(to bottom, #7A1818, #8B1E1E)",
-            boxShadow: "inset 0 0 40px rgba(0,0,0,0.25), 0 40px 80px rgba(0,0,0,0.25)",
+            boxShadow:
+              "inset 0 0 40px rgba(0,0,0,0.25), 0 40px 80px rgba(0,0,0,0.25)",
             transformStyle: "preserve-3d",
             transformOrigin: "right center",
           }}
@@ -97,14 +132,19 @@ const VaultReveal = () => {
       {/* Title behind the vault doors */}
       <div className="absolute inset-0 z-10 grid place-items-center">
         <h1
-          className="vault-title text-center font-headline text-foreground"
+          ref={titleRef}
+          className="text-center font-headline text-foreground"
           style={{
             fontSize: "clamp(3rem, 6vw, 6rem)",
             transformStyle: "preserve-3d",
           }}
         >
-          <span className="block">Venture Capsule</span>
-          <span className="block text-primary">is revealed</span>
+          <span ref={titleSpan1Ref} className="block">
+            Venture Capsule
+          </span>
+          <span ref={titleSpan2Ref} className="block text-primary">
+            is revealed
+          </span>
         </h1>
       </div>
     </section>
