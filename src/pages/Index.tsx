@@ -26,7 +26,7 @@ const Index = () => {
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-primary text-sm font-medium mb-6 uppercase tracking-widest">
               Business • Finance • Economics
             </motion.p>
-            <h1 className="hero-headline mb-8">VentureCapsule</h1>
+            <h1 className="hero-headline mb-8 font-headline">VentureCapsule</h1>
             <p className="body-large max-w-2xl mb-10">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
             <div className="flex flex-wrap gap-4">
               <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>

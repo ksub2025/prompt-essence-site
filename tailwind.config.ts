@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         display: ["Space Grotesk", "sans-serif"],
+        headline: ["Playfair Display", "serif"],
         body: ["Inter", "sans-serif"],
       },
       colors: {
