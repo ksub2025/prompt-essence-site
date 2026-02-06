@@ -49,7 +49,7 @@ const Index = () => {
               Business • Finance • Economics
             </motion.p>
             <h1 className="hero-headline mb-8 font-headline">Venture Capsule</h1>
-            <p className="body-large max-w-2xl mb-10">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
+            <p className="body-large max-w-2xl mb-10 font-body">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
             <div className="flex flex-wrap gap-4">
               <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
               <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
