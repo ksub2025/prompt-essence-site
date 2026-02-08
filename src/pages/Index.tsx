@@ -7,7 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroScene from "@/components/HeroScene";
-import VaultReveal from "@/components/VaultReveal";
+
 
 const subsectionPreviews = [{
   icon: Briefcase,
@@ -65,8 +65,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Vault Door Reveal Section */}
-      <VaultReveal />
 
       <section className="py-24 bg-muted/30">
         <div className="section-container">
