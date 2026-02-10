@@ -127,7 +127,7 @@
   }
 
   .nav-link {
-    @apply text-accent hover:text-foreground transition-colors duration-300 text-sm font-medium;
+    @apply text-foreground hover:text-primary transition-colors duration-300 text-sm font-medium;
   }
 
   .nav-link-active {
