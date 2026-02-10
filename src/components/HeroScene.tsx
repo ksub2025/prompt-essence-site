@@ -94,7 +94,7 @@ const FloatingBox = ({ position, scale = 1, speed = 1 }: { position: [number, nu
     <Float speed={speed * 0.9} rotationIntensity={0.4} floatIntensity={0.9}>
       <RoundedBox ref={meshRef} args={[1.2, 1.2, 1.2]} radius={0.15} position={position} scale={scale}>
         <meshStandardMaterial
-          color="#9aa87a"
+          color="#D8EBE2"
           roughness={0.35}
           metalness={0.1}
           transparent
