@@ -69,7 +69,7 @@ const FloatingTorus = ({ position, scale = 1, speed = 1 }: { position: [number, 
     <Float speed={speed * 1.2} rotationIntensity={0.6} floatIntensity={0.6}>
       <Torus ref={meshRef} args={[1, 0.3, 16, 32]} position={position} scale={scale}>
         <meshStandardMaterial
-          color="#2d2c6a"
+          color="#2d2a5a"
           roughness={0.5}
           metalness={0.15}
           transparent
