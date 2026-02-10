@@ -42,7 +42,7 @@ const FloatingSphere = ({ position, scale = 1, speed = 1 }: { position: [number,
     <Float speed={speed * 0.8} rotationIntensity={0.3} floatIntensity={1}>
       <Sphere ref={meshRef} args={[1, 32, 32]} position={position} scale={scale}>
         <MeshDistortMaterial
-          color="#4a498a"
+          color="#4a4580"
           roughness={0.4}
           metalness={0.05}
           distort={0.3}
