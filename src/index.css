@@ -36,7 +36,6 @@
 
     --radius: 0.5rem;
 
-    /* Custom tokens */
     --hero-gradient: linear-gradient(135deg, hsl(26 90% 35% / 0.08), hsl(7 40% 82% / 0.15));
     --section-gradient: linear-gradient(180deg, hsl(7 40% 88%), hsl(7 35% 91%));
     --glow: 0 4px 24px hsl(26 90% 35% / 0.18);
