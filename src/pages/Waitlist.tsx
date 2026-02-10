@@ -5,25 +5,18 @@ import { z } from "zod";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 const waitlistSchema = z.object({
-  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100),
-  team_name: z.string().trim().min(2, "Team name must be at least 2 characters").max(100),
-  email: z.string().trim().email("Please enter a valid email address").max(255),
-  phone: z.string().trim().min(5, "Phone number must be at least 5 digits").max(20),
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
+  phone: z.string().trim().min(5, "Phone number must be at least 5 digits").max(20, "Phone number must be less than 20 characters"),
   country: z.string().min(1, "Please select your country"),
-  subsection: z.string().min(1, "Please select a subsection"),
-  faqs: z.string().max(1000).optional(),
-  how_heard: z.string().max(500).optional(),
-  improvement_suggestion: z.string().max(1000).optional(),
 });
 
 type WaitlistFormData = z.infer<typeof waitlistSchema>;
@@ -37,65 +30,27 @@ const countries = [
   "Thailand", "Turkey", "UAE", "Ukraine", "United Kingdom", "United States", "Vietnam", "Other"
 ];
 
-const subsections = [
-  { value: "Initiation", label: "Initiation", brief: "Build a thriving business based on your assigned location" },
-  { value: "Path Drawer", label: "Path Drawer", brief: "Explore financial literacy and grow your portfolio using FinLit" },
-  { value: "Operator", label: "Operator", brief: "Make intrapreneurial decisions and analyse business operations" },
-  { value: "Planned Chaos", label: "Planned Chaos", brief: "Navigate interconnected crisis scenarios round by round" },
-];
-
 const Waitlist = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<WaitlistFormData>({
     resolver: zodResolver(waitlistSchema),
     defaultValues: {
       name: "",
-      team_name: "",
       email: "",
       phone: "",
       country: "",
-      subsection: "",
-      faqs: "",
-      how_heard: "",
-      improvement_suggestion: "",
     },
   });
 
-  const onSubmit = async (data: WaitlistFormData) => {
-    setIsSubmitting(true);
-    try {
-      const { error } = await supabase.from("waitlist").insert({
-        name: data.name,
-        team_name: data.team_name,
-        email: data.email,
-        phone: data.phone,
-        country: data.country,
-        subsection: data.subsection,
-        faqs: data.faqs || null,
-        how_heard: data.how_heard || null,
-        improvement_suggestion: data.improvement_suggestion || null,
-      });
-
-      if (error) throw error;
-
-      setSubmitted(true);
-      toast({
-        title: "Welcome to the waitlist!",
-        description: "We'll keep you updated on VentureCapsule.",
-      });
-    } catch (error) {
-      console.error("Waitlist submission error:", error);
-      toast({
-        title: "Something went wrong",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  const onSubmit = (data: WaitlistFormData) => {
+    console.log("Waitlist form submitted:", data);
+    setSubmitted(true);
+    toast({
+      title: "Welcome to the waitlist!",
+      description: "We'll keep you updated on VentureCapsule.",
+    });
   };
 
   return (
@@ -134,20 +89,6 @@ const Waitlist = () => {
                           <FormLabel>Full Name</FormLabel>
                           <FormControl>
                             <Input placeholder="Enter your full name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="team_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Team Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Enter your team name" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -207,76 +148,9 @@ const Waitlist = () => {
                       )}
                     />
 
-                    <FormField
-                      control={form.control}
-                      name="subsection"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Subsection</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select a subsection" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {subsections.map((sub) => (
-                                <SelectItem key={sub.value} value={sub.value}>
-                                  {sub.label} — {sub.brief}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="faqs"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Any FAQs?</FormLabel>
-                          <FormControl>
-                            <Textarea placeholder="Any questions you'd like answered?" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="how_heard"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>How did you hear about us?</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g. Social media, friend, school..." {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="improvement_suggestion"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>What would you like to see to improve this competition?</FormLabel>
-                          <FormControl>
-                            <Textarea placeholder="Share your suggestions..." {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
-                      {isSubmitting ? "Submitting..." : "Join Waitlist"}
-                      {!isSubmitting && <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+                    <Button type="submit" size="lg" className="w-full group">
+                      Join Waitlist
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </form>
                 </Form>

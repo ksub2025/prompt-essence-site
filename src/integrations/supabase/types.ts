@@ -14,48 +14,7 @@ export type Database = {
   }
   public: {
     Tables: {
-      waitlist: {
-        Row: {
-          country: string
-          created_at: string
-          email: string
-          faqs: string | null
-          how_heard: string | null
-          id: string
-          improvement_suggestion: string | null
-          name: string
-          phone: string
-          subsection: string
-          team_name: string
-        }
-        Insert: {
-          country: string
-          created_at?: string
-          email: string
-          faqs?: string | null
-          how_heard?: string | null
-          id?: string
-          improvement_suggestion?: string | null
-          name: string
-          phone: string
-          subsection: string
-          team_name: string
-        }
-        Update: {
-          country?: string
-          created_at?: string
-          email?: string
-          faqs?: string | null
-          how_heard?: string | null
-          id?: string
-          improvement_suggestion?: string | null
-          name?: string
-          phone?: string
-          subsection?: string
-          team_name?: string
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
