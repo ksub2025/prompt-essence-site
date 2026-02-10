@@ -44,7 +44,6 @@ const Navigation = () => {
 
           {/* CTA Button & Theme Toggle */}
           <div className="hidden md:flex items-center gap-3">
-            <ThemeToggle />
             <Link to="/waitlist">
               <Button variant="hero" size="sm">
                 Join Waitlist
