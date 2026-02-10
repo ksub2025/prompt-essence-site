@@ -18,7 +18,7 @@ const FloatingCapsule = ({ position, scale = 1, speed = 1 }: { position: [number
       <mesh ref={meshRef} position={position} scale={scale}>
         <capsuleGeometry args={[0.5, 1, 8, 16]} />
         <MeshDistortMaterial
-          color="#7a8a5a"
+          color="#3A397A"
           roughness={0.3}
           metalness={0.1}
           distort={0.2}
@@ -42,7 +42,7 @@ const FloatingSphere = ({ position, scale = 1, speed = 1 }: { position: [number,
     <Float speed={speed * 0.8} rotationIntensity={0.3} floatIntensity={1}>
       <Sphere ref={meshRef} args={[1, 32, 32]} position={position} scale={scale}>
         <MeshDistortMaterial
-          color="#8a9a6a"
+          color="#4a498a"
           roughness={0.4}
           metalness={0.05}
           distort={0.3}
@@ -69,7 +69,7 @@ const FloatingTorus = ({ position, scale = 1, speed = 1 }: { position: [number, 
     <Float speed={speed * 1.2} rotationIntensity={0.6} floatIntensity={0.6}>
       <Torus ref={meshRef} args={[1, 0.3, 16, 32]} position={position} scale={scale}>
         <meshStandardMaterial
-          color="#6b7a4f"
+          color="#2d2c6a"
           roughness={0.5}
           metalness={0.15}
           transparent
@@ -94,7 +94,7 @@ const FloatingBox = ({ position, scale = 1, speed = 1 }: { position: [number, nu
     <Float speed={speed * 0.9} rotationIntensity={0.4} floatIntensity={0.9}>
       <RoundedBox ref={meshRef} args={[1.2, 1.2, 1.2]} radius={0.15} position={position} scale={scale}>
         <meshStandardMaterial
-          color="#9aa87a"
+          color="#D8EBE2"
           roughness={0.35}
           metalness={0.1}
           transparent
