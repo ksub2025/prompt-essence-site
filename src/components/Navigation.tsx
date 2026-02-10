@@ -53,7 +53,6 @@ const Navigation = () => {
 
           {/* Mobile Menu Button & Theme Toggle */}
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
             <button
               className="text-foreground p-2"
               onClick={() => setIsOpen(!isOpen)}
