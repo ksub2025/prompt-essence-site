@@ -26,6 +26,7 @@ export type Database = {
           name: string
           phone: string
           subsection: string
+          team_members: string | null
           team_name: string
         }
         Insert: {
@@ -39,6 +40,7 @@ export type Database = {
           name: string
           phone: string
           subsection: string
+          team_members?: string | null
           team_name: string
         }
         Update: {
@@ -52,6 +54,7 @@ export type Database = {
           name?: string
           phone?: string
           subsection?: string
+          team_members?: string | null
           team_name?: string
         }
         Relationships: []
