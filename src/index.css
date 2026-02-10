@@ -131,7 +131,7 @@
   }
 
   .nav-link-active {
-    @apply text-foreground;
+    @apply text-accent;
   }
 }
 
