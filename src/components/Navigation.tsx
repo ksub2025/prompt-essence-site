@@ -24,7 +24,7 @@ const Navigation = () => {
       <div className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="font-display font-bold text-xl tracking-tight text-foreground">
+          <Link to="/" className="font-headline font-bold text-xl tracking-tight text-foreground">
             Venture Capsule
           </Link>
 
