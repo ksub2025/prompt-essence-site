@@ -1,0 +1,1 @@
+ALTER TABLE public.waitlist ADD COLUMN team_members text;

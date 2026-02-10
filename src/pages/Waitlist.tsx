@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 const waitlistSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters"),
   team_name: z.string().trim().min(2, "Team name must be at least 2 characters").max(100, "Team name must be less than 100 characters"),
+  team_members: z.string().trim().min(2, "Please list your team members").max(500, "Must be less than 500 characters"),
   email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
   phone: z.string().trim().min(5, "Phone number must be at least 5 digits").max(20, "Phone number must be less than 20 characters"),
   country: z.string().min(1, "Please select your country"),
@@ -49,6 +50,7 @@ const Waitlist = () => {
     defaultValues: {
       name: "",
       team_name: "",
+      team_members: "",
       email: "",
       phone: "",
       country: "",
@@ -65,6 +67,7 @@ const Waitlist = () => {
       const { error } = await supabase.from("waitlist").insert({
         name: data.name,
         team_name: data.team_name,
+        team_members: data.team_members,
         email: data.email,
         phone: data.phone,
         country: data.country,
@@ -142,6 +145,20 @@ const Waitlist = () => {
                           <FormLabel>Team Name</FormLabel>
                           <FormControl>
                             <Input placeholder="Enter your team name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="team_members"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Team Members (2-5 members)</FormLabel>
+                          <FormControl>
+                            <Textarea placeholder="List your team members' names, separated by commas" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
