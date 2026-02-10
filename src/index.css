@@ -21,17 +21,17 @@
     --secondary: 80 17% 53%;
     --secondary-foreground: 220 25% 12%;
 
-    --muted: 7 25% 84%;
-    --muted-foreground: 220 10% 40%;
+    --muted: 80 12% 78%;
+    --muted-foreground: 80 17% 40%;
 
-    --accent: 80 14% 72%;
+    --accent: 80 17% 53%;
     --accent-foreground: 220 25% 12%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 7 22% 80%;
-    --input: 7 22% 80%;
+    --border: 80 14% 68%;
+    --input: 80 14% 68%;
     --ring: 26 90% 35%;
 
     --radius: 0.5rem;
@@ -127,7 +127,7 @@
   }
 
   .nav-link {
-    @apply text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium;
+    @apply text-accent hover:text-foreground transition-colors duration-300 text-sm font-medium;
   }
 
   .nav-link-active {
