@@ -18,7 +18,7 @@ const FloatingCapsule = ({ position, scale = 1, speed = 1 }: { position: [number
       <mesh ref={meshRef} position={position} scale={scale}>
         <capsuleGeometry args={[0.5, 1, 8, 16]} />
         <MeshDistortMaterial
-          color="#393469"
+          color="#2A3075"
           roughness={0.3}
           metalness={0.1}
           distort={0.2}
