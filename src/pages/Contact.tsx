@@ -32,11 +32,11 @@ const Contact = () => {
             <div className="max-w-3xl">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Contact Us</p>
               <h1 className="section-headline mb-8">
-                Conectamur
+                Let's Connect
               </h1>
               <p className="body-large">
-                Habesne quaestiones de programmate? Vis nobiscum cooperari? 
-                Libenter a te audiremus.
+                Have questions about the program? Want to collaborate with us? 
+                We'd love to hear from you.
               </p>
             </div>
           </AnimatedSection>
@@ -69,10 +69,10 @@ const Contact = () => {
               {submitted ? (
                 <div className="glass-card p-12 text-center">
                   <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
-                  <h2 className="font-display text-3xl font-bold mb-4">Nuntius Missus</h2>
+                  <h2 className="font-display text-3xl font-bold mb-4">Message Sent</h2>
                   <p className="text-muted-foreground">
-                    Gratias tibi pro contactu. Membrum turmae nostrae 
-                    intra 48 horas tibi respondebit.
+                    Thank you for reaching out. A member of our team 
+                    will respond to you within 48 hours.
                   </p>
                 </div>
               ) : (
@@ -81,7 +81,7 @@ const Contact = () => {
                     <label className="text-sm font-medium">Name *</label>
                     <Input 
                       required 
-                      placeholder="Nomen tuum"
+                      placeholder="Your name"
                       className="bg-background border-border focus:border-primary"
                     />
                   </div>
@@ -91,7 +91,7 @@ const Contact = () => {
                     <Input 
                       required 
                       type="email"
-                      placeholder="lorem@ipsum.com"
+                      placeholder="you@example.com"
                       className="bg-background border-border focus:border-primary"
                     />
                   </div>
@@ -100,7 +100,7 @@ const Contact = () => {
                     <label className="text-sm font-medium">Subject *</label>
                     <Input 
                       required 
-                      placeholder="De quo agitur?"
+                      placeholder="What is this about?"
                       className="bg-background border-border focus:border-primary"
                     />
                   </div>
@@ -109,7 +109,7 @@ const Contact = () => {
                     <label className="text-sm font-medium">Message *</label>
                     <Textarea 
                       required 
-                      placeholder="Nuntius tuus..."
+                      placeholder="Your message..."
                       className="bg-background border-border focus:border-primary min-h-[150px]"
                     />
                   </div>
