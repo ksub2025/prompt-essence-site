@@ -111,7 +111,7 @@ const Waitlist = () => {
                   <li>&#8226; ₹1,100 for teams of 3 members or less</li>
                   <li>&#8226; ₹1,500 for teams of more than 3 members</li>
                 </ul>
-                <p className="text-muted-foreground text-xs mt-2">Prices will be higher after the waitlist period ends.</p>
+                <p className="text-muted-foreground text-xs mt-2">Prices will be higher after the waitlist period ends. The waitlist closes after 40 teams register overall, so sign up early!</p>
               </div>
             </div>
           </AnimatedSection>
