@@ -89,6 +89,63 @@ const Index = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-24">
+        <div className="section-container">
+          <AnimatedSection>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="section-headline mb-4 text-center">Frequently Asked Questions</h2>
+              <p className="body-large text-center mb-12 text-muted-foreground">Everything you need to know about the business pitch competition in Hyderabad for IB students.</p>
+              <div className="space-y-6">
+                {[
+                  { q: "What is VentureCapsule?", a: "VentureCapsule is a business, finance and economics competition for students. Participants create, nurture and execute solutions to real-life challenges across subsections including business pitching, financial literacy, case studies and professional mentoring." },
+                  { q: "Who can participate?", a: "The competition is open to IB and high-school students worldwide. Teams of 2–5 members register through the waitlist and select a subsection such as Initiation, Path Drawer, Operator or Planned Chaos." },
+                  { q: "How is the competition structured?", a: "VentureCapsule features 4 main rounds and 2 bring-back rounds. Eliminated teams can re-enter during bring-back rounds, reflecting the 'nurture and execute' philosophy for refining ideas." },
+                  { q: "Where and when does it take place?", a: "The 2025 competition runs from May 24 to July 10, based in Hyderabad, India. It combines in-person and online rounds." },
+                  { q: "What makes VentureCapsule different?", a: "VentureCapsule goes beyond pitching with diverse subsections, professional mentoring, idea incubation opportunities after the competition, and a unique bring-back round system that gives participants multiple chances to succeed." },
+                ].map((faq, i) => (
+                  <AnimatedSection key={i} delay={i * 0.05}>
+                    <div className="glass-card p-6">
+                      <h3 className="font-display text-lg font-semibold mb-2">{faq.q}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
+                    </div>
+                  </AnimatedSection>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Competition Overview Table */}
+      <section className="py-24 bg-muted/30">
+        <div className="section-container">
+          <AnimatedSection>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="section-headline mb-8 text-center">Competition at a Glance</h2>
+              <div className="glass-card overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="p-4 font-display font-semibold">Detail</th>
+                      <th className="p-4 font-display font-semibold">Info</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    <tr><td className="p-4 font-medium">Event</td><td className="p-4 text-muted-foreground">VentureCapsule Business Pitch Competition</td></tr>
+                    <tr><td className="p-4 font-medium">Dates</td><td className="p-4 text-muted-foreground">May 24 – July 10, 2025</td></tr>
+                    <tr><td className="p-4 font-medium">Location</td><td className="p-4 text-muted-foreground">Hyderabad, India (hybrid)</td></tr>
+                    <tr><td className="p-4 font-medium">Eligibility</td><td className="p-4 text-muted-foreground">IB & high-school students, teams of 2–5</td></tr>
+                    <tr><td className="p-4 font-medium">Rounds</td><td className="p-4 text-muted-foreground">4 main rounds + 2 bring-back rounds</td></tr>
+                    <tr><td className="p-4 font-medium">Subsections</td><td className="p-4 text-muted-foreground">Initiation · Path Drawer · Operator · Planned Chaos</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       <section className="py-24">
         <div className="section-container">
           <AnimatedSection>
