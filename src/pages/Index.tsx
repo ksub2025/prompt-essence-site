@@ -71,7 +71,7 @@ const Index = () => {
           <AnimatedSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <h2 className="section-headline mb-8">What is VentureCapsule?</h2>
-              <p className="body-large leading-relaxed">We are a business, finance and economics based competition that allows students to create, nurture and execute solutions to real life challenges within different subsections. This considers financial literacy, business pitching, case studies and measuring those with professionals as you get to foster new ideas and grow these solutions in our round based competition system.</p>
+              <p className="body-large leading-relaxed">We are an online business, finance and economics based competition that allows students to create, nurture and execute solutions to real life challenges within different subsections. This considers financial literacy, business pitching, case studies and measuring those with professionals as you get to foster new ideas and grow these solutions in our round based competition system.</p>
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
