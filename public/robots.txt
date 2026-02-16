@@ -19,4 +19,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://prompt-essence-site.lovable.app/sitemap.xml
+Sitemap: https://venturecapsule.org/sitemap.xml
