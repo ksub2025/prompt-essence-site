@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const benefits = [
-  { icon: DollarSign, title: "Cash Prize", description: "Win monetary rewards for your innovative solutions and hard work throughout the competition." },
+  { icon: DollarSign, title: "Cash Prize", description: "Win ₹10,000 for each subsection winner and ₹6,500 for second place. Compete for real monetary rewards for your innovative solutions." },
   { icon: Rocket, title: "Project Expansion", description: "Opportunity to expand your projects beyond the competition with incubation support." },
   { icon: Users, title: "Professional Guidance", description: "Receive mentorship and guidance from experienced professionals in business and finance." },
   { icon: Award, title: "Global Certificate", description: "Earn a certificate that shows you participated within a global scale competition." },
