@@ -18,3 +18,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://prompt-essence-site.lovable.app/sitemap.xml
