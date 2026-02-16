@@ -156,7 +156,7 @@ const Waitlist = () => {
                       name="team_members"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Team Members (2-5 members)</FormLabel>
+                          <FormLabel><FormLabel>Team Members (2-6 members)</FormLabel></FormLabel>
                           <FormControl>
                             <Textarea placeholder="List your team members' names, separated by commas" {...field} />
                           </FormControl>
