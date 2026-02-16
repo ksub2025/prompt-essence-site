@@ -133,7 +133,7 @@ const Index = () => {
                   </thead>
                   <tbody className="divide-y divide-border">
                     <tr><td className="p-4 font-medium">Event</td><td className="p-4 text-muted-foreground">VentureCapsule Business Pitch Competition</td></tr>
-                    <tr><td className="p-4 font-medium">Format</td><td className="p-4 text-muted-foreground">Hybrid (in-person & online)</td></tr>
+                    <tr><td className="p-4 font-medium">Format</td><td className="p-4 text-muted-foreground">Online</td></tr>
                     <tr><td className="p-4 font-medium">Eligibility</td><td className="p-4 text-muted-foreground">Youth interested in business, finance & economics, teams of 2–5</td></tr>
                     <tr><td className="p-4 font-medium">Rounds</td><td className="p-4 text-muted-foreground">4 main rounds + 2 bring-back rounds</td></tr>
                     <tr><td className="p-4 font-medium">Subsections</td><td className="p-4 text-muted-foreground">Initiation · Path Drawer · Operator · Planned Chaos</td></tr>
