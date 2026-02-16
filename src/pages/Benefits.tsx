@@ -23,7 +23,7 @@ const Benefits = () => {
             <div className="max-w-3xl">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Benefits</p>
               <h1 className="section-headline mb-8">Your Benefit From This</h1>
-              <p className="body-large">VentureCapsule offers more than just a competition experience — it's an opportunity to grow, learn, and build your future.</p>
+              <p className="body-large">VentureCapsule offers more than just a competition experience. It's an opportunity to grow, learn, and build your future.</p>
             </div>
           </AnimatedSection>
         </div>

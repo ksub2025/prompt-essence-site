@@ -63,7 +63,7 @@ const About = () => {
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><RefreshCw className="w-7 h-7 text-primary" /></div>
                   <div>
                     <h3 className="font-display text-2xl font-semibold mb-4">Bring Back Rounds</h3>
-                    <p className="text-muted-foreground leading-relaxed text-lg">With VentureCapsule, we have a system called bring back rounds. In business and finance, a lot of startups are bound to fail due to ideas not being conceptualized well enough. However, those ideas are then worked upon and hence create the successful companies you see today. Hence, VentureCapsule introduces the bring back round — a round where even if you get eliminated from the previous one, you still have a chance to get back into the main competition, allowing you to nurture your ideas to the fullest.</p>
+                    <p className="text-muted-foreground leading-relaxed text-lg">With VentureCapsule, we have a system called bring back rounds. In business and finance, a lot of startups are bound to fail due to ideas not being conceptualized well enough. However, those ideas are then worked upon and hence create the successful companies you see today. Hence, VentureCapsule introduces the bring back round: a round where even if you get eliminated from the previous one, you still have a chance to get back into the main competition, allowing you to nurture your ideas to the fullest.</p>
                   </div>
                 </div>
               </div>
