@@ -37,7 +37,7 @@
     --radius: 0.5rem;
 
     --hero-gradient: linear-gradient(135deg, hsl(245 34% 35% / 0.5), hsl(22 68% 86% / 0.08));
-    --section-gradient: linear-gradient(180deg, hsl(245 34% 31%), hsl(245 34% 28%));
+    --section-gradient: linear-gradient(180deg, hsl(245 34% 31%), hsl(245 34% 31%));
     --glow: 0 4px 24px hsl(22 68% 86% / 0.15);
     --text-gradient: linear-gradient(135deg, hsl(22 68% 86%), hsl(22 50% 72%));
   }
@@ -73,7 +73,7 @@
 
     /* Custom tokens - dark */
     --hero-gradient: linear-gradient(135deg, hsl(245 34% 30% / 0.15), hsl(22 68% 50% / 0.05));
-    --section-gradient: linear-gradient(180deg, hsl(245 34% 22%), hsl(245 34% 20%));
+    --section-gradient: linear-gradient(180deg, hsl(245 34% 22%), hsl(245 34% 22%));
     --glow: 0 4px 24px hsl(22 68% 86% / 0.12);
     --text-gradient: linear-gradient(135deg, hsl(22 68% 86%), hsl(22 50% 70%));
   }
