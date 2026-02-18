@@ -128,20 +128,7 @@
 
   .nav-link {
     @apply text-foreground hover:text-primary text-sm font-medium;
-    text-shadow: none;
-    transition: color 0.35s ease, text-shadow 0.35s ease;
-  }
-
-  .nav-link-active {
-    @apply text-primary font-semibold;
-    text-shadow: 0 0 16px hsl(var(--primary) / 0.6), 0 0 32px hsl(var(--primary) / 0.3);
-    transition: text-shadow 0.35s ease, color 0.35s ease;
-  }
-
-  .nav-link-glow-out {
-    @apply text-primary font-semibold;
-    text-shadow: none;
-    transition: text-shadow 0.35s ease, color 0.35s ease;
+    transition: color 0.2s ease;
   }
 }
 
