@@ -14,52 +14,69 @@ const navItems = [
   { label: "Contact", path: "/contact" },
 ];
 
-const GLOW_DURATION = 380; // ms — slightly longer than CSS transition so it fully finishes
+const GLOW_OUT_DURATION = 0.35; // seconds
+const GLOW_OUT_MS = GLOW_OUT_DURATION * 1000 + 40; // a little buffer
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // The path whose glow is currently visible / animating
-  const [activeGlow, setActiveGlow] = useState<string>(location.pathname);
-  // The path whose glow is fading out
-  const [glowingOut, setGlowingOut] = useState<string | null>(null);
-
-  const pendingPath = useRef<string | null>(null);
+  // null means no glow visible (between glow-out and glow-in)
+  const [activeGlow, setActiveGlow] = useState<string | null>(location.pathname);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prevPathRef = useRef<string>(location.pathname);
 
   useEffect(() => {
     const next = location.pathname;
+    const prev = prevPathRef.current;
+    if (next === prev) return;
 
-    // Same page — nothing to do
-    if (next === activeGlow && !glowingOut) return;
+    prevPathRef.current = next;
 
-    // Cancel any in-flight sequence
+    // Cancel any pending glow-in
     if (timerRef.current) clearTimeout(timerRef.current);
 
-    pendingPath.current = next;
+    // Phase 1 — glow-out: set activeGlow to null so the old item fades to opacity 0
+    setActiveGlow(null);
 
-    // Phase 1: glow-out the current active item
-    setGlowingOut(activeGlow);
-    setActiveGlow(""); // remove active glow class immediately
-
-    // Phase 2: after glow-out finishes, glow-in the new item
+    // Phase 2 — glow-in: after glow-out finishes, fade in the new item
     timerRef.current = setTimeout(() => {
-      setGlowingOut(null);
-      setActiveGlow(pendingPath.current ?? next);
-    }, GLOW_DURATION);
+      setActiveGlow(next);
+    }, GLOW_OUT_MS);
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-  const getLinkClass = (path: string) => {
-    if (path === activeGlow) return "nav-link nav-link-active";
-    if (path === glowingOut) return "nav-link nav-link-glow-out";
-    return "nav-link";
-  };
+  const renderNavLink = (item: { label: string; path: string }, extraClass = "") => (
+    <Link
+      key={item.path}
+      to={item.path}
+      className={`nav-link relative inline-block ${extraClass}`}
+    >
+      {/* Base text — always rendered for layout */}
+      <span className={activeGlow === item.path ? "text-primary font-semibold" : ""}>
+        {item.label}
+      </span>
+
+      {/* Glow overlay — animated opacity, sequential via state machine */}
+      <motion.span
+        aria-hidden
+        className="absolute inset-0 flex items-center justify-center pointer-events-none font-semibold whitespace-nowrap"
+        style={{
+          color: "hsl(var(--primary))",
+          textShadow:
+            "0 0 14px hsl(var(--primary) / 0.65), 0 0 28px hsl(var(--primary) / 0.35)",
+        }}
+        animate={{ opacity: activeGlow === item.path ? 1 : 0 }}
+        transition={{ duration: GLOW_OUT_DURATION, ease: "easeInOut" }}
+        initial={false}
+      >
+        {item.label}
+      </motion.span>
+    </Link>
+  );
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
@@ -72,15 +89,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 ml-12">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={getLinkClass(item.path)}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => renderNavLink(item))}
           </div>
 
           {/* CTA Button */}
@@ -114,16 +123,7 @@ const Navigation = () => {
             className="md:hidden bg-background border-b border-border"
           >
             <div className="section-container py-6 flex flex-col gap-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`${getLinkClass(item.path)} text-lg`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => renderNavLink(item, "text-lg"))}
               <div className="flex flex-col gap-3 mt-4">
                 <Link to="/waitlist" onClick={() => setIsOpen(false)}>
                   <Button variant="hero" className="w-full">
