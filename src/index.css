@@ -138,50 +138,52 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(245 34% 31% / 0.05);
+  background: hsl(245 34% 40% / 0.15);
+  border-radius: 50px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(22 68% 86% / 0.25);
+  background: hsl(22 68% 86% / 0.5);
   border-radius: 50px;
-  border: 2px solid transparent;
+  border: 2px solid hsl(245 34% 31% / 0.3);
   background-clip: padding-box;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(22 68% 86% / 0.45);
-  border: 2px solid transparent;
+  background: hsl(22 68% 86% / 0.7);
+  border: 2px solid hsl(245 34% 31% / 0.2);
   background-clip: padding-box;
-  box-shadow: 0 0 8px hsl(22 68% 86% / 0.3);
+  box-shadow: 0 0 12px hsl(22 68% 86% / 0.4);
 }
 
 .dark::-webkit-scrollbar-track {
-  background: hsl(245 34% 22% / 0.1);
+  background: hsl(245 34% 30% / 0.2);
+  border-radius: 50px;
 }
 
 .dark::-webkit-scrollbar-thumb {
-  background: hsl(22 68% 86% / 0.2);
+  background: hsl(22 68% 86% / 0.4);
   border-radius: 50px;
-  border: 2px solid transparent;
+  border: 2px solid hsl(245 34% 22% / 0.3);
   background-clip: padding-box;
 }
 
 .dark::-webkit-scrollbar-thumb:hover {
-  background: hsl(22 68% 86% / 0.4);
-  border: 2px solid transparent;
+  background: hsl(22 68% 86% / 0.65);
+  border: 2px solid hsl(245 34% 22% / 0.2);
   background-clip: padding-box;
-  box-shadow: 0 0 8px hsl(22 68% 86% / 0.25);
+  box-shadow: 0 0 12px hsl(22 68% 86% / 0.35);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(22 68% 86% / 0.25) transparent;
+  scrollbar-color: hsl(22 68% 86% / 0.5) hsl(245 34% 40% / 0.15);
 }
 
 .dark * {
-  scrollbar-color: hsl(22 68% 86% / 0.2) transparent;
+  scrollbar-color: hsl(22 68% 86% / 0.4) hsl(245 34% 30% / 0.2);
 }
 
 @layer utilities {
