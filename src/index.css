@@ -132,6 +132,58 @@
   }
 }
 
+/* Custom Scrollbar — Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(245 34% 31% / 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(22 68% 86% / 0.25);
+  border-radius: 50px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(22 68% 86% / 0.45);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 8px hsl(22 68% 86% / 0.3);
+}
+
+.dark::-webkit-scrollbar-track {
+  background: hsl(245 34% 22% / 0.1);
+}
+
+.dark::-webkit-scrollbar-thumb {
+  background: hsl(22 68% 86% / 0.2);
+  border-radius: 50px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark::-webkit-scrollbar-thumb:hover {
+  background: hsl(22 68% 86% / 0.4);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 8px hsl(22 68% 86% / 0.25);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(22 68% 86% / 0.25) transparent;
+}
+
+.dark * {
+  scrollbar-color: hsl(22 68% 86% / 0.2) transparent;
+}
+
 @layer utilities {
   .animate-fade-up {
     animation: fadeUp 0.8s ease-out forwards;
