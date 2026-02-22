@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import vcLogo from "@/assets/vc-logo.jpeg";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -84,8 +85,8 @@ const Navigation = () => {
       <div className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="font-headline font-bold text-xl tracking-tight text-foreground">
-            Venture Capsule
+          <Link to="/" className="flex items-center">
+            <img src={vcLogo} alt="Venture Capsule" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
