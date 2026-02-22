@@ -89,7 +89,7 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 ml-12">
+          <div className="hidden md:flex items-center gap-6 mx-auto">
             {navItems.map((item) => renderNavLink(item))}
           </div>
 
