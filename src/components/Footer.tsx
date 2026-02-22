@@ -10,7 +10,7 @@ const footerLinks = {
   Participate: [
     { label: "Benefits", path: "/benefits" },
     { label: "Join Waitlist", path: "/waitlist" },
-    { label: "Apply Now", path: "/apply" },
+    
   ],
   Support: [
     { label: "FAQs", path: "/faqs" },
