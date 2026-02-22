@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -98,7 +99,8 @@ const Waitlist = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <section className="pt-32 pb-20">
+      <Breadcrumbs />
+      <section className="pt-8 pb-20">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">

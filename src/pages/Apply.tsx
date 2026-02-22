@@ -3,19 +3,21 @@ import { DollarSign, Rocket, Users, Award, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const Apply = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <section className="pt-32 pb-20">
+      <Breadcrumbs />
+      <section className="pt-8 pb-20">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Apply</p>
               <h1 className="section-headline mb-8">Apply Now</h1>
-              <p className="body-large">Join VentureCapsule and start your journey in business, finance, and economics.</p>
+              <p className="body-large">Join VentureCapsule and start your journey in business, finance, and economics. Explore the <Link to="/subsections" className="text-primary hover:underline">competition pathways</Link> and <Link to="/benefits" className="text-primary hover:underline">benefits</Link>.</p>
             </div>
           </AnimatedSection>
         </div>
@@ -44,7 +46,7 @@ const Apply = () => {
             <div className="glass-card p-12 md:p-20 text-center max-w-2xl mx-auto">
               <p className="text-6xl mb-6">📝</p>
               <h2 className="font-display text-3xl font-bold mb-4">Applications Opening Soon</h2>
-              <p className="text-muted-foreground text-lg mb-8">The application form will be available shortly. Check back soon to apply for VentureCapsule.</p>
+              <p className="text-muted-foreground text-lg mb-8">The application form will be available shortly. In the meantime, <Link to="/waitlist" className="text-primary hover:underline">join the waitlist</Link> to secure early access.</p>
               <Link to="/contact"><Button variant="outline" size="lg">Contact Us for Updates</Button></Link>
             </div>
           </AnimatedSection>
