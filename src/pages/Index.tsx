@@ -145,17 +145,6 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="section-container">
-          <AnimatedSection>
-            <div className="glass-card p-12 md:p-16 text-center">
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">Ready to Build the Future?</h2>
-              <p className="body-large max-w-2xl mx-auto mb-8">Join VentureCapsule and transform your ideas into impactful solutions guided by industry professionals.</p>
-              <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
       <Footer />
     </div>;
