@@ -26,6 +26,10 @@ const pageMeta: Record<string, { title: string; description: string }> = {
     title: 'Benefits | Why Join This Student Finance & Economics Competition',
     description: 'Win cash prizes, earn a global certificate, and get mentored by professionals. Discover what VentureCapsule\'s business competition offers students.',
   },
+  '/faqs': {
+    title: 'FAQs | VentureCapsule Business Competition Questions Answered',
+    description: 'Find answers to frequently asked questions about VentureCapsule — eligibility, competition structure, rounds, and how to participate.',
+  },
   '/waitlist': {
     title: 'Join Waitlist | VentureCapsule Business Competition for Students',
     description: 'Secure your spot in VentureCapsule — the premier business competition for students featuring finance challenges and economics case competitions.',

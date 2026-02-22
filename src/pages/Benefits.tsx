@@ -3,6 +3,7 @@ import { ArrowRight, DollarSign, Rocket, Users, Award, Globe } from "lucide-reac
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const benefits = [
@@ -17,13 +18,14 @@ const Benefits = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <section className="pt-32 pb-20">
+      <Breadcrumbs />
+      <section className="pt-8 pb-20">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-3xl">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Benefits</p>
               <h1 className="section-headline mb-8">Your Benefit From This</h1>
-              <p className="body-large">VentureCapsule offers more than just a competition experience. It's an opportunity to grow, learn, and build your future.</p>
+              <p className="body-large">VentureCapsule offers more than just a competition experience. Explore our <Link to="/subsections" className="text-primary hover:underline">four unique pathways</Link> and see what sets us apart.</p>
             </div>
           </AnimatedSection>
         </div>
@@ -50,7 +52,7 @@ const Benefits = () => {
           <AnimatedSection>
             <div className="glass-card p-12 text-center">
               <h2 className="font-display text-3xl font-bold mb-6">Ready to Get Started?</h2>
-              <p className="body-large max-w-2xl mx-auto mb-8">Don't miss out on this opportunity to grow your skills, build your network, and compete on a global stage.</p>
+              <p className="body-large max-w-2xl mx-auto mb-8">Don't miss out on this opportunity. Check the <Link to="/timeline" className="text-primary hover:underline">competition timeline</Link> and <Link to="/waitlist" className="text-primary hover:underline">join the waitlist</Link> today.</p>
               <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
             </div>
           </AnimatedSection>
