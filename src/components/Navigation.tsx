@@ -101,7 +101,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <LayoutGroup>
-            <div className="hidden md:flex items-center gap-1 mx-auto">
+            <div className="hidden md:flex items-center gap-1 mx-auto mr-8">
               {navItems.map((item) => renderNavLink(item))}
             </div>
           </LayoutGroup>
