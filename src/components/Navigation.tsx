@@ -56,7 +56,7 @@ const Navigation = () => {
     <Link
       key={item.path}
       to={item.path}
-      className={`nav-link relative inline-block rounded-xl px-3.5 py-1.5 transition-colors duration-300 ${extraClass}`}
+      className={`nav-link relative inline-block rounded-xl px-4 py-2.5 transition-colors duration-300 ${extraClass}`}
     >
       {/* Active glass pill background */}
       {isActive(item.path) && (
@@ -101,7 +101,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <LayoutGroup>
-            <div className="hidden md:flex items-center gap-1.5 mx-auto px-2 py-1.5 rounded-2xl bg-foreground/[0.06] backdrop-blur-xl border border-foreground/[0.08] shadow-[0_0_20px_hsl(var(--primary)/0.08),inset_0_1px_0_hsl(var(--foreground)/0.06)]">
+            <div className="hidden md:flex items-center gap-1 mx-auto">
               {navItems.map((item) => renderNavLink(item))}
             </div>
           </LayoutGroup>
