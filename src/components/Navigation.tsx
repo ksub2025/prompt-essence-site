@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -50,27 +50,38 @@ const Navigation = () => {
     };
   }, [location.pathname]);
 
+  const isActive = (path: string) => activeGlow === path;
+
   const renderNavLink = (item: { label: string; path: string }, extraClass = "") => (
     <Link
       key={item.path}
       to={item.path}
-      className={`nav-link relative inline-block ${extraClass}`}
+      className={`nav-link relative inline-block rounded-xl px-3.5 py-1.5 transition-colors duration-300 ${extraClass}`}
     >
+      {/* Active glass pill background */}
+      {isActive(item.path) && (
+        <motion.div
+          layoutId="active-pill"
+          className="absolute inset-0 rounded-xl bg-foreground/[0.09] backdrop-blur-md border border-foreground/[0.1] shadow-[0_0_16px_hsl(var(--primary)/0.15),inset_0_1px_0_hsl(var(--foreground)/0.08)]"
+          transition={{ type: "spring", stiffness: 350, damping: 30 }}
+        />
+      )}
+
       {/* Base text — always rendered for layout */}
-      <span className={activeGlow === item.path ? "text-primary font-semibold" : ""}>
+      <span className={`relative z-10 ${isActive(item.path) ? "text-primary font-semibold" : ""}`}>
         {item.label}
       </span>
 
       {/* Glow overlay — animated opacity, sequential via state machine */}
       <motion.span
         aria-hidden
-        className="absolute inset-0 flex items-center justify-center pointer-events-none font-semibold whitespace-nowrap"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none font-semibold whitespace-nowrap z-10"
         style={{
           color: "hsl(var(--primary))",
           textShadow:
             "0 0 14px hsl(var(--primary) / 0.65), 0 0 28px hsl(var(--primary) / 0.35)",
         }}
-        animate={{ opacity: activeGlow === item.path ? 1 : 0 }}
+        animate={{ opacity: isActive(item.path) ? 1 : 0 }}
         transition={{ duration: GLOW_OUT_DURATION, ease: "easeInOut" }}
         initial={false}
       >
@@ -89,9 +100,11 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6 mx-auto">
-            {navItems.map((item) => renderNavLink(item))}
-          </div>
+          <LayoutGroup>
+            <div className="hidden md:flex items-center gap-1.5 mx-auto px-2 py-1.5 rounded-2xl bg-foreground/[0.06] backdrop-blur-xl border border-foreground/[0.08] shadow-[0_0_20px_hsl(var(--primary)/0.08),inset_0_1px_0_hsl(var(--foreground)/0.06)]">
+              {navItems.map((item) => renderNavLink(item))}
+            </div>
+          </LayoutGroup>
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
