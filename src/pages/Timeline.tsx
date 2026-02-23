@@ -41,20 +41,19 @@ const Timeline = () => {
         }
       );
 
-      // Animate each timeline card
-      gsap.utils.toArray<HTMLElement>(".timeline-event").forEach((el, i) => {
-        const isEven = i % 2 === 0;
+      // Animate each timeline-item: fade in + slide up
+      gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-item").forEach((el) => {
         gsap.fromTo(
           el,
-          { opacity: 0, x: isEven ? -40 : 40 },
+          { opacity: 0, y: 50 },
           {
             opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: "power2.out",
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 85%",
+              start: "top 80%",
               toggleActions: "play none none none",
             },
           }
@@ -62,7 +61,7 @@ const Timeline = () => {
       });
 
       // Animate timeline dots
-      gsap.utils.toArray<HTMLElement>(".timeline-dot").forEach((el) => {
+      gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-dot").forEach((el) => {
         gsap.fromTo(
           el,
           { scale: 0 },
