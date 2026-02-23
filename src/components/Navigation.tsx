@@ -56,7 +56,7 @@ const Navigation = () => {
     <Link
       key={item.path}
       to={item.path}
-      className={`nav-link relative inline-block rounded-xl px-4 py-2.5 transition-colors duration-300 ${extraClass}`}
+      className={`nav-link relative inline-block rounded-xl px-4 py-2.5 transition-all duration-300 hover:bg-foreground/[0.05] ${extraClass}`}
     >
       {/* Active glass pill background */}
       {isActive(item.path) && (
