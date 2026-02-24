@@ -23,8 +23,6 @@ const waitlistSchema = z.object({
   phone: z.string().trim().min(5, "Phone number must be at least 5 digits").max(20, "Phone number must be less than 20 characters"),
   country: z.string().min(1, "Please select your country"),
   subsection: z.string().min(1, "Please select a subsection"),
-  how_heard: z.string().max(500, "Must be less than 500 characters").optional().or(z.literal("")),
-  improvement_suggestion: z.string().max(1000, "Must be less than 1000 characters").optional().or(z.literal("")),
   faqs: z.string().max(1000, "Must be less than 1000 characters").optional().or(z.literal("")),
 });
 
@@ -56,8 +54,6 @@ const Waitlist = () => {
       phone: "",
       country: "",
       subsection: "",
-      how_heard: "",
-      improvement_suggestion: "",
       faqs: "",
     },
   });
@@ -73,8 +69,6 @@ const Waitlist = () => {
         phone: data.phone,
         country: data.country,
         subsection: data.subsection,
-        how_heard: data.how_heard || null,
-        improvement_suggestion: data.improvement_suggestion || null,
         faqs: data.faqs || null,
       });
 
@@ -253,33 +247,6 @@ const Waitlist = () => {
                       )}
                     />
 
-                    <FormField
-                      control={form.control}
-                      name="how_heard"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>How did you hear about us? (Optional)</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g. Social media, friend, event..." {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="improvement_suggestion"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Any suggestions for improvement? (Optional)</FormLabel>
-                          <FormControl>
-                            <Textarea placeholder="Share your thoughts..." {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
 
                     <FormField
                       control={form.control}
