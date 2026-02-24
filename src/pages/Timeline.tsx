@@ -105,7 +105,11 @@ const Timeline = () => {
       <section className="timeline-section py-16">
         <div className="section-container">
           <div className="timeline timeline-container relative max-w-2xl mx-auto">
-            <div className="timeline-line absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border origin-top" />
+            <svg className="timeline-path absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 200 1000" preserveAspectRatio="none">
+              <path id="motionPath" d="M100,0 C100,200 100,300 100,500 C100,700 100,800 100,1000" stroke="hsl(var(--primary))" fill="none" strokeWidth="4" strokeOpacity="0.3" />
+            </svg>
+            <div className="moving-indicator absolute left-6 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary z-20 shadow-lg shadow-primary/30" />
+            <div className="timeline-line absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border origin-top z-[1]" />
             <div className="space-y-8">
               {timelineEvents.map((event, index) => {
                 const Icon = event.icon;
