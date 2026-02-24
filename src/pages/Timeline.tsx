@@ -127,58 +127,98 @@ const Timeline = () => {
           snapPoints.push(closestLen / pathTotalLen);
         });
 
-        // Main scroll-driven animation
-        // Move indicator along the path using MotionPath
-        const motionTween = gsap.to(indicator, {
-          motionPath: {
-            path: curvePath,
-            align: curvePath,
-            alignOrigin: [0.5, 0.5],
-            autoRotate: false,
-          },
-          ease: "none",
+        // Build a segment-based timeline so the indicator DWELLS at each dot
+        // Each segment: slow departure (resistance) → fast middle → slow arrival (attraction)
+        const masterTL = gsap.timeline({
           scrollTrigger: {
             trigger: ".timeline-section",
             start: "top 70%",
             end: "bottom 30%",
-            scrub: 0.3,
-            snap: {
-              snapTo: snapPoints,
-              duration: { min: 0.15, max: 0.4 },
-              ease: "power3.inOut",
-            },
+            scrub: 0.5,
             onUpdate: (self) => {
               // Draw trail to match progress
               const offset = totalLength * (1 - self.progress);
               trailPath.style.strokeDashoffset = `${offset}`;
-
-              // Magnetic glow effect: brighter when near a snap point
-              const progress = self.progress;
-              let minDist = 1;
-              for (const sp of snapPoints) {
-                const dist = Math.abs(progress - sp);
-                if (dist < minDist) minDist = dist;
-              }
-              // Near dot = bright glow, between dots = dim
-              const proximity = 1 - Math.min(minDist * 8, 1);
-              const glowSize = 12 + proximity * 10;
-              const glowSpread = 4 + proximity * 6;
-              const glowAlpha = 0.3 + proximity * 0.4;
-              const outerSize = 24 + proximity * 16;
-              const outerSpread = 8 + proximity * 8;
-              const outerAlpha = 0.1 + proximity * 0.2;
-              indicator.style.boxShadow = `0 0 ${glowSize}px ${glowSpread}px hsl(var(--primary) / ${glowAlpha}), 0 0 ${outerSize}px ${outerSpread}px hsl(var(--primary) / ${outerAlpha})`;
-
-              // Scale: bigger when snapped to dot, smaller in transit
-              const scale = 0.75 + proximity * 0.55;
-              indicator.style.transform = indicator.style.transform.replace(/scale\([^)]*\)/, '') + ` scale(${scale})`;
             },
+          },
+        });
+
+        // For each segment between consecutive dots, tween along that sub-path
+        for (let i = 0; i < snapPoints.length - 1; i++) {
+          const startFrac = snapPoints[i];
+          const endFrac = snapPoints[i + 1];
+
+          // Get start and end positions on the path
+          const startPt = pathEl.getPointAtLength(startFrac * pathTotalLen);
+          const endPt = pathEl.getPointAtLength(endFrac * pathTotalLen);
+
+          // Sample intermediate points along this segment for a smooth curved motion
+          const segmentPoints: { x: number; y: number }[] = [];
+          const sampleCount = 20;
+          for (let s = 0; s <= sampleCount; s++) {
+            const frac = startFrac + (s / sampleCount) * (endFrac - startFrac);
+            const pt = pathEl.getPointAtLength(frac * pathTotalLen);
+            segmentPoints.push({ x: pt.x, y: pt.y });
+          }
+
+          // Convert to motionPath values array (relative to SVG container)
+          const cLeft = cRect.left;
+          const cTop = cRect.top;
+
+          // Travel phase: move from current dot to next dot with magnetic easing
+          // power4.in = slow start (resistance leaving), power4.out would be fast start
+          // We want: resist leaving → fast middle → attract to next
+          // "slow" ease: slow at start, fast in middle, slow at end = perfect magnetic feel
+          masterTL.to(indicator, {
+            motionPath: {
+              path: segmentPoints.map(p => ({ x: p.x, y: p.y })),
+              curviness: 0,
+              type: "cubic",
+            },
+            duration: 1,
+            ease: "slow(0.7, 0.7, false)",
+          });
+
+          // Dwell phase: stay at the dot for a beat (creates the "stick" feel)
+          if (i < snapPoints.length - 2) {
+            masterTL.to(indicator, {
+              duration: 0.4,
+              // No movement, just hold position
+            });
+          }
+        }
+
+        // Glow & scale: use a separate ScrollTrigger to update visuals
+        ScrollTrigger.create({
+          trigger: ".timeline-section",
+          start: "top 70%",
+          end: "bottom 30%",
+          scrub: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            let minDist = 1;
+            for (const sp of snapPoints) {
+              const dist = Math.abs(progress - sp);
+              if (dist < minDist) minDist = dist;
+            }
+            const proximity = 1 - Math.min(minDist * 10, 1);
+            const glowSize = 10 + proximity * 14;
+            const glowSpread = 3 + proximity * 8;
+            const glowAlpha = 0.25 + proximity * 0.5;
+            const outerSize = 20 + proximity * 20;
+            const outerSpread = 6 + proximity * 10;
+            const outerAlpha = 0.08 + proximity * 0.25;
+            indicator.style.boxShadow = `0 0 ${glowSize}px ${glowSpread}px hsl(var(--primary) / ${glowAlpha}), 0 0 ${outerSize}px ${outerSpread}px hsl(var(--primary) / ${outerAlpha})`;
+
+            const scale = 0.7 + proximity * 0.6;
+            const currentTransform = indicator.style.transform || '';
+            indicator.style.transform = currentTransform.replace(/scale\([^)]*\)/, '') + ` scale(${scale})`;
           },
         });
 
         // Cleanup
         return () => {
-          motionTween.kill();
+          masterTL.kill();
         };
       }, timelineRef);
 
