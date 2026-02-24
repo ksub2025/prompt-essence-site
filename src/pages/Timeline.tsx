@@ -28,7 +28,7 @@ const Timeline = () => {
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Timeline</p>
               <h1 className="section-headline mb-8">Competition Timeline</h1>
               <p className="body-large">
-                Key dates and milestones for VentureCapsule 2025. Learn about the <Link to="/structure" className="text-primary hover:underline">round-based competition structure</Link> and choose your <Link to="/subsections" className="text-primary hover:underline">pathway</Link>.
+                Key dates and milestones for VentureCapsule 2026. Learn about the <Link to="/structure" className="text-primary hover:underline">round-based competition structure</Link> and choose your <Link to="/subsections" className="text-primary hover:underline">pathway</Link>.
               </p>
             </div>
           </AnimatedSection>
