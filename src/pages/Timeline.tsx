@@ -52,10 +52,19 @@ const Timeline = () => {
       if (!main || !indicator) return;
 
       const ctx = gsap.context(() => {
+        const initialContainer = main.querySelector<HTMLElement>(".tl-initial");
         const containers = gsap.utils.toArray<HTMLElement>(".tl-container:not(.tl-initial)");
-        const indicatorRect = indicator.getBoundingClientRect();
+        if (!initialContainer) return;
 
-        // Build motion path points relative to indicator start
+        // Position indicator at center of first card
+        const mainRect = main.getBoundingClientRect();
+        const initRect = initialContainer.getBoundingClientRect();
+        const startX = initRect.left + initRect.width / 2 - mainRect.left - 12;
+        const startY = initRect.top + initRect.height / 2 - mainRect.top - 12;
+        gsap.set(indicator, { x: 0, y: 0, left: startX, top: startY });
+
+        // Build motion path points relative to indicator's starting position
+        const indicatorRect = indicator.getBoundingClientRect();
         const points = containers.map((container) => {
           const r = container.getBoundingClientRect();
           return {
@@ -128,6 +137,19 @@ const Timeline = () => {
 
       {/* Main scattered timeline area */}
       <div ref={mainRef} className="relative" style={{ height: "300vh" }}>
+        {/* Glowing indicator — positioned at the center of the first card, moves via MotionPath */}
+        <div
+          ref={indicatorRef}
+          className="tl-indicator absolute z-50 pointer-events-none"
+          style={{
+            width: 24,
+            height: 24,
+            borderRadius: "50%",
+            background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
+            boxShadow: "0 0 16px 6px hsl(var(--primary) / 0.5), 0 0 32px 12px hsl(var(--primary) / 0.2)",
+          }}
+        />
+
         {timelineEvents.map((event, index) => {
           const Icon = event.icon;
           const pos = positions[index];
@@ -150,25 +172,6 @@ const Timeline = () => {
                   <h3 className="font-display font-semibold text-lg">{event.title}</h3>
                 </div>
                 <p className="text-muted-foreground">{event.date}</p>
-
-                {/* The indicator sits inside the first container */}
-                {isFirst && (
-                  <div
-                    ref={indicatorRef}
-                    className="absolute z-30 pointer-events-none"
-                    style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: "50%",
-                      top: "50%",
-                      left: "50%",
-                      marginTop: -12,
-                      marginLeft: -12,
-                      background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
-                      boxShadow: "0 0 16px 6px hsl(var(--primary) / 0.5), 0 0 32px 12px hsl(var(--primary) / 0.2)",
-                    }}
-                  />
-                )}
               </div>
             </div>
           );
