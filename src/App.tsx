@@ -14,6 +14,7 @@ import Benefits from "./pages/Benefits";
 import FAQ from "./pages/FAQ";
 import Apply from "./pages/Apply";
 import Waitlist from "./pages/Waitlist";
+import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import Timeline from "./pages/Timeline";
 import NotFound from "./pages/NotFound";
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="/benefits" element={<Benefits />} />
               <Route path="/faqs" element={<FAQ />} />
               <Route path="/apply" element={<Apply />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/waitlist" element={<Waitlist />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/timeline" element={<Timeline />} />
