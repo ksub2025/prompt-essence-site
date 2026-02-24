@@ -13,6 +13,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
+import vcLogo from "@/assets/vc-logo.png";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email"),
@@ -93,9 +94,13 @@ const Login = () => {
         <div className="section-container">
           <AnimatedSection>
             <div className="glass-card p-8 md:p-12 max-w-md mx-auto">
-              <h1 className="font-display text-2xl font-bold text-center mb-8">
-                {isLogin ? "Log In" : "Sign Up"}
-              </h1>
+              <div className="flex flex-col items-center mb-8">
+                <img src={vcLogo} alt="Venture Capsule logo" className="w-16 h-16 mb-4 object-contain" />
+                <h1 className="font-display text-2xl font-bold text-center">
+                  {isLogin ? "Log In" : "Sign Up"}
+                </h1>
+                <p className="text-muted-foreground text-sm mt-1">to continue to <span className="text-primary font-medium">Venture Capsule</span></p>
+              </div>
 
               {/* Google Button */}
               <Button
