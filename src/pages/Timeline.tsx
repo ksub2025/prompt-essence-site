@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,130 +24,199 @@ const timelineEvents = [
 const Timeline = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
+  const curvePathRef = useRef<SVGPathElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const buildCurvePath = useCallback(() => {
+    const container = document.querySelector(".timeline-container") as HTMLElement;
+    const dots = gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-dot");
+    if (!container || dots.length < 2) return "";
+
+    const cRect = container.getBoundingClientRect();
+    const points = dots.map((dot) => {
+      const r = dot.getBoundingClientRect();
+      return {
+        x: r.left - cRect.left + r.width / 2,
+        y: r.top - cRect.top + r.height / 2,
+      };
+    });
+
+    // Build a smooth cubic bezier curve through all points
+    let d = `M${points[0].x},${points[0].y}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const curr = points[i];
+      const next = points[i + 1];
+      const midY = (curr.y + next.y) / 2;
+      // Curve outward for a serpentine feel
+      const curveOffset = (i % 2 === 0 ? 1 : -1) * 60;
+      const cp1x = curr.x + curveOffset;
+      const cp1y = midY;
+      const cp2x = next.x - curveOffset;
+      const cp2y = midY;
+      d += ` C${cp1x},${cp1y} ${cp2x},${cp2y} ${next.x},${next.y}`;
+    }
+    return d;
+  }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate each timeline-item: fade in + slide up
-      gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-item").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-
-      // Animate timeline dots
-      gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-dot").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { scale: 0 },
-          {
-            scale: 1,
-            duration: 0.4,
-            ease: "back.out(2)",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-
-      // Magnetic snap: indicator travels between dots with resistance + attraction
-      const dots = gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-dot");
-      const indicator = indicatorRef.current;
-      if (!indicator || dots.length === 0) return;
-
-      const container = document.querySelector(".timeline-container") as HTMLElement;
-      if (!container) return;
-
-      // Build a timeline that snaps between dot positions with magnetic feel
-      const magnetTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".timeline-section",
-          start: "top 70%",
-          end: "bottom 30%",
-          scrub: 0.8,
-        },
-      });
-
-      // Position indicator at first dot initially
-      const containerRect = container.getBoundingClientRect();
-      const firstDotRect = dots[0].getBoundingClientRect();
-      const startY = firstDotRect.top - containerRect.top + firstDotRect.height / 2;
-      const startX = firstDotRect.left - containerRect.left + firstDotRect.width / 2;
-      gsap.set(indicator, { top: startY, left: startX, xPercent: -50, yPercent: -50 });
-
-      // For each subsequent dot, create a magnetic snap animation
-      dots.forEach((dot, i) => {
-        if (i === 0) return;
-        const prevDot = dots[i - 1];
-
-        magnetTl.to(indicator, {
-          duration: 1,
-          ease: "power2.in", // resistance: slow start leaving previous dot
-          top: () => {
-            const cRect = container.getBoundingClientRect();
-            const prevR = prevDot.getBoundingClientRect();
-            const dotR = dot.getBoundingClientRect();
-            // Move to midpoint first
-            return ((prevR.top + dotR.top) / 2) - cRect.top + dotR.height / 2;
-          },
-          left: () => {
-            const cRect = container.getBoundingClientRect();
-            const prevR = prevDot.getBoundingClientRect();
-            const dotR = dot.getBoundingClientRect();
-            return ((prevR.left + dotR.left) / 2) - cRect.left + dotR.width / 2;
-          },
-          scale: 0.7, // shrink in transit
-          onUpdate: function() {
-            // Pulse glow down during transit
-            const progress = this.progress();
-            const glow = progress < 0.5 ? 1 - progress : progress;
-            indicator.style.boxShadow = `0 0 ${12 * glow}px ${4 * glow}px hsl(var(--primary) / ${0.4 * glow}), 0 0 ${24 * glow}px ${8 * glow}px hsl(var(--primary) / ${0.15 * glow})`;
-          }
+    // Small delay to ensure layout is settled
+    const initTimeout = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        // Animate each timeline-item: fade in + slide up
+        gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-item").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
         });
 
-        magnetTl.to(indicator, {
-          duration: 1,
-          ease: "power4.out", // attraction: fast snap into dot
-          top: () => {
-            const cRect = container.getBoundingClientRect();
-            const dotR = dot.getBoundingClientRect();
-            return dotR.top - cRect.top + dotR.height / 2;
-          },
-          left: () => {
-            const cRect = container.getBoundingClientRect();
-            const dotR = dot.getBoundingClientRect();
-            return dotR.left - cRect.left + dotR.width / 2;
-          },
-          scale: 1.3, // overshoot on snap
-          onComplete: () => {
-            // Settle back
-            gsap.to(indicator, { scale: 1, duration: 0.2, ease: "elastic.out(1, 0.5)" });
-          },
-          onUpdate: function() {
-            // Ramp glow up on attraction
-            const progress = this.progress();
-            indicator.style.boxShadow = `0 0 ${12 + 8 * progress}px ${4 + 4 * progress}px hsl(var(--primary) / ${0.4 + 0.2 * progress}), 0 0 ${24 + 12 * progress}px ${8 + 6 * progress}px hsl(var(--primary) / ${0.15 + 0.1 * progress})`;
-          }
+        // Animate timeline dots
+        gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-dot").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { scale: 0 },
+            {
+              scale: 1,
+              duration: 0.4,
+              ease: "back.out(2)",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
         });
-      });
-    }, timelineRef);
 
-    return () => ctx.revert();
-  }, []);
+        // Build curve path through dots
+        const pathD = buildCurvePath();
+        if (!pathD || !curvePathRef.current || !svgRef.current) return;
+
+        const container = document.querySelector(".timeline-container") as HTMLElement;
+        if (!container) return;
+
+        // Set SVG dimensions to match container
+        const cRect = container.getBoundingClientRect();
+        svgRef.current.setAttribute("viewBox", `0 0 ${cRect.width} ${cRect.height}`);
+        svgRef.current.style.width = `${cRect.width}px`;
+        svgRef.current.style.height = `${cRect.height}px`;
+
+        curvePathRef.current.setAttribute("d", pathD);
+
+        // Draw the path progressively
+        const pathLength = curvePathRef.current.getTotalLength();
+        gsap.set(curvePathRef.current, {
+          strokeDasharray: pathLength,
+          strokeDashoffset: pathLength,
+        });
+
+        gsap.to(curvePathRef.current, {
+          strokeDashoffset: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".timeline-section",
+            start: "top 70%",
+            end: "bottom 30%",
+            scrub: 0.5,
+          },
+        });
+
+        // Magnetic indicator: snaps to each dot with dwell time
+        const indicator = indicatorRef.current;
+        const dots = gsap.utils.toArray<HTMLElement>(".timeline-section .timeline-dot");
+        if (!indicator || dots.length === 0) return;
+
+        const dotCount = dots.length;
+        // Each segment: 70% travel, 30% dwell (stick to dot)
+        const travelRatio = 0.65;
+        const dwellRatio = 0.35;
+        const segmentDuration = 1;
+
+        const magnetTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".timeline-section",
+            start: "top 70%",
+            end: "bottom 30%",
+            scrub: 0.6,
+          },
+        });
+
+        // Position at first dot
+        const getDotPos = (dot: HTMLElement) => {
+          const dotR = dot.getBoundingClientRect();
+          const contR = container.getBoundingClientRect();
+          return {
+            x: dotR.left - contR.left + dotR.width / 2,
+            y: dotR.top - contR.top + dotR.height / 2,
+          };
+        };
+
+        const firstPos = getDotPos(dots[0]);
+        gsap.set(indicator, {
+          top: firstPos.y,
+          left: firstPos.x,
+          xPercent: -50,
+          yPercent: -50,
+          scale: 1,
+        });
+
+        // Initial dwell on first dot
+        magnetTl.to(indicator, {
+          duration: dwellRatio * segmentDuration,
+          scale: 1.15,
+          ease: "sine.inOut",
+        });
+
+        for (let i = 1; i < dotCount; i++) {
+          const targetDot = dots[i];
+
+          // Travel phase: leave current dot with resistance, accelerate toward next
+          magnetTl.to(indicator, {
+            duration: travelRatio * segmentDuration,
+            top: () => getDotPos(targetDot).y,
+            left: () => getDotPos(targetDot).x,
+            scale: 0.6,
+            ease: "slow(0.5, 0.8, false)", // slow start (resistance), fast end (attraction)
+            onUpdate: function () {
+              const p = this.progress();
+              // Dim glow during travel, brighten on approach
+              const intensity = p < 0.4 ? 0.3 : 0.3 + (p - 0.4) * (1.17 / 0.6);
+              indicator.style.boxShadow = `0 0 ${12 * intensity}px ${4 * intensity}px hsl(var(--primary) / ${0.4 * intensity}), 0 0 ${24 * intensity}px ${8 * intensity}px hsl(var(--primary) / ${0.15 * intensity})`;
+            },
+          });
+
+          // Dwell phase: snap onto dot, scale up, glow bright — STAY here
+          magnetTl.to(indicator, {
+            duration: dwellRatio * segmentDuration,
+            scale: 1.15,
+            ease: "elastic.out(1.2, 0.4)",
+            onStart: () => {
+              // Flash glow on snap
+              indicator.style.boxShadow = `0 0 20px 8px hsl(var(--primary) / 0.6), 0 0 40px 16px hsl(var(--primary) / 0.25)`;
+            },
+            onComplete: () => {
+              indicator.style.boxShadow = `0 0 12px 4px hsl(var(--primary) / 0.4), 0 0 24px 8px hsl(var(--primary) / 0.15)`;
+            },
+          });
+        }
+      }, timelineRef);
+
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(initTimeout);
+  }, [buildCurvePath]);
 
   return (
     <div className="min-h-screen bg-background" ref={timelineRef}>
@@ -171,6 +240,23 @@ const Timeline = () => {
       <section className="timeline-section py-16">
         <div className="section-container">
           <div className="timeline timeline-container relative max-w-2xl mx-auto">
+            {/* Curvy SVG path connecting dots */}
+            <svg
+              ref={svgRef}
+              className="absolute top-0 left-0 pointer-events-none z-0 overflow-visible"
+              fill="none"
+            >
+              <path
+                ref={curvePathRef}
+                stroke="hsl(var(--primary))"
+                strokeWidth="2"
+                strokeOpacity="0.25"
+                strokeLinecap="round"
+                fill="none"
+              />
+            </svg>
+
+            {/* Magnetic indicator */}
             <div
               ref={indicatorRef}
               className="moving-indicator absolute w-5 h-5 rounded-full z-30 pointer-events-none"
@@ -179,6 +265,7 @@ const Timeline = () => {
                 boxShadow: '0 0 12px 4px hsl(var(--primary) / 0.4), 0 0 24px 8px hsl(var(--primary) / 0.15)',
               }}
             />
+
             <div className="space-y-8">
               {timelineEvents.map((event, index) => {
                 const Icon = event.icon;
