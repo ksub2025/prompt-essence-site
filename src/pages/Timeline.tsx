@@ -78,6 +78,23 @@ const Timeline = () => {
           }
         );
       });
+
+      // Animate moving-indicator along the SVG motionPath
+      gsap.to(".timeline-section .moving-indicator", {
+        motionPath: {
+          path: "#motionPath",
+          align: "#motionPath",
+          alignOrigin: [0.5, 0.5],
+          autoRotate: false,
+        },
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".timeline-section",
+          start: "top 80%",
+          end: "bottom 20%",
+          scrub: true,
+        },
+      });
     }, timelineRef);
 
     return () => ctx.revert();
