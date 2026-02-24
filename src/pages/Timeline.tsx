@@ -122,11 +122,28 @@ const Timeline = () => {
       <section className="timeline-section py-16">
         <div className="section-container">
           <div className="timeline timeline-container relative max-w-2xl mx-auto">
-            <svg className="timeline-path absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 200 1000" preserveAspectRatio="none">
-              <path id="motionPath" d="M100,0 C100,200 100,300 100,500 C100,700 100,800 100,1000" stroke="hsl(var(--primary))" fill="none" strokeWidth="4" strokeOpacity="0.3" />
+            <svg className="timeline-path absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 200 1400" preserveAspectRatio="xMidYMid meet">
+              <path
+                id="motionPath"
+                d="M100,0 C150,50 160,100 100,200 C40,300 30,350 100,400 C170,450 160,500 100,600 C40,700 30,750 100,800 C170,850 160,900 100,1000 C40,1100 30,1150 100,1200 C170,1250 160,1300 100,1400"
+                stroke="hsl(var(--primary))"
+                fill="none"
+                strokeWidth="3"
+                strokeOpacity="0.2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M100,0 C150,50 160,100 100,200 C40,300 30,350 100,400 C170,450 160,500 100,600 C40,700 30,750 100,800 C170,850 160,900 100,1000 C40,1100 30,1150 100,1200 C170,1250 160,1300 100,1400"
+                stroke="hsl(var(--primary))"
+                fill="none"
+                strokeWidth="3"
+                strokeOpacity="0.08"
+                strokeLinecap="round"
+                strokeDasharray="8 12"
+              />
             </svg>
-            <div className="moving-indicator absolute left-6 md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full z-30" style={{ background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))', boxShadow: '0 0 12px 4px hsl(var(--primary) / 0.4), 0 0 24px 8px hsl(var(--primary) / 0.15)' }} />
-            <div className="timeline-line absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border origin-top z-[1]" />
+            <div className="moving-indicator absolute w-5 h-5 rounded-full z-30" style={{ top: 0, left: '50%', marginLeft: '-10px', background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))', boxShadow: '0 0 12px 4px hsl(var(--primary) / 0.4), 0 0 24px 8px hsl(var(--primary) / 0.15)' }} />
+            <div className="timeline-line absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border origin-top z-[1] hidden" />
             <div className="space-y-8">
               {timelineEvents.map((event, index) => {
                 const Icon = event.icon;
