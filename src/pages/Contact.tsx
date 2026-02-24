@@ -9,13 +9,41 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
+
+    const { error } = await supabase.from("contact_messages").insert({
+      name,
+      email,
+      subject,
+      message,
+    });
+
+    setIsSubmitting(false);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSubmitted(true);
     toast({
       title: "Message Sent",
@@ -81,22 +109,22 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="glass-card p-8 md:p-10 space-y-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Name *</label>
-                    <Input required placeholder="Your name" className="bg-background border-border focus:border-primary" />
+                    <Input name="name" required placeholder="Your name" className="bg-background border-border focus:border-primary" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Email *</label>
-                    <Input required type="email" placeholder="you@example.com" className="bg-background border-border focus:border-primary" />
+                    <Input name="email" required type="email" placeholder="you@example.com" className="bg-background border-border focus:border-primary" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Subject *</label>
-                    <Input required placeholder="What is this about?" className="bg-background border-border focus:border-primary" />
+                    <Input name="subject" required placeholder="What is this about?" className="bg-background border-border focus:border-primary" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Message *</label>
-                    <Textarea required placeholder="Your message..." className="bg-background border-border focus:border-primary min-h-[150px]" />
+                    <Textarea name="message" required placeholder="Your message..." className="bg-background border-border focus:border-primary min-h-[150px]" />
                   </div>
-                  <Button type="submit" variant="hero" size="lg" className="w-full group">
-                    Send Message
+                  <Button type="submit" variant="hero" size="lg" className="w-full group" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Send Message"}
                     <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </form>
