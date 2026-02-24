@@ -108,6 +108,11 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
+            <Link to="/login">
+              <Button variant="outline" size="sm">
+                Log In
+              </Button>
+            </Link>
             <Link to="/waitlist">
               <Button variant="hero" size="sm">
                 Join Waitlist
@@ -139,6 +144,11 @@ const Navigation = () => {
             <div className="section-container py-6 flex flex-col gap-4">
               {navItems.map((item) => renderNavLink(item, "text-lg"))}
               <div className="flex flex-col gap-3 mt-4">
+                <Link to="/login" onClick={() => setIsOpen(false)}>
+                  <Button variant="outline" className="w-full">
+                    Log In
+                  </Button>
+                </Link>
                 <Link to="/waitlist" onClick={() => setIsOpen(false)}>
                   <Button variant="hero" className="w-full">
                     Join Waitlist
