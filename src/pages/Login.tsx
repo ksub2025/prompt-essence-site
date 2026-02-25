@@ -64,7 +64,7 @@ const Login = () => {
       toast({ title: "Login failed", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "Welcome back!" });
-      navigate("/");
+      navigate("/dashboard/supporting-docs");
     }
     setIsLoading(false);
   };
