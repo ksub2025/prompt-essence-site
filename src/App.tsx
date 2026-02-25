@@ -19,6 +19,12 @@ import Contact from "./pages/Contact";
 import Timeline from "./pages/Timeline";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import DashboardLayout from "./layouts/DashboardLayout";
+import SupportingDocs from "./pages/dashboard/SupportingDocs";
+import DashboardTimeline from "./pages/dashboard/DashboardTimeline";
+import Support from "./pages/dashboard/Support";
+import Guide from "./pages/dashboard/Guide";
+import JudgingCriteria from "./pages/dashboard/JudgingCriteria";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +50,13 @@ const App = () => (
               <Route path="/waitlist" element={<Waitlist />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/timeline" element={<Timeline />} />
+              <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route path="supporting-docs" element={<SupportingDocs />} />
+                <Route path="timeline" element={<DashboardTimeline />} />
+                <Route path="support" element={<Support />} />
+                <Route path="guide" element={<Guide />} />
+                <Route path="judging-criteria" element={<JudgingCriteria />} />
+              </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
