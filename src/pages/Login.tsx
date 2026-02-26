@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Mail, Loader2 } from "lucide-react";
+import { Mail, Loader2, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -15,33 +10,51 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import vcLogo from "@/assets/vc-logo.png";
 
-const loginSchema = z.object({
-  email: z.string().email("Please enter a valid email"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
-
-const signupSchema = loginSchema.extend({
-  fullName: z.string().min(2, "Name must be at least 2 characters"),
-});
-
-type LoginData = z.infer<typeof loginSchema>;
-type SignupData = z.infer<typeof signupSchema>;
-
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const loginForm = useForm<LoginData>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
-  });
+  // Login state
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginErrors, setLoginErrors] = useState<Record<string, string>>({});
 
-  const signupForm = useForm<SignupData>({
-    resolver: zodResolver(signupSchema),
-    defaultValues: { email: "", password: "", fullName: "" },
-  });
+  // Signup state
+  const [fullName, setFullName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [signupErrors, setSignupErrors] = useState<Record<string, string>>({});
+
+  const validateEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const validateLogin = () => {
+    const errors: Record<string, string> = {};
+    if (!loginEmail.trim()) errors.email = "Email is required";
+    else if (!validateEmail(loginEmail)) errors.email = "Please enter a valid email";
+    if (!loginPassword) errors.password = "Password is required";
+    else if (loginPassword.length < 8) errors.password = "Password must be at least 8 characters";
+    setLoginErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const validateSignup = () => {
+    const errors: Record<string, string> = {};
+    if (!fullName.trim()) errors.fullName = "Full name is required";
+    if (!signupEmail.trim()) errors.email = "Email is required";
+    else if (!validateEmail(signupEmail)) errors.email = "Please enter a valid email";
+    if (!signupPassword) errors.password = "Password is required";
+    else if (signupPassword.length < 8) errors.password = "Password must be at least 8 characters";
+    if (!confirmPassword) errors.confirmPassword = "Please confirm your password";
+    else if (signupPassword !== confirmPassword) errors.confirmPassword = "Passwords do not match";
+    setSignupErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
@@ -54,11 +67,13 @@ const Login = () => {
     setIsLoading(false);
   };
 
-  const handleEmailLogin = async (data: LoginData) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateLogin()) return;
     setIsLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
+      email: loginEmail,
+      password: loginPassword,
     });
     if (error) {
       toast({ title: "Login failed", description: error.message, variant: "destructive" });
@@ -69,13 +84,16 @@ const Login = () => {
     setIsLoading(false);
   };
 
-  const handleEmailSignup = async (data: SignupData) => {
+  const handleEmailSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateSignup()) return;
+    console.log("Sign up data:", { fullName, email: signupEmail, password: signupPassword });
     setIsLoading(true);
     const { error } = await supabase.auth.signUp({
-      email: data.email,
-      password: data.password,
+      email: signupEmail,
+      password: signupPassword,
       options: {
-        data: { full_name: data.fullName },
+        data: { full_name: fullName },
         emailRedirectTo: window.location.origin,
       },
     });
@@ -86,6 +104,11 @@ const Login = () => {
     }
     setIsLoading(false);
   };
+
+  const inputClass =
+    "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm";
+
+  const errorClass = "text-sm text-destructive mt-1";
 
   return (
     <div className="min-h-screen bg-background">
@@ -99,16 +122,13 @@ const Login = () => {
                 <h1 className="font-display text-2xl font-bold text-center">
                   {isLogin ? "Log In" : "Sign Up"}
                 </h1>
-                <p className="text-muted-foreground text-sm mt-1">to continue to <span className="text-primary font-medium">Venture Capsule</span></p>
+                <p className="text-muted-foreground text-sm mt-1">
+                  to continue to <span className="text-primary font-medium">Venture Capsule</span>
+                </p>
               </div>
 
               {/* Google Button */}
-              <Button
-                variant="outline"
-                className="w-full mb-4"
-                onClick={handleGoogleLogin}
-                disabled={isLoading}
-              >
+              <Button variant="outline" className="w-full mb-4" onClick={handleGoogleLogin} disabled={isLoading}>
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
                   <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -125,67 +145,125 @@ const Login = () => {
                 <div className="h-px flex-1 bg-border" />
               </div>
 
-              {/* Email Form */}
+              {/* Forms */}
               {isLogin ? (
-                <Form {...loginForm}>
-                  <form onSubmit={loginForm.handleSubmit(handleEmailLogin)} className="space-y-4">
-                    <FormField control={loginForm.control} name="email" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl><Input type="email" placeholder="you@example.com" {...field} /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <FormField control={loginForm.control} name="password" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl><Input type="password" placeholder="••••••••" {...field} /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <Button type="submit" className="w-full" disabled={isLoading}>
-                      {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Mail className="w-4 h-4 mr-2" />}
-                      Log in using Email
-                    </Button>
-                  </form>
-                </Form>
+                <form onSubmit={handleEmailLogin} className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium leading-none mb-2 block">Email</label>
+                    <input
+                      type="email"
+                      className={inputClass}
+                      placeholder="you@example.com"
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                    />
+                    {loginErrors.email && <p className={errorClass}>{loginErrors.email}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium leading-none mb-2 block">Password</label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        className={inputClass}
+                        placeholder="••••••••"
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                    {loginErrors.password && <p className={errorClass}>{loginErrors.password}</p>}
+                  </div>
+                  <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Mail className="w-4 h-4 mr-2" />}
+                    Log in using Email
+                  </Button>
+                </form>
               ) : (
-                <Form {...signupForm}>
-                  <form onSubmit={signupForm.handleSubmit(handleEmailSignup)} className="space-y-4">
-                    <FormField control={signupForm.control} name="fullName" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Name</FormLabel>
-                        <FormControl><Input placeholder="Your name" {...field} /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <FormField control={signupForm.control} name="email" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl><Input type="email" placeholder="you@example.com" {...field} /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <FormField control={signupForm.control} name="password" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl><Input type="password" placeholder="••••••••" {...field} /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <Button type="submit" className="w-full" disabled={isLoading}>
-                      {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Mail className="w-4 h-4 mr-2" />}
-                      Sign Up with Email
-                    </Button>
-                  </form>
-                </Form>
+                <form onSubmit={handleEmailSignup} className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium leading-none mb-2 block">Full Name</label>
+                    <input
+                      type="text"
+                      className={inputClass}
+                      placeholder="Your full name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                    />
+                    {signupErrors.fullName && <p className={errorClass}>{signupErrors.fullName}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium leading-none mb-2 block">Email</label>
+                    <input
+                      type="email"
+                      className={inputClass}
+                      placeholder="you@example.com"
+                      value={signupEmail}
+                      onChange={(e) => setSignupEmail(e.target.value)}
+                    />
+                    {signupErrors.email && <p className={errorClass}>{signupErrors.email}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium leading-none mb-2 block">Password</label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        className={inputClass}
+                        placeholder="••••••••"
+                        value={signupPassword}
+                        onChange={(e) => setSignupPassword(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                    {signupErrors.password && <p className={errorClass}>{signupErrors.password}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium leading-none mb-2 block">Confirm Password</label>
+                    <div className="relative">
+                      <input
+                        type={showConfirm ? "text" : "password"}
+                        className={inputClass}
+                        placeholder="••••••••"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        onClick={() => setShowConfirm(!showConfirm)}
+                      >
+                        {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                    {signupErrors.confirmPassword && <p className={errorClass}>{signupErrors.confirmPassword}</p>}
+                  </div>
+                  <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Mail className="w-4 h-4 mr-2" />}
+                    Sign Up with Email
+                  </Button>
+                </form>
               )}
 
               <p className="text-center text-sm text-muted-foreground mt-6">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
                 <button
                   className="text-primary font-medium hover:underline"
-                  onClick={() => setIsLogin(!isLogin)}
+                  onClick={() => {
+                    setIsLogin(!isLogin);
+                    setLoginErrors({});
+                    setSignupErrors({});
+                  }}
                 >
                   {isLogin ? "Sign Up" : "Log In"}
                 </button>
