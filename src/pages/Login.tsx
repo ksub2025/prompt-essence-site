@@ -87,20 +87,39 @@ const Login = () => {
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateSignup()) return;
-    console.log("Sign up data:", { fullName, email: signupEmail, password: signupPassword });
+    console.log("[Signup] Attempting signup for:", signupEmail);
     setIsLoading(true);
-    const { error } = await supabase.auth.signUp({
-      email: signupEmail,
-      password: signupPassword,
-      options: {
-        data: { full_name: fullName },
-        emailRedirectTo: window.location.origin,
-      },
-    });
-    if (error) {
-      toast({ title: "Signup failed", description: error.message, variant: "destructive" });
-    } else {
-      toast({ title: "Check your email", description: "We sent you a confirmation link." });
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: signupEmail,
+        password: signupPassword,
+        options: {
+          data: { full_name: fullName },
+          emailRedirectTo: window.location.origin,
+        },
+      });
+
+      if (error) {
+        console.error("[Signup] Error:", error.message);
+        toast({ title: "Signup failed", description: error.message, variant: "destructive" });
+      } else if (data.user && data.user.identities && data.user.identities.length === 0) {
+        // User already exists — Supabase returns empty identities for repeated signups
+        console.warn("[Signup] Repeated signup detected for:", signupEmail);
+        toast({
+          title: "Account already exists",
+          description: "An account with this email already exists. Please log in instead.",
+          variant: "destructive",
+        });
+      } else {
+        console.log("[Signup] User created, confirmation email requested:", data.user?.id);
+        toast({
+          title: "Check your email",
+          description: "We sent a confirmation link. Check your spam/junk folder if you don't see it.",
+        });
+      }
+    } catch (err) {
+      console.error("[Signup] Unexpected error:", err);
+      toast({ title: "Signup failed", description: "An unexpected error occurred. Please try again.", variant: "destructive" });
     }
     setIsLoading(false);
   };
