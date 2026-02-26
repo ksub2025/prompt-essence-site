@@ -20,6 +20,7 @@ import Timeline from "./pages/Timeline";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import DashboardLayout from "./layouts/DashboardLayout";
+import AuthGuard from "./components/AuthGuard";
 import SupportingDocs from "./pages/dashboard/SupportingDocs";
 import DashboardTimeline from "./pages/dashboard/DashboardTimeline";
 import Support from "./pages/dashboard/Support";
@@ -50,7 +51,7 @@ const App = () => (
               <Route path="/waitlist" element={<Waitlist />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/timeline" element={<Timeline />} />
-              <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route path="/dashboard" element={<AuthGuard><DashboardLayout /></AuthGuard>}>
                 <Route path="supporting-docs" element={<SupportingDocs />} />
                 <Route path="timeline" element={<DashboardTimeline />} />
                 <Route path="support" element={<Support />} />
