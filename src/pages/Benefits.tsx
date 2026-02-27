@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
+import FloatingDecorations from "@/components/FloatingDecorations";
 
 const benefits = [
   { icon: DollarSign, title: "Cash Prize", description: "Win ₹10,000 for each subsection winner and ₹6,500 for second place. Compete for real monetary rewards for your innovative solutions." },
@@ -16,7 +17,8 @@ const benefits = [
 
 const Benefits = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <FloatingDecorations variant="full" />
       <Navigation />
       <Breadcrumbs />
       <section className="pt-8 pb-20">
