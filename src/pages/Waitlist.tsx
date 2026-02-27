@@ -12,6 +12,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
+import FloatingDecorations from "@/components/FloatingDecorations";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -91,7 +92,8 @@ const Waitlist = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <FloatingDecorations variant="medium" />
       <Navigation />
       <Breadcrumbs />
       <section className="pt-8 pb-20">
