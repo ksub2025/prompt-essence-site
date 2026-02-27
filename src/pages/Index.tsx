@@ -47,7 +47,7 @@ const Index = () => {
   }, []);
 
   return <div className="min-h-screen bg-background relative">
-      <FloatingDecorations variant="hero" />
+      <FloatingDecorations variant="full" />
       <Navigation />
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
