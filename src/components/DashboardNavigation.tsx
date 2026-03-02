@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, LayoutGroup } from "framer-motion";
 import { Menu, X, LogOut } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -13,15 +14,36 @@ const dashboardItems = [
   { label: "Support", path: "/dashboard/support" },
   { label: "Guide", path: "/dashboard/guide" },
   { label: "Judging Criteria", path: "/dashboard/judging-criteria" },
+  { label: "My Waitlist", path: "/dashboard/my-waitlist" },
 ];
 
 const GLOW_OUT_DURATION = 0.35;
 
 const DashboardNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [userInitials, setUserInitials] = useState("U");
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!user) return;
+      const meta = user.user_metadata;
+      // Google avatar
+      if (meta?.avatar_url) setAvatarUrl(meta.avatar_url);
+      else if (meta?.picture) setAvatarUrl(meta.picture);
+      // Initials fallback
+      const name = meta?.full_name || meta?.name || user.email || "";
+      const parts = name.trim().split(/\s+/);
+      setUserInitials(
+        parts.length >= 2
+          ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+          : name.slice(0, 2).toUpperCase()
+      );
+    });
+  }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -80,7 +102,15 @@ const DashboardNavigation = () => {
             </div>
           </LayoutGroup>
 
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-3">
+            <Avatar className="h-8 w-8">
+              {avatarUrl ? (
+                <AvatarImage src={avatarUrl} alt="Profile" />
+              ) : null}
+              <AvatarFallback className="text-xs font-semibold bg-primary/10 text-primary">
+                {userInitials}
+              </AvatarFallback>
+            </Avatar>
             <Button variant="outline" size="sm" onClick={handleLogout}>
               <LogOut className="w-4 h-4 mr-2" />
               Sign Out
