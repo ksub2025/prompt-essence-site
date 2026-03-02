@@ -80,6 +80,7 @@ export type Database = {
           content: string
           created_at: string
           display_name: string
+          email: string | null
           id: string
           parent_id: string | null
           updated_at: string
@@ -89,6 +90,7 @@ export type Database = {
           content: string
           created_at?: string
           display_name: string
+          email?: string | null
           id?: string
           parent_id?: string | null
           updated_at?: string
@@ -98,6 +100,7 @@ export type Database = {
           content?: string
           created_at?: string
           display_name?: string
+          email?: string | null
           id?: string
           parent_id?: string | null
           updated_at?: string
