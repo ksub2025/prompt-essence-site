@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from "react";
 
 // Google reCAPTCHA v2 test key — replace with your real site key for production
-const RECAPTCHA_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+const RECAPTCHA_SITE_KEY = "6LciiH0sAAAAADl8ZKemY4GK5k-Q81n8g1_4kFi0";
 
 declare global {
   interface Window {

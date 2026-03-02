@@ -22,7 +22,7 @@ const moreItems = [
   { label: "Pathways", path: "/dashboard/pathways" },
   { label: "Benefits", path: "/dashboard/benefits" },
   { label: "FAQs", path: "/dashboard/faqs" },
-  { label: "Support", path: "/dashboard/support" },
+  { label: "Community", path: "/dashboard/community" },
   { label: "Contact", path: "/dashboard/contact" },
 ];
 

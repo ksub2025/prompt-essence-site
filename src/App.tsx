@@ -24,7 +24,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import AuthGuard from "./components/AuthGuard";
 import SupportingDocs from "./pages/dashboard/SupportingDocs";
 import DashboardTimeline from "./pages/dashboard/DashboardTimeline";
-import Support from "./pages/dashboard/Support";
+import Community from "./pages/dashboard/Community";
 import Guide from "./pages/dashboard/Guide";
 import JudgingCriteria from "./pages/dashboard/JudgingCriteria";
 import MyWaitlist from "./pages/dashboard/MyWaitlist";
@@ -62,7 +62,7 @@ const App = () => (
               <Route path="/dashboard" element={<AuthGuard><DashboardLayout /></AuthGuard>}>
                 <Route path="supporting-docs" element={<SupportingDocs />} />
                 <Route path="timeline" element={<DashboardTimeline />} />
-                <Route path="support" element={<Support />} />
+                <Route path="community" element={<Community />} />
                 <Route path="guide" element={<Guide />} />
                 <Route path="judging-criteria" element={<JudgingCriteria />} />
                 <Route path="my-waitlist" element={<MyWaitlist />} />
