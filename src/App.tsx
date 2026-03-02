@@ -28,6 +28,11 @@ import Support from "./pages/dashboard/Support";
 import Guide from "./pages/dashboard/Guide";
 import JudgingCriteria from "./pages/dashboard/JudgingCriteria";
 import MyWaitlist from "./pages/dashboard/MyWaitlist";
+import DashboardAbout from "./pages/dashboard/DashboardAbout";
+import DashboardSubsections from "./pages/dashboard/DashboardSubsections";
+import DashboardBenefits from "./pages/dashboard/DashboardBenefits";
+import DashboardFAQs from "./pages/dashboard/DashboardFAQs";
+import DashboardContact from "./pages/dashboard/DashboardContact";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +66,11 @@ const App = () => (
                 <Route path="guide" element={<Guide />} />
                 <Route path="judging-criteria" element={<JudgingCriteria />} />
                 <Route path="my-waitlist" element={<MyWaitlist />} />
+                <Route path="about" element={<DashboardAbout />} />
+                <Route path="pathways" element={<DashboardSubsections />} />
+                <Route path="benefits" element={<DashboardBenefits />} />
+                <Route path="faqs" element={<DashboardFAQs />} />
+                <Route path="contact" element={<DashboardContact />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
