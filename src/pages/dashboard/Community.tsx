@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { MessageSquare, Heart, Flag, Reply, Send, ChevronDown, ChevronUp, Trash2 } from "lucide-react";
+import { MessageSquare, Heart, Flag, Reply, Send, ChevronDown, ChevronUp, Trash2, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -9,16 +9,20 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
+const HOST_EMAIL = "venturecapsuletm@gmail.com";
+
 interface Comment {
   id: string;
   user_id: string;
   parent_id: string | null;
   content: string;
   display_name: string;
+  email: string | null;
   created_at: string;
   likes_count: number;
   liked_by_me: boolean;
   replies: Comment[];
+  is_host: boolean;
 }
 
 const REPORT_REASONS = [
@@ -37,6 +41,7 @@ const Community = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [userDisplayName, setUserDisplayName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [reportDialog, setReportDialog] = useState<{ open: boolean; commentId: string; content: string; author: string }>({ open: false, commentId: "", content: "", author: "" });
   const [reportReason, setReportReason] = useState("");
   const [expandedReplies, setExpandedReplies] = useState<Set<string>>(new Set());
@@ -50,6 +55,7 @@ const Community = () => {
     if (user) {
       const meta = user.user_metadata;
       setUserDisplayName(meta?.full_name || meta?.name || user.email?.split("@")[0] || "User");
+      setUserEmail(user.email || "");
     }
 
     const { data: commentsData, error } = await supabase
@@ -80,10 +86,12 @@ const Community = () => {
       parent_id: c.parent_id,
       content: c.content,
       display_name: c.display_name,
+      email: c.email,
       created_at: c.created_at,
       likes_count: likesMap.get(c.id)?.count || 0,
       liked_by_me: likesMap.get(c.id)?.likedByMe || false,
       replies: [],
+      is_host: c.email === HOST_EMAIL,
     }));
 
     // Build tree
@@ -136,7 +144,8 @@ const Community = () => {
       parent_id: parentId,
       content,
       display_name: userDisplayName,
-    });
+      email: userEmail,
+    } as any);
     setIsSubmitting(false);
 
     if (error) {
@@ -227,16 +236,21 @@ const Community = () => {
 
   const renderComment = (comment: Comment, isReply = false) => (
     <div key={comment.id} className={`${isReply ? "ml-8 md:ml-12 border-l-2 border-border pl-4" : ""}`}>
-      <div className="glass-card p-4 md:p-5 mb-3">
+      <div className={`glass-card p-4 md:p-5 mb-3 ${comment.is_host ? "ring-2 ring-primary/50 bg-primary/5" : ""}`}>
         <div className="flex items-start gap-3">
-          <Avatar className="h-8 w-8 shrink-0">
-            <AvatarFallback className="text-xs font-semibold bg-primary/10 text-primary">
-              {getInitials(comment.display_name)}
+          <Avatar className={`h-8 w-8 shrink-0 ${comment.is_host ? "ring-2 ring-primary" : ""}`}>
+            <AvatarFallback className={`text-xs font-semibold ${comment.is_host ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}>
+              {comment.is_host ? <Crown className="w-4 h-4" /> : getInitials(comment.display_name)}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="font-semibold text-sm text-foreground">{comment.display_name}</span>
+              {comment.is_host && (
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground px-2 py-0.5 rounded-full">
+                  <Crown className="w-3 h-3" /> Host
+                </span>
+              )}
               <span className="text-xs text-muted-foreground">{timeAgo(comment.created_at)}</span>
             </div>
             <p className="text-sm text-foreground/90 mt-1.5 whitespace-pre-wrap break-words">{comment.content}</p>
