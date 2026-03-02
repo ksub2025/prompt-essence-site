@@ -17,6 +17,7 @@ import Waitlist from "./pages/Waitlist";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import Timeline from "./pages/Timeline";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import DashboardLayout from "./layouts/DashboardLayout";
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="/faqs" element={<FAQ />} />
               <Route path="/apply" element={<Apply />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/waitlist" element={<Waitlist />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/timeline" element={<Timeline />} />
