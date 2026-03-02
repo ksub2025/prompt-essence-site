@@ -1,18 +1,20 @@
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Mail, Loader2, Eye, EyeOff, CheckCircle } from "lucide-react";
+import { Mail, Loader2, Eye, EyeOff, CheckCircle, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
+import ReCaptcha from "@/components/ReCaptcha";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import vcLogo from "@/assets/vc-logo.png";
 
-type Mode = "login" | "signup" | "forgot";
+type Mode = "login" | "signup" | "forgot" | "verify";
 
 const Login = () => {
   const [mode, setMode] = useState<Mode>("login");
@@ -35,10 +37,16 @@ const Login = () => {
   const [signupPassword, setSignupPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [signupErrors, setSignupErrors] = useState<Record<string, string>>({});
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   // Forgot state
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotErrors, setForgotErrors] = useState<Record<string, string>>({});
+
+  // OTP verification state
+  const [otpCode, setOtpCode] = useState("");
+  const [verifyEmail, setVerifyEmail] = useState("");
+  const [otpError, setOtpError] = useState("");
 
   // Listen for auth changes (handles Google OAuth redirect)
   useEffect(() => {
@@ -114,9 +122,13 @@ const Login = () => {
       errors.confirmPassword = "Passwords do not match";
     }
 
+    if (!captchaToken) {
+      errors.captcha = "Please complete the CAPTCHA verification";
+    }
+
     setSignupErrors(errors);
     return Object.keys(errors).length === 0;
-  }, [fullName, signupEmail, signupPassword, confirmPassword]);
+  }, [fullName, signupEmail, signupPassword, confirmPassword, captchaToken]);
 
   const handleGoogleLogin = async () => {
     setGoogleLoading(true);
@@ -133,8 +145,6 @@ const Login = () => {
         });
         setGoogleLoading(false);
       }
-      // If redirected, page will reload and onAuthStateChange handles it
-      // If not redirected but tokens set, onAuthStateChange handles it
     } catch {
       toast({
         title: "Google sign-in failed",
@@ -170,7 +180,6 @@ const Login = () => {
           });
         }
       }
-      // Success is handled by onAuthStateChange
     } catch {
       toast({
         title: "Login failed",
@@ -181,12 +190,43 @@ const Login = () => {
     setIsLoading(false);
   };
 
+  const verifyCaptcha = async (token: string): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase.functions.invoke("verify-recaptcha", {
+        body: { token },
+      });
+      if (error) {
+        console.error("CAPTCHA verification error:", error);
+        return false;
+      }
+      return data?.success === true;
+    } catch {
+      console.error("CAPTCHA verification failed");
+      return false;
+    }
+  };
+
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateSignup()) return;
 
     setIsLoading(true);
     try {
+      // Verify CAPTCHA server-side
+      if (captchaToken) {
+        const captchaValid = await verifyCaptcha(captchaToken);
+        if (!captchaValid) {
+          toast({
+            title: "CAPTCHA verification failed",
+            description: "Please refresh and try again.",
+            variant: "destructive",
+          });
+          setCaptchaToken(null);
+          setIsLoading(false);
+          return;
+        }
+      }
+
       const { data, error } = await supabase.auth.signUp({
         email: signupEmail.trim(),
         password: signupPassword,
@@ -205,13 +245,71 @@ const Login = () => {
           variant: "destructive",
         });
       } else {
+        // Switch to OTP verification mode
+        setVerifyEmail(signupEmail.trim());
+        setOtpCode("");
+        setOtpError("");
+        setMode("verify");
         toast({
-          title: "Check your email ✉️",
-          description: "We sent a confirmation link to " + signupEmail.trim() + ". Check your spam/junk folder if you don't see it.",
+          title: "Verification code sent ✉️",
+          description: "We sent a 6-digit code to " + signupEmail.trim() + ". Check your spam/junk folder if you don't see it.",
         });
       }
     } catch {
       toast({ title: "Sign up failed", description: "An unexpected error occurred.", variant: "destructive" });
+    }
+    setIsLoading(false);
+  };
+
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (otpCode.length !== 6) {
+      setOtpError("Please enter the full 6-digit code");
+      return;
+    }
+
+    setIsLoading(true);
+    setOtpError("");
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        email: verifyEmail,
+        token: otpCode,
+        type: "signup",
+      });
+      if (error) {
+        setOtpError("Invalid or expired code. Please check and try again.");
+        toast({
+          title: "Verification failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+      // Success is handled by onAuthStateChange
+    } catch {
+      setOtpError("An unexpected error occurred. Please try again.");
+    }
+    setIsLoading(false);
+  };
+
+  const handleResendCode = async () => {
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.resend({
+        type: "signup",
+        email: verifyEmail,
+      });
+      if (error) {
+        toast({ title: "Resend failed", description: error.message, variant: "destructive" });
+      } else {
+        toast({
+          title: "Code resent ✉️",
+          description: "A new verification code has been sent to " + verifyEmail,
+        });
+        setOtpCode("");
+        setOtpError("");
+      }
+    } catch {
+      toast({ title: "Resend failed", description: "An unexpected error occurred.", variant: "destructive" });
     }
     setIsLoading(false);
   };
@@ -256,13 +354,17 @@ const Login = () => {
     setShowPassword(false);
     setShowConfirm(false);
     setForgotSent(false);
+    setCaptchaToken(null);
+    setOtpCode("");
+    setOtpError("");
   };
 
-  const titles: Record<Mode, string> = { login: "Log In", signup: "Create Account", forgot: "Forgot Password" };
+  const titles: Record<Mode, string> = { login: "Log In", signup: "Create Account", forgot: "Forgot Password", verify: "Verify Email" };
   const subtitles: Record<Mode, string> = {
     login: "Welcome back to",
     signup: "Sign up for",
     forgot: "Reset your password for",
+    verify: "Enter the code sent to",
   };
 
   return (
@@ -277,13 +379,16 @@ const Login = () => {
                 <img src={vcLogo} alt="Venture Capsule logo" className="w-16 h-16 mb-4 object-contain" />
                 <h1 className="font-display text-2xl font-bold text-center">{titles[mode]}</h1>
                 <p className="text-muted-foreground text-sm mt-1">
-                  {subtitles[mode]}{" "}
-                  <span className="text-primary font-medium">Venture Capsule</span>
+                  {mode === "verify" ? (
+                    <>Enter the code sent to <span className="text-primary font-medium">{verifyEmail}</span></>
+                  ) : (
+                    <>{subtitles[mode]}{" "}<span className="text-primary font-medium">Venture Capsule</span></>
+                  )}
                 </p>
               </div>
 
               {/* Google Button (login/signup only) */}
-              {mode !== "forgot" && (
+              {(mode === "login" || mode === "signup") && (
                 <>
                   <Button
                     variant="outline"
@@ -471,10 +576,72 @@ const Login = () => {
                     {signupErrors.confirmPassword && <p className="text-sm text-destructive">{signupErrors.confirmPassword}</p>}
                   </div>
 
+                  {/* reCAPTCHA */}
+                  <div className="space-y-2">
+                    <ReCaptcha
+                      onVerify={(token) => {
+                        setCaptchaToken(token);
+                        if (signupErrors.captcha) setSignupErrors((p) => ({ ...p, captcha: "" }));
+                      }}
+                      onExpire={() => setCaptchaToken(null)}
+                    />
+                    {signupErrors.captcha && <p className="text-sm text-destructive text-center">{signupErrors.captcha}</p>}
+                  </div>
+
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Mail className="w-4 h-4 mr-2" />}
                     Sign Up with Email
                   </Button>
+                </form>
+              )}
+
+              {/* OTP Verification */}
+              {mode === "verify" && (
+                <form onSubmit={handleVerifyOTP} className="space-y-6" noValidate>
+                  <div className="flex justify-center">
+                    <ShieldCheck className="w-16 h-16 text-primary opacity-80" />
+                  </div>
+                  <p className="text-muted-foreground text-sm text-center">
+                    Enter the 6-digit verification code we sent to your email. Check your spam/junk folder if you don't see it.
+                  </p>
+
+                  <div className="flex justify-center">
+                    <InputOTP maxLength={6} value={otpCode} onChange={setOtpCode}>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={0} />
+                        <InputOTPSlot index={1} />
+                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={3} />
+                        <InputOTPSlot index={4} />
+                        <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                    </InputOTP>
+                  </div>
+                  {otpError && <p className="text-sm text-destructive text-center">{otpError}</p>}
+
+                  <Button type="submit" className="w-full" disabled={isLoading || otpCode.length !== 6}>
+                    {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <CheckCircle className="w-4 h-4 mr-2" />}
+                    Verify & Continue
+                  </Button>
+
+                  <div className="text-center space-y-2">
+                    <button
+                      type="button"
+                      className="text-sm text-primary hover:underline"
+                      onClick={handleResendCode}
+                      disabled={isLoading}
+                    >
+                      Didn't receive the code? Resend
+                    </button>
+                    <br />
+                    <button
+                      type="button"
+                      className="text-sm text-muted-foreground hover:underline"
+                      onClick={() => switchMode("signup")}
+                    >
+                      ← Back to Sign Up
+                    </button>
+                  </div>
                 </form>
               )}
 
@@ -531,7 +698,7 @@ const Login = () => {
               )}
 
               {/* Toggle login/signup */}
-              {mode !== "forgot" && (
+              {(mode === "login" || mode === "signup") && (
                 <p className="text-center text-sm text-muted-foreground mt-6">
                   {mode === "login" ? "Don't have an account?" : "Already have an account?"}{" "}
                   <button
