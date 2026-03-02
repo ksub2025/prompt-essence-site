@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, LayoutGroup } from "framer-motion";
-import { Menu, X, LogOut } from "lucide-react";
+import { Menu, X, LogOut, ChevronDown } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
-const dashboardItems = [
-  { label: "Supporting Docs", path: "/dashboard/supporting-docs" },
+const primaryItems = [
+  { label: "Docs", path: "/dashboard/supporting-docs" },
   { label: "Timeline", path: "/dashboard/timeline" },
-  { label: "Support", path: "/dashboard/support" },
   { label: "Guide", path: "/dashboard/guide" },
-  { label: "Judging Criteria", path: "/dashboard/judging-criteria" },
+  { label: "Judging", path: "/dashboard/judging-criteria" },
   { label: "My Waitlist", path: "/dashboard/my-waitlist" },
 ];
+
+const moreItems = [
+  { label: "About", path: "/dashboard/about" },
+  { label: "Pathways", path: "/dashboard/pathways" },
+  { label: "Benefits", path: "/dashboard/benefits" },
+  { label: "FAQs", path: "/dashboard/faqs" },
+  { label: "Support", path: "/dashboard/support" },
+  { label: "Contact", path: "/dashboard/contact" },
+];
+
+const allItems = [...primaryItems, ...moreItems];
 
 const GLOW_OUT_DURATION = 0.35;
 
@@ -31,10 +42,8 @@ const DashboardNavigation = () => {
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (!user) return;
       const meta = user.user_metadata;
-      // Google avatar
       if (meta?.avatar_url) setAvatarUrl(meta.avatar_url);
       else if (meta?.picture) setAvatarUrl(meta.picture);
-      // Initials fallback
       const name = meta?.full_name || meta?.name || user.email || "";
       const parts = name.trim().split(/\s+/);
       setUserInitials(
@@ -46,6 +55,7 @@ const DashboardNavigation = () => {
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
+  const isMoreActive = moreItems.some((item) => isActive(item.path));
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -67,11 +77,9 @@ const DashboardNavigation = () => {
           transition={{ type: "spring", stiffness: 350, damping: 30 }}
         />
       )}
-
       <span className={`relative z-10 ${isActive(item.path) ? "text-primary font-semibold" : ""}`}>
         {item.label}
       </span>
-
       <motion.span
         aria-hidden
         className="absolute inset-0 flex items-center justify-center pointer-events-none font-semibold whitespace-nowrap z-10"
@@ -98,15 +106,29 @@ const DashboardNavigation = () => {
 
           <LayoutGroup>
             <div className="hidden md:flex items-center gap-1 mx-auto">
-              {dashboardItems.map((item) => renderNavLink(item))}
+              {primaryItems.map((item) => renderNavLink(item))}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className={`nav-link relative inline-flex items-center gap-1 rounded-xl px-4 py-2.5 transition-colors duration-300 ${isMoreActive ? "text-primary font-semibold" : ""}`}>
+                    More <ChevronDown className="w-3.5 h-3.5" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-44">
+                  {moreItems.map((item) => (
+                    <DropdownMenuItem key={item.path} asChild>
+                      <Link to={item.path} className={isActive(item.path) ? "text-primary font-semibold" : ""}>
+                        {item.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </LayoutGroup>
 
           <div className="hidden md:flex items-center gap-3">
             <Avatar className="h-8 w-8">
-              {avatarUrl ? (
-                <AvatarImage src={avatarUrl} alt="Profile" />
-              ) : null}
+              {avatarUrl ? <AvatarImage src={avatarUrl} alt="Profile" /> : null}
               <AvatarFallback className="text-xs font-semibold bg-primary/10 text-primary">
                 {userInitials}
               </AvatarFallback>
@@ -134,7 +156,7 @@ const DashboardNavigation = () => {
             className="md:hidden bg-background border-b border-border"
           >
             <div className="section-container py-6 flex flex-col gap-4">
-              {dashboardItems.map((item) => renderNavLink(item, "text-lg"))}
+              {allItems.map((item) => renderNavLink(item, "text-lg"))}
               <Button variant="outline" className="w-full mt-4" onClick={handleLogout}>
                 <LogOut className="w-4 h-4 mr-2" />
                 Sign Out

@@ -7,7 +7,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-const Support = () => {
+const DashboardContact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -36,11 +36,10 @@ const Support = () => {
   return (
     <div className="max-w-xl mx-auto">
       <AnimatedSection>
-        <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">Support</h1>
-        <p className="text-muted-foreground mb-2">Get help from the Venture Capsule team.</p>
+        <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">Contact Us</h1>
         <div className="flex items-center gap-2 mb-8">
           <Mail className="w-4 h-4 text-primary" />
-          <span className="text-sm">venturecapsuletm@gmail.com</span>
+          <span className="text-sm text-muted-foreground">venturecapsuletm@gmail.com</span>
         </div>
       </AnimatedSection>
 
@@ -80,4 +79,4 @@ const Support = () => {
   );
 };
 
-export default Support;
+export default DashboardContact;
