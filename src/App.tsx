@@ -27,6 +27,7 @@ import DashboardTimeline from "./pages/dashboard/DashboardTimeline";
 import Support from "./pages/dashboard/Support";
 import Guide from "./pages/dashboard/Guide";
 import JudgingCriteria from "./pages/dashboard/JudgingCriteria";
+import MyWaitlist from "./pages/dashboard/MyWaitlist";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const App = () => (
                 <Route path="support" element={<Support />} />
                 <Route path="guide" element={<Guide />} />
                 <Route path="judging-criteria" element={<JudgingCriteria />} />
+                <Route path="my-waitlist" element={<MyWaitlist />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
