@@ -231,7 +231,7 @@ const FloatingElements = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+    <div ref={containerRef} className="absolute inset-0 pointer-events-none overflow-hidden z-20">
       {items.map((item, i) => (
         <img
           key={item.alt}
