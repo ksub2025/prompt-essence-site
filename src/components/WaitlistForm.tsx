@@ -129,6 +129,36 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
           <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
             {isSubmitting ? <><Loader2 className="mr-2 w-4 h-4 animate-spin" />Submitting...</> : <>Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></>}
           </Button>
+
+          <AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Confirm your details</AlertDialogTitle>
+                <AlertDialogDescription asChild>
+                  <div className="space-y-2 text-sm">
+                    <p>Please double-check your information before submitting:</p>
+                    {pendingData && (
+                      <ul className="space-y-1 mt-2 text-muted-foreground">
+                        <li><strong>Name:</strong> {pendingData.name}</li>
+                        <li><strong>Team:</strong> {pendingData.team_name}</li>
+                        <li><strong>Members:</strong> {pendingData.team_members}</li>
+                        <li><strong>Email:</strong> {pendingData.email}</li>
+                        <li><strong>Phone:</strong> {pendingData.phone}</li>
+                        <li><strong>Country:</strong> {pendingData.country}</li>
+                        <li><strong>Subsection:</strong> {pendingData.subsection}</li>
+                      </ul>
+                    )}
+                  </div>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Go Back & Edit</AlertDialogCancel>
+                <AlertDialogAction onClick={() => pendingData && handleConfirmedSubmit(pendingData)}>
+                  Confirm & Join
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </form>
       </Form>
     </div>
