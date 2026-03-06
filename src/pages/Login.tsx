@@ -258,7 +258,7 @@ const Login = () => {
       } else if (data.user && data.user.identities && data.user.identities.length === 0) {
         toast({
           title: "Account already exists",
-          description: "An account with this email already exists. Please log in instead.",
+          description: "An account with this email already exists. Please use your original sign-in method (email & password or Google) to log in.",
           variant: "destructive",
         });
       } else {
