@@ -1,12 +1,12 @@
 import { useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 
-import coin from "@/assets/float-3d-coin.png";
-import chart from "@/assets/float-3d-chart.png";
-import goldbar from "@/assets/float-3d-goldbar.png";
-import briefcase from "@/assets/float-briefcase.png";
-import globe from "@/assets/float-globe.png";
-import diamond from "@/assets/float-3d-diamond.png";
+import dollar from "@/assets/float-3d-dollar.png";
+import stockchart from "@/assets/float-3d-stockchart.png";
+import piggybank from "@/assets/float-3d-piggybank.png";
+import calculator from "@/assets/float-3d-calculator.png";
+import idea from "@/assets/float-3d-idea.png";
+import trophy from "@/assets/float-3d-trophy.png";
 
 interface FloatingItem {
   src: string;
@@ -19,12 +19,12 @@ interface FloatingItem {
 }
 
 const items: FloatingItem[] = [
-  { src: coin, alt: "Coin", size: 64, x: "8%", y: "18%", delay: 0, duration: 5 },
-  { src: chart, alt: "Chart", size: 72, x: "85%", y: "12%", delay: 0.8, duration: 6 },
-  { src: goldbar, alt: "Gold bar", size: 56, x: "78%", y: "72%", delay: 1.4, duration: 5.5 },
-  { src: briefcase, alt: "Briefcase", size: 60, x: "12%", y: "70%", delay: 0.5, duration: 6.5 },
-  { src: globe, alt: "Globe", size: 52, x: "90%", y: "42%", delay: 1, duration: 5.8 },
-  { src: diamond, alt: "Diamond", size: 48, x: "5%", y: "45%", delay: 1.8, duration: 6.2 },
+  { src: dollar, alt: "Dollar", size: 64, x: "8%", y: "18%", delay: 0, duration: 5 },
+  { src: stockchart, alt: "Stock Chart", size: 72, x: "85%", y: "12%", delay: 0.8, duration: 6 },
+  { src: piggybank, alt: "Piggy Bank", size: 68, x: "78%", y: "72%", delay: 1.4, duration: 5.5 },
+  { src: calculator, alt: "Calculator", size: 60, x: "12%", y: "70%", delay: 0.5, duration: 6.5 },
+  { src: idea, alt: "Idea", size: 56, x: "90%", y: "42%", delay: 1, duration: 5.8 },
+  { src: trophy, alt: "Trophy", size: 52, x: "5%", y: "45%", delay: 1.8, duration: 6.2 },
 ];
 
 interface Particle {
@@ -238,7 +238,7 @@ const FloatingElements = () => {
           src={item.src}
           alt={item.alt}
           onClick={(e) => handleClick(e, i)}
-          className="float-item absolute opacity-0 brightness-0 invert sepia saturate-[0.3] hue-rotate-[340deg] pointer-events-auto cursor-pointer select-none"
+          className="float-item absolute opacity-0 pointer-events-auto cursor-pointer select-none drop-shadow-lg"
           draggable={false}
           style={{
             width: item.size,
