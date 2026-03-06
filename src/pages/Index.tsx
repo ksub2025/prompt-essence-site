@@ -7,7 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroScene from "@/components/HeroScene";
-
+import FloatingBackground from "@/components/FloatingBackground";
 
 const subsectionPreviews = [{
   icon: Briefcase,
@@ -46,6 +46,7 @@ const Index = () => {
   }, []);
 
   return <div className="min-h-screen bg-background relative">
+      <FloatingBackground />
       <Navigation />
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
