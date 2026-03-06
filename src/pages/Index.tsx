@@ -51,6 +51,7 @@ const Index = () => {
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroScene />
+        <FloatingElements />
         <div className="section-container relative z-10">
           <div ref={heroRef} className="max-w-4xl">
             <p className="hero-line text-primary text-sm font-medium mb-6 uppercase tracking-widest">
