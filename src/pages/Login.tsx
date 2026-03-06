@@ -50,8 +50,16 @@ const Login = () => {
 
   // Listen for auth changes (handles Google OAuth redirect)
   useEffect(() => {
+    // Check for existing session on mount (handles OAuth redirect back)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        toast({ title: "Welcome!", description: "You've been signed in successfully." });
+        navigate("/dashboard/supporting-docs", { replace: true });
+      }
+    });
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session && event === "SIGNED_IN") {
+      if (session && (event === "SIGNED_IN" || event === "INITIAL_SESSION")) {
         setGoogleLoading(false);
         toast({ title: "Welcome!", description: "You've been signed in successfully." });
         navigate("/dashboard/supporting-docs", { replace: true });
@@ -136,7 +144,7 @@ const Login = () => {
     toast({ title: "Connecting to Google...", description: "Please wait while we redirect you." });
     try {
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+        redirect_uri: window.location.origin + "/login",
       });
       if (result.error) {
         toast({
