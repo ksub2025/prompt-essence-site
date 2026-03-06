@@ -68,7 +68,7 @@ const Index = () => {
       </section>
 
 
-      <section className="py-24 bg-muted/30 border-t border-border">
+      <section className="py-24 bg-muted/30">
         <div className="section-container">
           <AnimatedSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
