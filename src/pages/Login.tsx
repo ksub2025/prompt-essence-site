@@ -136,7 +136,7 @@ const Login = () => {
     toast({ title: "Connecting to Google...", description: "Please wait while we redirect you." });
     try {
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+        redirect_uri: window.location.origin + "/login",
       });
       if (result.error) {
         toast({
