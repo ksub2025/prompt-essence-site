@@ -65,6 +65,8 @@ const DashboardNavigation = () => {
     navigate("/");
   };
 
+  const confirmLogout = () => setShowLogoutConfirm(true);
+
   const renderNavLink = (item: { label: string; path: string }, extraClass = "") => (
     <Link
       key={item.path}
