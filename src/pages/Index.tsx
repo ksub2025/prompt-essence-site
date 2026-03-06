@@ -7,7 +7,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroScene from "@/components/HeroScene";
-import FloatingDecorations from "@/components/FloatingDecorations";
 
 
 const subsectionPreviews = [{
@@ -47,7 +46,6 @@ const Index = () => {
   }, []);
 
   return <div className="min-h-screen bg-background relative">
-      <FloatingDecorations variant="full" />
       <Navigation />
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

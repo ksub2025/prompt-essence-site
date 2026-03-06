@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
-import FloatingDecorations from "@/components/FloatingDecorations";
+
 import { RefreshCw, Trophy, Calendar } from "lucide-react";
 
 const timelineEvents = [
@@ -19,7 +19,6 @@ const timelineEvents = [
 const Timeline = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <FloatingDecorations variant="medium" />
       <Navigation />
       <Breadcrumbs />
 

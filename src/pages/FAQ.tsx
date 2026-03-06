@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
-import FloatingDecorations from "@/components/FloatingDecorations";
+
 
 const faqs = [
   { q: "What is VentureCapsule?", a: <>VentureCapsule is a business, finance and economics competition for students. Participants create, nurture and execute solutions to real-life challenges across subsections including business pitching, financial literacy, case studies and professional mentoring. <Link to="/about" className="text-primary hover:underline">Learn more about us</Link>.</> },
@@ -16,7 +16,6 @@ const faqs = [
 const FAQ = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <FloatingDecorations variant="sparse" />
       <Navigation />
       <Breadcrumbs />
       <section className="pt-8 pb-20">

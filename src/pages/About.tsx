@@ -4,12 +4,11 @@ import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Rocket, RefreshCw, Users, Target } from "lucide-react";
-import FloatingDecorations from "@/components/FloatingDecorations";
+
 
 const About = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <FloatingDecorations variant="sparse" />
       <Navigation />
       <Breadcrumbs />
       <section className="pt-8 pb-20">

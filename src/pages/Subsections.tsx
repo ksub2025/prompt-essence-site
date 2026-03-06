@@ -5,12 +5,11 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import FloatingDecorations from "@/components/FloatingDecorations";
+
 
 const Subsections = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <FloatingDecorations variant="full" />
       <Navigation />
       <Breadcrumbs />
 
