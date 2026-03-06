@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -42,6 +43,8 @@ interface WaitlistFormProps {
 const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [pendingData, setPendingData] = useState<WaitlistFormData | null>(null);
   const { toast } = useToast();
 
   const form = useForm<WaitlistFormData>({
@@ -51,7 +54,7 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
     },
   });
 
-  const onSubmit = async (data: WaitlistFormData) => {
+  const handleConfirmedSubmit = async (data: WaitlistFormData) => {
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from("waitlist").insert({
@@ -68,6 +71,11 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const onSubmit = (data: WaitlistFormData) => {
+    setPendingData(data);
+    setShowConfirm(true);
   };
 
   if (submitted) {
@@ -121,6 +129,36 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
           <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
             {isSubmitting ? <><Loader2 className="mr-2 w-4 h-4 animate-spin" />Submitting...</> : <>Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></>}
           </Button>
+
+          <AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Confirm your details</AlertDialogTitle>
+                <AlertDialogDescription asChild>
+                  <div className="space-y-2 text-sm">
+                    <p>Please double-check your information before submitting:</p>
+                    {pendingData && (
+                      <ul className="space-y-1 mt-2 text-muted-foreground">
+                        <li><strong>Name:</strong> {pendingData.name}</li>
+                        <li><strong>Team:</strong> {pendingData.team_name}</li>
+                        <li><strong>Members:</strong> {pendingData.team_members}</li>
+                        <li><strong>Email:</strong> {pendingData.email}</li>
+                        <li><strong>Phone:</strong> {pendingData.phone}</li>
+                        <li><strong>Country:</strong> {pendingData.country}</li>
+                        <li><strong>Subsection:</strong> {pendingData.subsection}</li>
+                      </ul>
+                    )}
+                  </div>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Go Back & Edit</AlertDialogCancel>
+                <AlertDialogAction onClick={() => pendingData && handleConfirmedSubmit(pendingData)}>
+                  Confirm & Join
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </form>
       </Form>
     </div>
