@@ -46,7 +46,6 @@ const Index = () => {
   }, []);
 
   return <div className="min-h-screen bg-background relative">
-      <FloatingBackground />
       <Navigation />
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

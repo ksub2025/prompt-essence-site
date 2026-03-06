@@ -378,8 +378,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative">
-      <FloatingBackground density="medium" />
+    <div className="min-h-screen bg-background">
       <Navigation />
       <section className="pt-32 pb-20">
         <div className="section-container">
