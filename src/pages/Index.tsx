@@ -7,7 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroScene from "@/components/HeroScene";
-import FloatingBackground from "@/components/FloatingBackground";
+
 
 const subsectionPreviews = [{
   icon: Briefcase,

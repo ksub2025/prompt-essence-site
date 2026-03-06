@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import vcLogo from "@/assets/vc-logo.png";
-import FloatingBackground from "@/components/FloatingBackground";
+
 
 type Mode = "login" | "signup" | "forgot" | "verify";
 
