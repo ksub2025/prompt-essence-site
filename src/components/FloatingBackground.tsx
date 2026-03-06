@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import float3dGoldbar from "@/assets/float-3d-goldbar.png";
 import float3dChart from "@/assets/float-3d-chart.png";
 import float3dDiamond from "@/assets/float-3d-diamond.png";
@@ -6,7 +6,7 @@ import float3dCoin from "@/assets/float-3d-coin.png";
 import float3dRocket from "@/assets/float-3d-rocket.png";
 import float3dBulb from "@/assets/float-3d-bulb.png";
 
-const images = [
+const allImages = [
   { src: float3dGoldbar, alt: "Gold bar" },
   { src: float3dChart, alt: "Growth chart" },
   { src: float3dDiamond, alt: "Diamond" },
@@ -15,14 +15,71 @@ const images = [
   { src: float3dBulb, alt: "Innovation bulb" },
 ];
 
-const positions = [
-  { top: "6%", left: "4%", size: 64, rotate: -12 },
-  { top: "12%", right: "5%", size: 56, rotate: 8 },
-  { top: "42%", left: "2%", size: 52, rotate: 15 },
-  { top: "50%", right: "3%", size: 60, rotate: -6 },
-  { top: "75%", left: "6%", size: 48, rotate: 10 },
-  { top: "80%", right: "5%", size: 54, rotate: -18 },
-];
+function seededRandom(seed: number) {
+  let s = seed;
+  return () => {
+    s = (s * 16807 + 0) % 2147483647;
+    return s / 2147483647;
+  };
+}
+
+interface PlacedElement {
+  src: string;
+  alt: string;
+  top: number; // vh
+  left: number; // vw
+  size: number; // px
+  rotate: number;
+  delay: number;
+  duration: number;
+}
+
+function generateElements(count: number): PlacedElement[] {
+  const seed = Math.floor(Math.random() * 100000);
+  const rand = seededRandom(seed);
+  const elements: PlacedElement[] = [];
+
+  // Divide the vertical space into rows, place elements avoiding overlap
+  const rowHeight = (count > 0) ? Math.max(8, 300 / count) : 20; // vh per element roughly
+
+  for (let i = 0; i < count; i++) {
+    const img = allImages[i % allImages.length];
+    const row = i;
+    const topMin = row * rowHeight;
+    const topMax = topMin + rowHeight - 5;
+    const top = topMin + rand() * (topMax - topMin);
+
+    // Alternate sides with randomness
+    const side = rand();
+    let left: number;
+    if (side < 0.35) {
+      left = rand() * 12; // left edge 0-12vw
+    } else if (side > 0.65) {
+      left = 88 + rand() * 10; // right edge 88-98vw
+    } else {
+      // Sometimes middle-ish but offset
+      left = 15 + rand() * 70;
+    }
+
+    const size = 48 + rand() * 40; // 48-88px
+    const rotate = -25 + rand() * 50; // -25 to +25 deg
+    const delay = rand() * 4000;
+    const duration = 8000 + rand() * 6000;
+
+    elements.push({
+      src: img.src,
+      alt: img.alt,
+      top,
+      left,
+      size,
+      rotate,
+      delay,
+      duration,
+    });
+  }
+
+  return elements;
+}
 
 interface FloatingBackgroundProps {
   density?: "low" | "medium" | "full";
@@ -30,9 +87,10 @@ interface FloatingBackgroundProps {
 
 const FloatingBackground = ({ density = "full" }: FloatingBackgroundProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const count = density === "low" ? 3 : density === "medium" ? 4 : 6;
-  const visibleImages = images.slice(0, count);
-  const visiblePositions = positions.slice(0, count);
+  const count = density === "low" ? 12 : density === "medium" ? 18 : 28;
+
+  // Generate random positions once per mount (randomized each page load/login)
+  const elements = useMemo(() => generateElements(count), [count]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -40,57 +98,56 @@ const FloatingBackground = ({ density = "full" }: FloatingBackgroundProps) => {
     const animations: Animation[] = [];
 
     els.forEach((el, i) => {
-      const dur = 10000 + i * 2500;
-      const yRange = 20 + (i % 3) * 8;
-      const baseRotate = visiblePositions[i]?.rotate ?? 0;
+      const elem = elements[i];
+      if (!elem) return;
+
+      const yRange = 15 + (i % 4) * 6;
+      const xRange = 5 + (i % 3) * 4;
 
       const anim = el.animate(
         [
-          { transform: `rotate(${baseRotate}deg) translate(0, 0) scale(1)` },
-          { transform: `rotate(${baseRotate + 3}deg) translate(6px, -${yRange}px) scale(1.05)` },
-          { transform: `rotate(${baseRotate - 2}deg) translate(-4px, ${yRange / 3}px) scale(0.97)` },
-          { transform: `rotate(${baseRotate}deg) translate(0, 0) scale(1)` },
+          { transform: `rotate(${elem.rotate}deg) translate(0, 0) scale(1)` },
+          { transform: `rotate(${elem.rotate + 4}deg) translate(${xRange}px, -${yRange}px) scale(1.06)` },
+          { transform: `rotate(${elem.rotate - 3}deg) translate(-${xRange}px, ${yRange / 2}px) scale(0.96)` },
+          { transform: `rotate(${elem.rotate}deg) translate(0, 0) scale(1)` },
         ],
         {
-          duration: dur,
+          duration: elem.duration,
           iterations: Infinity,
           easing: "ease-in-out",
-          delay: i * 1200,
+          delay: elem.delay,
         }
       );
       animations.push(anim);
     });
 
     return () => animations.forEach((a) => a.cancel());
-  }, [count]);
+  }, [elements]);
 
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       aria-hidden="true"
+      style={{ minHeight: "100%" }}
     >
-      {visibleImages.map((img, i) => {
-        const pos = visiblePositions[i];
-        return (
-          <img
-            key={img.alt}
-            src={img.src}
-            alt=""
-            className="float-3d absolute select-none drop-shadow-lg"
-            style={{
-              top: pos.top,
-              left: (pos as any).left,
-              right: (pos as any).right,
-              width: pos.size,
-              height: pos.size,
-              objectFit: "contain",
-              opacity: 0.18,
-              transform: `rotate(${pos.rotate}deg)`,
-            }}
-          />
-        );
-      })}
+      {elements.map((elem, i) => (
+        <img
+          key={`${elem.alt}-${i}`}
+          src={elem.src}
+          alt=""
+          className="float-3d absolute select-none drop-shadow-xl"
+          style={{
+            top: `${elem.top}vh`,
+            left: `${elem.left}vw`,
+            width: elem.size,
+            height: elem.size,
+            objectFit: "contain",
+            opacity: 0.45,
+            transform: `rotate(${elem.rotate}deg)`,
+          }}
+        />
+      ))}
     </div>
   );
 };
