@@ -61,14 +61,13 @@ const FloatingElements = () => {
           key={item.alt}
           src={item.src}
           alt={item.alt}
-          className="float-item absolute opacity-0"
+          className="float-item absolute opacity-0 brightness-0 invert sepia saturate-[0.3] hue-rotate-[340deg]"
           style={{
             width: item.size,
             height: item.size,
             left: item.x,
             top: item.y,
             objectFit: "contain",
-            filter: "drop-shadow(0 4px 12px hsl(22 68% 86% / 0.2))",
           }}
         />
       ))}
