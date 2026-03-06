@@ -51,20 +51,20 @@ const Index = () => {
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroScene />
-        <FloatingElements />
-        <div className="section-container relative z-10">
+        <div className="section-container relative z-10 pointer-events-none">
           <div ref={heroRef} className="max-w-4xl">
             <p className="hero-line text-primary text-sm font-medium mb-6 uppercase tracking-widest">
               Business • Finance • Economics
             </p>
             <h1 className="hero-line hero-headline mb-8 font-headline">Venture Capsule</h1>
             <p className="hero-line body-large max-w-2xl mb-10 font-body">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
-            <div className="hero-line flex flex-wrap gap-4">
+            <div className="hero-line flex flex-wrap gap-4 pointer-events-auto">
               <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
               <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
             </div>
           </div>
         </div>
+        <FloatingElements />
       </section>
 
 
