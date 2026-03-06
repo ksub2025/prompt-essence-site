@@ -27,17 +27,140 @@ const items: FloatingItem[] = [
   { src: diamond, alt: "Diamond", size: 48, x: "5%", y: "45%", delay: 1.8, duration: 6.2 },
 ];
 
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  rotation: number;
+  vr: number;
+  freed: boolean;
+  size: number;
+}
+
+const FRICTION = 0.985;
+const BOUNCE_DAMPING = 0.7;
+const COLLISION_FORCE = 4;
+const MIN_VELOCITY = 0.05;
+
 const FloatingElements = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const floatTweens = useRef<gsap.core.Tween[]>([]);
   const elRefs = useRef<HTMLImageElement[]>([]);
-  const busyRef = useRef<Set<number>>(new Set());
+  const particles = useRef<Particle[]>([]);
+  const rafId = useRef<number>(0);
+
+  // Physics loop
+  const tick = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const bounds = container.getBoundingClientRect();
+
+    particles.current.forEach((p, i) => {
+      if (!p.freed) return;
+
+      // Apply friction
+      p.vx *= FRICTION;
+      p.vy *= FRICTION;
+      p.vr *= FRICTION;
+
+      // Stop if barely moving
+      if (Math.abs(p.vx) < MIN_VELOCITY && Math.abs(p.vy) < MIN_VELOCITY) {
+        p.vx = 0;
+        p.vy = 0;
+        p.vr = 0;
+      }
+
+      // Move
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.vr;
+
+      // Wall bounce
+      const halfW = p.size / 2;
+      if (p.x - halfW < 0) { p.x = halfW; p.vx = Math.abs(p.vx) * BOUNCE_DAMPING; }
+      if (p.x + halfW > bounds.width) { p.x = bounds.width - halfW; p.vx = -Math.abs(p.vx) * BOUNCE_DAMPING; }
+      if (p.y - halfW < 0) { p.y = halfW; p.vy = Math.abs(p.vy) * BOUNCE_DAMPING; }
+      if (p.y + halfW > bounds.height) { p.y = bounds.height - halfW; p.vy = -Math.abs(p.vy) * BOUNCE_DAMPING; }
+
+      // Collision with other particles
+      particles.current.forEach((other, j) => {
+        if (j <= i) return;
+        const dx = other.x - p.x;
+        const dy = other.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const minDist = (p.size + other.size) / 2;
+
+        if (dist < minDist && dist > 0) {
+          const nx = dx / dist;
+          const ny = dy / dist;
+          const overlap = minDist - dist;
+
+          // Separate
+          p.x -= nx * overlap * 0.5;
+          p.y -= ny * overlap * 0.5;
+          other.x += nx * overlap * 0.5;
+          other.y += ny * overlap * 0.5;
+
+          // Transfer velocity
+          const relVx = p.vx - other.vx;
+          const relVy = p.vy - other.vy;
+          const dot = relVx * nx + relVy * ny;
+
+          if (dot > 0) {
+            const impulse = dot * COLLISION_FORCE * 0.25;
+            p.vx -= nx * impulse;
+            p.vy -= ny * impulse;
+            other.vx += nx * impulse;
+            other.vy += ny * impulse;
+            other.vr += (Math.random() - 0.5) * 3;
+
+            // Free the other element if hit hard enough
+            if (!other.freed && Math.sqrt(other.vx ** 2 + other.vy ** 2) > 1) {
+              other.freed = true;
+              floatTweens.current[j]?.kill();
+              gsap.killTweensOf(elRefs.current[j]);
+            }
+          }
+        }
+      });
+
+      // Apply to DOM
+      const el = elRefs.current[i];
+      if (el) {
+        el.style.left = `${p.x - p.size / 2}px`;
+        el.style.top = `${p.y - p.size / 2}px`;
+        el.style.transform = `rotate(${p.rotation}deg)`;
+      }
+    });
+
+    rafId.current = requestAnimationFrame(tick);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const els = containerRef.current.querySelectorAll<HTMLImageElement>(".float-item");
+    const container = containerRef.current;
+    const els = container.querySelectorAll<HTMLImageElement>(".float-item");
     elRefs.current = Array.from(els);
+    const bounds = container.getBoundingClientRect();
 
+    // Initialize particles at their CSS positions
+    particles.current = items.map((item) => {
+      const xPct = parseFloat(item.x) / 100;
+      const yPct = parseFloat(item.y) / 100;
+      return {
+        x: xPct * bounds.width,
+        y: yPct * bounds.height,
+        vx: 0,
+        vy: 0,
+        rotation: 0,
+        vr: 0,
+        freed: false,
+        size: item.size,
+      };
+    });
+
+    // Start idle float animations
     const tweens = elRefs.current.map((el, i) => {
       const item = items[i];
       gsap.set(el, { opacity: 0, scale: 0.7 });
@@ -56,90 +179,56 @@ const FloatingElements = () => {
     });
 
     floatTweens.current = tweens;
-    return () => tweens.forEach((t) => t.kill());
-  }, []);
 
-  const getCenter = (el: HTMLElement) => {
-    const rect = el.getBoundingClientRect();
-    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, w: rect.width };
-  };
+    // Start physics loop
+    rafId.current = requestAnimationFrame(tick);
 
-  const launchElement = useCallback((index: number, pushX: number, pushY: number, spin: number) => {
-    const el = elRefs.current[index];
-    if (!el || busyRef.current.has(index)) return;
-
-    busyRef.current.add(index);
-    floatTweens.current[index]?.pause();
-
-    gsap.to(el, {
-      x: `+=${pushX}`,
-      y: `+=${pushY}`,
-      rotation: `+=${spin}`,
-      scale: 1.15,
-      duration: 0.35,
-      ease: "power2.out",
-      onUpdate: () => checkCollisions(index),
-      onComplete: () => {
-        gsap.to(el, {
-          x: 0,
-          y: 0,
-          rotation: 0,
-          scale: 1,
-          duration: 1.6,
-          ease: "elastic.out(1, 0.35)",
-          onComplete: () => {
-            busyRef.current.delete(index);
-            floatTweens.current[index]?.resume();
-          },
-        });
-      },
-    });
-  }, []);
-
-  const checkCollisions = useCallback((movedIndex: number) => {
-    const movedEl = elRefs.current[movedIndex];
-    if (!movedEl) return;
-    const movedCenter = getCenter(movedEl);
-
-    elRefs.current.forEach((otherEl, j) => {
-      if (j === movedIndex || busyRef.current.has(j)) return;
-
-      const otherCenter = getCenter(otherEl);
-      const dx = otherCenter.x - movedCenter.x;
-      const dy = otherCenter.y - movedCenter.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const minDist = (movedCenter.w + otherCenter.w) / 2;
-
-      if (dist < minDist && dist > 0) {
-        // Collision! Push the other element away
-        const force = 80 + Math.random() * 40;
-        const nx = dx / dist;
-        const ny = dy / dist;
-        const spin = (Math.random() - 0.5) * 270;
-        launchElement(j, nx * force, ny * force, spin);
-      }
-    });
-  }, [launchElement]);
+    return () => {
+      tweens.forEach((t) => t.kill());
+      cancelAnimationFrame(rafId.current);
+    };
+  }, [tick]);
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLImageElement>, index: number) => {
     const el = e.currentTarget;
-    const center = getCenter(el);
+    const p = particles.current[index];
+    if (!p) return;
 
-    const dx = center.x - e.clientX;
-    const dy = center.y - e.clientY;
+    const rect = el.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const dx = centerX - e.clientX;
+    const dy = centerY - e.clientY;
     const dist = Math.sqrt(dx * dx + dy * dy) || 1;
 
-    const force = 140 + Math.random() * 60;
-    const pushX = (dx / dist) * force;
-    const pushY = (dy / dist) * force;
-    const spin = (Math.random() - 0.5) * 360;
+    const force = 12 + Math.random() * 6;
 
-    // Reset busy state so we can re-launch
-    busyRef.current.delete(index);
-    gsap.killTweensOf(el);
+    if (!p.freed) {
+      // First click: free from idle animation, sync position
+      p.freed = true;
+      floatTweens.current[index]?.kill();
+      gsap.killTweensOf(el);
 
-    launchElement(index, pushX, pushY, spin);
-  }, [launchElement]);
+      const container = containerRef.current;
+      if (container) {
+        const containerRect = container.getBoundingClientRect();
+        p.x = centerX - containerRect.left;
+        p.y = centerY - containerRect.top;
+      }
+
+      // Set visible
+      gsap.set(el, { opacity: 0.55, scale: 1, clearProps: "x,y,rotation" });
+    }
+
+    // Apply velocity in push direction
+    p.vx += (dx / dist) * force;
+    p.vy += (dy / dist) * force;
+    p.vr += (Math.random() - 0.5) * 8;
+
+    // Bounce scale feedback
+    gsap.fromTo(el, { scale: 1.2 }, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.5)" });
+  }, []);
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none overflow-hidden z-0">
