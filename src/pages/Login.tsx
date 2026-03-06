@@ -50,14 +50,31 @@ const Login = () => {
 
   // Listen for auth changes (handles Google OAuth redirect)
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session && (event === "SIGNED_IN" || event === "TOKEN_REFRESHED")) {
+        // Check if this is a Google OAuth sign-in that linked to an existing email account
+        const identities = session.user?.identities ?? [];
+        const hasEmailIdentity = identities.some((i) => i.provider === "email");
+        const hasGoogleIdentity = identities.some((i) => i.provider === "google");
+
+        if (hasEmailIdentity && hasGoogleIdentity && googleLoading) {
+          // User had an email/password account and just linked Google — block this
+          await supabase.auth.signOut();
+          setGoogleLoading(false);
+          toast({
+            title: "Account already exists",
+            description: "An account with this email already exists. Please log in with your email and password instead.",
+            variant: "destructive",
+          });
+          return;
+        }
+
         toast({ title: "Welcome!", description: "You've been signed in successfully." });
         navigate("/dashboard/supporting-docs", { replace: true });
       }
     });
     return () => subscription.unsubscribe();
-  }, [navigate, toast]);
+  }, [navigate, toast, googleLoading]);
 
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
