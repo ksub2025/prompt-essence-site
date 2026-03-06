@@ -1,12 +1,14 @@
 import { Outlet } from "react-router-dom";
 import DashboardNavigation from "@/components/DashboardNavigation";
 import Footer from "@/components/Footer";
+import FloatingElements from "@/components/FloatingElements";
 
 const DashboardLayout = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
       <DashboardNavigation />
-      <main className="pt-24 pb-20">
+      <FloatingElements />
+      <main className="pt-24 pb-20 relative z-10">
         <div className="section-container">
           <Outlet />
         </div>
