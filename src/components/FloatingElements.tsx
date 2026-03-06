@@ -238,7 +238,7 @@ const FloatingElements = () => {
           src={item.src}
           alt={item.alt}
           onClick={(e) => handleClick(e, i)}
-          className="float-item absolute opacity-0 brightness-0 invert sepia saturate-[0.3] hue-rotate-[340deg] pointer-events-auto cursor-pointer select-none"
+          className="float-item absolute opacity-0 pointer-events-auto cursor-pointer select-none drop-shadow-lg"
           draggable={false}
           style={{
             width: item.size,
