@@ -51,27 +51,8 @@ const Login = () => {
   // Listen for auth changes (handles Google OAuth redirect)
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session && (event === "SIGNED_IN" || event === "TOKEN_REFRESHED")) {
-        const identities = session.user?.identities ?? [];
-        const hasEmailIdentity = identities.some((i) => i.provider === "email");
-        const hasGoogleIdentity = identities.some((i) => i.provider === "google");
-
-        // Check if current sign-in was via Google (app_metadata.provider reflects last login method)
-        const currentProvider = session.user?.app_metadata?.provider;
-        const signedInViaGoogle = currentProvider === "google";
-
-        // If user signed in via Google but also has an email/password identity, block it
-        if (hasEmailIdentity && hasGoogleIdentity && signedInViaGoogle) {
-          await supabase.auth.signOut();
-          setGoogleLoading(false);
-          toast({
-            title: "Account already exists",
-            description: "An account with this email already exists. Please use your original email and password to log in.",
-            variant: "destructive",
-          });
-          return;
-        }
-
+      if (session && event === "SIGNED_IN") {
+        setGoogleLoading(false);
         toast({ title: "Welcome!", description: "You've been signed in successfully." });
         navigate("/dashboard/supporting-docs", { replace: true });
       }
@@ -195,7 +176,7 @@ const Login = () => {
         } else {
           toast({
             title: "Login failed",
-            description: "Invalid email or password. Please check your credentials and try again.",
+            description: "Invalid email or password. If you signed up with Google, please use the 'Log in with Google' button instead.",
             variant: "destructive",
           });
         }
