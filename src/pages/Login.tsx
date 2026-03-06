@@ -176,7 +176,7 @@ const Login = () => {
         } else {
           toast({
             title: "Login failed",
-            description: "Invalid email or password. Please check your credentials and try again.",
+            description: "Invalid email or password. If you signed up with Google, please use the 'Log in with Google' button instead.",
             variant: "destructive",
           });
         }
