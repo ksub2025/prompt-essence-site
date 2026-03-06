@@ -56,12 +56,12 @@ const Login = () => {
         const hasEmailIdentity = identities.some((i) => i.provider === "email");
         const hasGoogleIdentity = identities.some((i) => i.provider === "google");
 
-        // Detect current sign-in method from AMR (Authentication Methods Reference)
-        const amr = (session as any)?.amr ?? [];
-        const signedInViaOAuth = amr.some((a: any) => a.method === "oauth");
+        // Check if current sign-in was via Google (app_metadata.provider reflects last login method)
+        const currentProvider = session.user?.app_metadata?.provider;
+        const signedInViaGoogle = currentProvider === "google";
 
-        // If user signed in via OAuth but also has an email/password identity, block it
-        if (hasEmailIdentity && hasGoogleIdentity && signedInViaOAuth) {
+        // If user signed in via Google but also has an email/password identity, block it
+        if (hasEmailIdentity && hasGoogleIdentity && signedInViaGoogle) {
           await supabase.auth.signOut();
           setGoogleLoading(false);
           toast({
