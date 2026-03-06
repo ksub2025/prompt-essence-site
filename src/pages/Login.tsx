@@ -63,7 +63,7 @@ const Login = () => {
           setGoogleLoading(false);
           toast({
             title: "Account already exists",
-            description: "An account with this email already exists. Please log in with your email and password instead.",
+            description: "An account with this email already exists. Please use your original email and password to log in.",
             variant: "destructive",
           });
           return;
