@@ -52,13 +52,16 @@ const Login = () => {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session && (event === "SIGNED_IN" || event === "TOKEN_REFRESHED")) {
-        // Check if this is a Google OAuth sign-in that linked to an existing email account
         const identities = session.user?.identities ?? [];
         const hasEmailIdentity = identities.some((i) => i.provider === "email");
         const hasGoogleIdentity = identities.some((i) => i.provider === "google");
 
-        if (hasEmailIdentity && hasGoogleIdentity && googleLoading) {
-          // User had an email/password account and just linked Google — block this
+        // Detect current sign-in method from AMR (Authentication Methods Reference)
+        const amr = (session as any)?.amr ?? [];
+        const signedInViaOAuth = amr.some((a: any) => a.method === "oauth");
+
+        // If user signed in via OAuth but also has an email/password identity, block it
+        if (hasEmailIdentity && hasGoogleIdentity && signedInViaOAuth) {
           await supabase.auth.signOut();
           setGoogleLoading(false);
           toast({
@@ -74,7 +77,7 @@ const Login = () => {
       }
     });
     return () => subscription.unsubscribe();
-  }, [navigate, toast, googleLoading]);
+  }, [navigate, toast]);
 
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
