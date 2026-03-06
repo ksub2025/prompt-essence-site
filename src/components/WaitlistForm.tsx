@@ -43,6 +43,8 @@ interface WaitlistFormProps {
 const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [pendingData, setPendingData] = useState<WaitlistFormData | null>(null);
   const { toast } = useToast();
 
   const form = useForm<WaitlistFormData>({
