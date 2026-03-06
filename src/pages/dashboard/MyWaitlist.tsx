@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, User, Mail, Phone, Globe, Users, Tag, HelpCircle } from "lucide-react";
+import WaitlistForm from "@/components/WaitlistForm";
 
 type WaitlistEntry = {
   name: string;
@@ -32,23 +33,26 @@ const MyWaitlist = () => {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
-  useEffect(() => {
-    const fetchEntry = async () => {
-      const { data, error } = await supabase
-        .from("waitlist")
-        .select("name, team_name, team_members, email, phone, country, subsection, faqs, created_at")
-        .limit(1)
-        .maybeSingle();
+  const fetchEntry = useCallback(async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("waitlist")
+      .select("name, team_name, team_members, email, phone, country, subsection, faqs, created_at")
+      .limit(1)
+      .maybeSingle();
 
-      if (error || !data) {
-        setNotFound(true);
-      } else {
-        setEntry(data);
-      }
-      setLoading(false);
-    };
-    fetchEntry();
+    if (error || !data) {
+      setNotFound(true);
+    } else {
+      setEntry(data);
+      setNotFound(false);
+    }
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    fetchEntry();
+  }, [fetchEntry]);
 
   if (loading) {
     return (
@@ -60,13 +64,10 @@ const MyWaitlist = () => {
 
   if (notFound) {
     return (
-      <div className="max-w-xl mx-auto text-center py-16">
-        <HelpCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-        <h2 className="font-display text-xl font-bold mb-2">No Waitlist Entry Found</h2>
-        <p className="text-muted-foreground">
-          There's no waitlist registration associated with this email address. If you haven't joined yet, visit the{" "}
-          <a href="/waitlist" className="text-primary hover:underline">waitlist page</a> to sign up.
-        </p>
+      <div className="max-w-xl mx-auto">
+        <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">Join the Waitlist</h1>
+        <p className="text-muted-foreground mb-8">You haven't joined the waitlist yet. Sign up below!</p>
+        <WaitlistForm onSuccess={fetchEntry} />
       </div>
     );
   }
