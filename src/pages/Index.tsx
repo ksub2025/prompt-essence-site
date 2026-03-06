@@ -7,6 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import HeroScene from "@/components/HeroScene";
+import FloatingElements from "@/components/FloatingElements";
 
 
 const subsectionPreviews = [{
