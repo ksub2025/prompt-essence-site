@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 
 import coin from "@/assets/float-3d-coin.png";
@@ -29,6 +29,7 @@ const items: FloatingItem[] = [
 
 const FloatingElements = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const floatTweens = useRef<gsap.core.Tween[]>([]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -51,17 +52,66 @@ const FloatingElements = () => {
       });
     });
 
+    floatTweens.current = tweens;
     return () => tweens.forEach((t) => t.kill());
+  }, []);
+
+  const handleClick = useCallback((e: React.MouseEvent<HTMLImageElement>, index: number) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    // Direction from click point to element center = push direction
+    const dx = centerX - e.clientX;
+    const dy = centerY - e.clientY;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+    // Normalize and scale the push force
+    const force = 120 + Math.random() * 60;
+    const pushX = (dx / dist) * force;
+    const pushY = (dy / dist) * force;
+    const spin = (Math.random() - 0.5) * 360;
+
+    // Pause the idle float
+    floatTweens.current[index]?.pause();
+
+    // Bounce away
+    gsap.to(el, {
+      x: `+=${pushX}`,
+      y: `+=${pushY}`,
+      rotation: `+=${spin}`,
+      scale: 1.2,
+      duration: 0.3,
+      ease: "power2.out",
+      onComplete: () => {
+        // Bounce back with elastic ease
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          duration: 1.4,
+          ease: "elastic.out(1, 0.4)",
+          onComplete: () => {
+            // Resume idle float
+            floatTweens.current[index]?.resume();
+          },
+        });
+      },
+    });
   }, []);
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-      {items.map((item) => (
+      {items.map((item, i) => (
         <img
           key={item.alt}
           src={item.src}
           alt={item.alt}
-          className="float-item absolute opacity-0 brightness-0 invert sepia saturate-[0.3] hue-rotate-[340deg]"
+          onClick={(e) => handleClick(e, i)}
+          className="float-item absolute opacity-0 brightness-0 invert sepia saturate-[0.3] hue-rotate-[340deg] pointer-events-auto cursor-pointer select-none"
+          draggable={false}
           style={{
             width: item.size,
             height: item.size,
