@@ -49,49 +49,47 @@ const Index = () => {
   return <div className="min-h-screen bg-background relative">
       <Navigation />
 
-      <div className="relative">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <HeroScene />
-          <div className="section-container relative z-10 pointer-events-none">
-            <div ref={heroRef} className="max-w-4xl">
-              <p className="hero-line text-primary text-sm font-medium mb-6 uppercase tracking-widest">
-                Business • Finance • Economics
-              </p>
-              <h1 className="hero-line hero-headline mb-8 font-headline">Venture Capsule</h1>
-              <p className="hero-line body-large max-w-2xl mb-10 font-body">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
-              <div className="hero-line flex flex-wrap gap-4 pointer-events-auto">
-                <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
-                <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
-              </div>
+      <FloatingElements />
+
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <HeroScene />
+        <div className="section-container relative z-10 pointer-events-none">
+          <div ref={heroRef} className="max-w-4xl">
+            <p className="hero-line text-primary text-sm font-medium mb-6 uppercase tracking-widest">
+              Business • Finance • Economics
+            </p>
+            <h1 className="hero-line hero-headline mb-8 font-headline">Venture Capsule</h1>
+            <p className="hero-line body-large max-w-2xl mb-10 font-body">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
+            <div className="hero-line flex flex-wrap gap-4 pointer-events-auto">
+              <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
+              <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-24 bg-muted/30 relative">
-          <div className="section-container relative z-10">
-            <AnimatedSection>
-              <div className="max-w-4xl mx-auto text-center mb-16">
-                <h2 className="section-headline mb-8">What is VentureCapsule?</h2>
-                <p className="body-large leading-relaxed">We are an online business, finance and economics based competition that allows students to create, nurture and execute solutions to real life challenges within different subsections. This considers financial literacy, business pitching, case studies and measuring those with professionals as you get to foster new ideas and grow these solutions in our round based competition system.</p>
-              </div>
-            </AnimatedSection>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {subsectionPreviews.map((section, index) => <AnimatedSection key={section.title} delay={index * 0.1}>
-                  <Link to={section.path}>
-                    <div className="glass-card p-8 text-center hover:border-primary/30 transition-all group cursor-pointer h-full">
-                      <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <section.icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
-                      </div>
-                      <h3 className="font-display text-lg font-semibold">{section.title}</h3>
+      <section className="py-24 bg-muted/30 relative">
+        <div className="section-container relative z-10">
+          <AnimatedSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <h2 className="section-headline mb-8">What is VentureCapsule?</h2>
+              <p className="body-large leading-relaxed">We are an online business, finance and economics based competition that allows students to create, nurture and execute solutions to real life challenges within different subsections. This considers financial literacy, business pitching, case studies and measuring those with professionals as you get to foster new ideas and grow these solutions in our round based competition system.</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {subsectionPreviews.map((section, index) => <AnimatedSection key={section.title} delay={index * 0.1}>
+                <Link to={section.path}>
+                  <div className="glass-card p-8 text-center hover:border-primary/30 transition-all group cursor-pointer h-full">
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <section.icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
                     </div>
-                  </Link>
-                </AnimatedSection>)}
-            </div>
+                    <h3 className="font-display text-lg font-semibold">{section.title}</h3>
+                  </div>
+                </Link>
+              </AnimatedSection>)}
           </div>
-        </section>
-
-        <FloatingElements />
-      </div>
+        </div>
+      </section>
 
       {/* FAQ Section */}
       <section className="py-24">
