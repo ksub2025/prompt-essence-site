@@ -137,7 +137,7 @@ const DashboardNavigation = () => {
                 {userInitials}
               </AvatarFallback>
             </Avatar>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
+            <Button variant="outline" size="sm" onClick={confirmLogout}>
               <LogOut className="w-4 h-4 mr-2" />
               Sign Out
             </Button>
@@ -161,7 +161,7 @@ const DashboardNavigation = () => {
           >
             <div className="section-container py-6 flex flex-col gap-4">
               {allItems.map((item) => renderNavLink(item, "text-lg"))}
-              <Button variant="outline" className="w-full mt-4" onClick={handleLogout}>
+              <Button variant="outline" className="w-full mt-4" onClick={confirmLogout}>
                 <LogOut className="w-4 h-4 mr-2" />
                 Sign Out
               </Button>
@@ -169,6 +169,19 @@ const DashboardNavigation = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <AlertDialog open={showLogoutConfirm} onOpenChange={setShowLogoutConfirm}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Sign out?</AlertDialogTitle>
+            <AlertDialogDescription>Are you sure you want to sign out of your account?</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleLogout}>Sign Out</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </nav>
   );
 };
