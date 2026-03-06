@@ -29,7 +29,7 @@ const items: FloatingItem[] = [
   { src: idea, alt: "Idea", size: 64, x: "90%", y: "42%", delay: 1, duration: 5.8 },
   { src: trophy, alt: "Trophy", size: 56, x: "5%", y: "45%", delay: 1.8, duration: 6.2 },
   { src: handshake, alt: "Handshake", size: 60, x: "50%", y: "15%", delay: 0.3, duration: 5.4 },
-  { src: barchart, alt: "Bar Chart", size: 62, x: "35%", y: "75%", delay: 1.2, duration: 6.8 },
+  { src: barchart, alt: "Analytics", size: 62, x: "35%", y: "75%", delay: 1.2, duration: 6.8 },
   { src: briefcase, alt: "Briefcase", size: 58, x: "65%", y: "50%", delay: 0.7, duration: 5.2 },
 ];
 
