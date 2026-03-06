@@ -54,7 +54,7 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
     },
   });
 
-  const onSubmit = async (data: WaitlistFormData) => {
+  const handleConfirmedSubmit = async (data: WaitlistFormData) => {
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from("waitlist").insert({
@@ -71,6 +71,11 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const onSubmit = (data: WaitlistFormData) => {
+    setPendingData(data);
+    setShowConfirm(true);
   };
 
   if (submitted) {
