@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
-import FloatingDecorations from "@/components/FloatingDecorations";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -54,7 +54,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <FloatingDecorations variant="sparse" />
       <Navigation />
       <Breadcrumbs />
 
