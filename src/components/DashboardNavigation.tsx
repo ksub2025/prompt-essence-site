@@ -33,6 +33,7 @@ const GLOW_OUT_DURATION = 0.35;
 
 const DashboardNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [userInitials, setUserInitials] = useState("U");
   const location = useLocation();
