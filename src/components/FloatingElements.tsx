@@ -1,17 +1,12 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-import dollar from "@/assets/float-3d-dollar.png";
 import stockchart from "@/assets/float-3d-stockchart.png";
-import calculator from "@/assets/float-3d-calculator.png";
 import idea from "@/assets/float-3d-idea.png";
 import trophy from "@/assets/float-3d-trophy.png";
 import handshake from "@/assets/float-3d-handshake.png";
 import briefcase from "@/assets/float-3d-briefcase.png";
 import barchart from "@/assets/float-3d-barchart.png";
-import coin from "@/assets/float-3d-coin.png";
-import diamond from "@/assets/float-3d-diamond.png";
-import goldbar from "@/assets/float-3d-goldbar.png";
 import rocket from "@/assets/float-3d-rocket.png";
 import chart from "@/assets/float-3d-chart.png";
 
@@ -26,17 +21,12 @@ interface FloatingItem {
 }
 
 const items: FloatingItem[] = [
-  { src: dollar, alt: "Dollar", size: 64, x: "8%", y: "18%", delay: 0, duration: 5 },
   { src: stockchart, alt: "Stock Chart", size: 72, x: "85%", y: "12%", delay: 0.8, duration: 6 },
   { src: idea, alt: "Idea", size: 64, x: "90%", y: "42%", delay: 1, duration: 5.8 },
   { src: trophy, alt: "Trophy", size: 56, x: "5%", y: "45%", delay: 1.8, duration: 6.2 },
   { src: handshake, alt: "Handshake", size: 60, x: "50%", y: "15%", delay: 0.3, duration: 5.4 },
   { src: briefcase, alt: "Briefcase", size: 58, x: "65%", y: "50%", delay: 0.7, duration: 5.2 },
-  { src: calculator, alt: "Calculator", size: 60, x: "15%", y: "70%", delay: 1.2, duration: 5.6 },
   { src: barchart, alt: "Bar Chart", size: 66, x: "75%", y: "35%", delay: 0.5, duration: 5.3 },
-  { src: coin, alt: "Coin", size: 52, x: "30%", y: "8%", delay: 1.6, duration: 6.1 },
-  { src: diamond, alt: "Diamond", size: 50, x: "42%", y: "65%", delay: 0.9, duration: 5.7 },
-  { src: goldbar, alt: "Gold Bar", size: 62, x: "20%", y: "38%", delay: 1.3, duration: 5.9 },
   { src: rocket, alt: "Rocket", size: 58, x: "92%", y: "68%", delay: 0.4, duration: 5.1 },
   { src: chart, alt: "Chart", size: 54, x: "55%", y: "78%", delay: 2.0, duration: 6.3 },
 ];
