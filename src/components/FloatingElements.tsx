@@ -68,7 +68,7 @@ const FloatingElements = () => {
             left: item.x,
             top: item.y,
             objectFit: "contain",
-            filter: "drop-shadow(1px 0 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(0 -1px 0 black)",
+            filter: "brightness(0) invert(1) drop-shadow(1px 0 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(0 -1px 0 black)",
           }}
         />
       ))}
