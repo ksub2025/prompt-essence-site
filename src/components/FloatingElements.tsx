@@ -6,7 +6,7 @@ import idea from "@/assets/float-3d-idea.png";
 import trophy from "@/assets/float-3d-trophy.png";
 import handshake from "@/assets/float-3d-handshake.png";
 import briefcase from "@/assets/float-3d-briefcase.png";
-import barchart from "@/assets/float-3d-barchart.png";
+
 import rocket from "@/assets/float-3d-rocket.png";
 import chart from "@/assets/float-3d-chart.png";
 
