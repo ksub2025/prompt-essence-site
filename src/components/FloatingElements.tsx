@@ -6,7 +6,7 @@ import idea from "@/assets/float-3d-idea.png";
 import trophy from "@/assets/float-3d-trophy.png";
 import handshake from "@/assets/float-3d-handshake.png";
 import briefcase from "@/assets/float-3d-briefcase.png";
-import barchart from "@/assets/float-3d-barchart.png";
+
 import rocket from "@/assets/float-3d-rocket.png";
 import chart from "@/assets/float-3d-chart.png";
 
@@ -26,7 +26,7 @@ const items: FloatingItem[] = [
   { src: trophy, alt: "Trophy", size: 56, x: "5%", y: "45%", delay: 1.8, duration: 6.2 },
   { src: handshake, alt: "Handshake", size: 60, x: "12%", y: "12%", delay: 0.3, duration: 5.4 },
   { src: briefcase, alt: "Briefcase", size: 58, x: "8%", y: "72%", delay: 0.7, duration: 5.2 },
-  { src: barchart, alt: "Bar Chart", size: 66, x: "75%", y: "35%", delay: 0.5, duration: 5.3 },
+  
   { src: rocket, alt: "Rocket", size: 58, x: "92%", y: "68%", delay: 0.4, duration: 5.1 },
   { src: chart, alt: "Chart", size: 54, x: "55%", y: "78%", delay: 2.0, duration: 6.3 },
 ];
