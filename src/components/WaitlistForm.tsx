@@ -26,6 +26,7 @@ const waitlistSchema = z.object({
 
 type WaitlistFormData = z.infer<typeof waitlistSchema>;
 
+interface WaitlistFormProps {
   onSuccess?: () => void;
 }
 
