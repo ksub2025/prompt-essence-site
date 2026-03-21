@@ -11,30 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-
-const waitlistSchema = z.object({
-  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100),
-  team_name: z.string().trim().min(2, "Team name must be at least 2 characters").max(100),
-  team_members: z.string().trim().min(2, "Please list your team members").max(500),
-  email: z.string().trim().email("Please enter a valid email address").max(255),
-  phone: z.string().trim().min(5, "Phone number must be at least 5 digits").max(20),
-  country: z.string().min(1, "Please select your country"),
-  subsection: z.string().min(1, "Please select a subsection"),
-  faqs: z.string().max(1000).optional().or(z.literal("")),
-});
-
-type WaitlistFormData = z.infer<typeof waitlistSchema>;
-
-const countries = [
-  "Afghanistan", "Albania", "Algeria", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Canada",
-  "Chile", "China", "Colombia", "Czech Republic", "Denmark", "Egypt", "Finland", "France", "Germany", "Greece",
-  "Hong Kong", "Hungary", "India", "Indonesia", "Ireland", "Israel", "Italy", "Japan", "Kenya", "Malaysia",
-  "Mexico", "Netherlands", "New Zealand", "Nigeria", "Norway", "Pakistan", "Peru", "Philippines", "Poland", "Portugal",
-  "Romania", "Russia", "Saudi Arabia", "Singapore", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Taiwan",
-  "Thailand", "Turkey", "UAE", "Ukraine", "United Kingdom", "United States", "Vietnam", "Other"
-];
-
-const subsections = ["Initiation", "Path Drawer", "Operator", "Planned Chaos"];
+import { countries, subsections } from "@/lib/constants";
 
 interface WaitlistFormProps {
   onSuccess?: () => void;
