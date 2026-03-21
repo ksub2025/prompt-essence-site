@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
-
 import { RefreshCw, Trophy, Calendar } from "lucide-react";
 
 const timelineEvents = [
@@ -18,10 +14,7 @@ const timelineEvents = [
 
 const Timeline = () => {
   return (
-    <div className="min-h-screen bg-background relative">
-      <Navigation />
-      <Breadcrumbs />
-
+    <>
       <section className="pt-8 pb-12">
         <div className="section-container">
           <AnimatedSection>
@@ -89,9 +82,7 @@ const Timeline = () => {
           </AnimatedSection>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

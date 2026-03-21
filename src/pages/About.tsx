@@ -1,16 +1,10 @@
 import { Link } from "react-router-dom";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import AnimatedSection from "@/components/AnimatedSection";
 import { Rocket, RefreshCw, Users, Target } from "lucide-react";
-
+import AnimatedSection from "@/components/AnimatedSection";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background relative">
-      <Navigation />
-      <Breadcrumbs />
+    <>
       <section className="pt-8 pb-20">
         <div className="section-container">
           <AnimatedSection>
@@ -75,8 +69,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      <Footer />
-    </div>
+    </>
   );
 };
 

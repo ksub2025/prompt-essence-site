@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "./components/SEOHead";
@@ -20,6 +20,7 @@ import Timeline from "./pages/Timeline";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import PublicLayout from "./layouts/PublicLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import AuthGuard from "./components/AuthGuard";
 import SupportingDocs from "./pages/dashboard/SupportingDocs";
@@ -47,19 +48,27 @@ const App = () => (
             <ScrollToTop />
             <SEOHead />
             <Routes>
+              {/* Standalone pages (no shared layout) */}
               <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/structure" element={<Structure />} />
-              <Route path="/subsections" element={<Subsections />} />
-              <Route path="/benefits" element={<Benefits />} />
-              <Route path="/faqs" element={<FAQ />} />
-              <Route path="/apply" element={<Apply />} />
               <Route path="/login" element={<Login />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/waitlist" element={<Waitlist />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/timeline" element={<Timeline />} />
+
+              {/* Public pages with shared Navigation + Breadcrumbs + Footer */}
+              <Route element={<PublicLayout />}>
+                <Route path="/about" element={<About />} />
+                <Route path="/structure" element={<Structure />} />
+                <Route path="/subsections" element={<Subsections />} />
+                <Route path="/benefits" element={<Benefits />} />
+                <Route path="/faqs" element={<FAQ />} />
+                <Route path="/apply" element={<Apply />} />
+                <Route path="/waitlist" element={<Waitlist />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/timeline" element={<Timeline />} />
+              </Route>
+
+              {/* Dashboard */}
               <Route path="/dashboard" element={<AuthGuard><DashboardLayout /></AuthGuard>}>
+                <Route index element={<Navigate to="supporting-docs" replace />} />
                 <Route path="supporting-docs" element={<SupportingDocs />} />
                 <Route path="timeline" element={<DashboardTimeline />} />
                 <Route path="community" element={<Community />} />
@@ -72,6 +81,7 @@ const App = () => (
                 <Route path="faqs" element={<DashboardFAQs />} />
                 <Route path="contact" element={<DashboardContact />} />
               </Route>
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

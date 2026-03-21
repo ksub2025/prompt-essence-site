@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Send, Mail, CheckCircle } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,36 +23,20 @@ const Contact = () => {
     const subject = formData.get("subject") as string;
     const message = formData.get("message") as string;
 
-    const { error } = await supabase.from("contact_messages").insert({
-      name,
-      email,
-      subject,
-      message,
-    });
-
+    const { error } = await supabase.from("contact_messages").insert({ name, email, subject, message });
     setIsSubmitting(false);
 
     if (error) {
-      toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
+      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
       return;
     }
 
     setSubmitted(true);
-    toast({
-      title: "Message Sent",
-      description: "We'll get back to you within 48 hours.",
-    });
+    toast({ title: "Message Sent", description: "We'll get back to you within 48 hours." });
   };
 
   return (
-    <div className="min-h-screen bg-background relative">
-      <Navigation />
-      <Breadcrumbs />
-
+    <>
       <section className="pt-8 pb-12">
         <div className="section-container">
           <AnimatedSection>
@@ -134,9 +114,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

@@ -1,18 +1,11 @@
 import { Link } from "react-router-dom";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-
 const Subsections = () => {
   return (
-    <div className="min-h-screen bg-background relative">
-      <Navigation />
-      <Breadcrumbs />
-
+    <>
       <section className="pt-8 pb-20">
         <div className="section-container">
           <AnimatedSection>
@@ -97,9 +90,7 @@ const Subsections = () => {
           </AnimatedSection>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
