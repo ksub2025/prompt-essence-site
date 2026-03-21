@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import AnimatedSection from "@/components/AnimatedSection";
-
 
 const rounds = [
   { number: "01", title: "Round 1", description: "The opening round of the competition where all participants submit their initial proposals.", hasBringBack: false },
@@ -16,10 +12,7 @@ const rounds = [
 
 const Structure = () => {
   return (
-    <div className="min-h-screen bg-background relative">
-      <Navigation />
-      <Breadcrumbs />
-
+    <>
       <section className="pt-8 pb-20">
         <div className="section-container">
           <AnimatedSection>
@@ -113,9 +106,7 @@ const Structure = () => {
           </AnimatedSection>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
