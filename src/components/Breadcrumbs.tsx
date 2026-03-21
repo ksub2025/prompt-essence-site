@@ -36,7 +36,6 @@ const routeBreadcrumbs: Record<string, BreadcrumbEntry[]> = {
   "/contact": [{ label: "Contact" }],
 };
 
-import { SITE_URL } from "@/lib/constants";
 
 const Breadcrumbs = () => {
   const { pathname } = useLocation();
