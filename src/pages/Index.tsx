@@ -52,7 +52,7 @@ const Index = () => {
 
       <div className="relative">
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <HeroScene />
+          <Suspense fallback={null}><HeroScene /></Suspense>
           <div className="section-container relative z-10 pointer-events-none">
             <div className="flex items-end justify-between gap-8">
               <div ref={heroRef} className="max-w-2xl flex-1">
