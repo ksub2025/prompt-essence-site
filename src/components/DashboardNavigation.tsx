@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { motion, LayoutGroup } from "framer-motion";
+import { LayoutGroup } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogOut, ChevronDown } from "lucide-react";
-import { AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import NavPill from "@/components/NavPill";
 
 const primaryItems = [
   { label: "Docs", path: "/dashboard/supporting-docs" },
@@ -65,41 +66,6 @@ const DashboardNavigation = () => {
     navigate("/");
   };
 
-  const confirmLogout = () => setShowLogoutConfirm(true);
-
-  const renderNavLink = (item: { label: string; path: string }, extraClass = "") => (
-    <Link
-      key={item.path}
-      to={item.path}
-      onClick={() => setIsOpen(false)}
-      className={`nav-link relative inline-block rounded-xl px-4 py-2.5 transition-colors duration-300 ${extraClass}`}
-    >
-      {isActive(item.path) && (
-        <motion.div
-          layoutId="dashboard-active-pill"
-          className="absolute inset-0 rounded-xl bg-foreground/[0.09] backdrop-blur-md border border-foreground/[0.1] shadow-[0_0_16px_hsl(var(--primary)/0.15),inset_0_1px_0_hsl(var(--foreground)/0.08)]"
-          transition={{ type: "spring", stiffness: 350, damping: 30 }}
-        />
-      )}
-      <span className={`relative z-10 ${isActive(item.path) ? "text-primary font-semibold" : ""}`}>
-        {item.label}
-      </span>
-      <motion.span
-        aria-hidden
-        className="absolute inset-0 flex items-center justify-center pointer-events-none font-semibold whitespace-nowrap z-10"
-        style={{
-          color: "hsl(var(--primary))",
-          textShadow: "0 0 14px hsl(var(--primary) / 0.65), 0 0 28px hsl(var(--primary) / 0.35)",
-        }}
-        animate={{ opacity: isActive(item.path) ? 1 : 0 }}
-        transition={{ duration: GLOW_OUT_DURATION, ease: "easeInOut" }}
-        initial={false}
-      >
-        {item.label}
-      </motion.span>
-    </Link>
-  );
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="section-container">
@@ -110,7 +76,15 @@ const DashboardNavigation = () => {
 
           <LayoutGroup>
             <div className="hidden md:flex items-center gap-1 mx-auto">
-              {primaryItems.map((item) => renderNavLink(item))}
+              {primaryItems.map((item) => (
+                <NavPill
+                  key={item.path}
+                  item={item}
+                  isActive={isActive(item.path)}
+                  layoutId="dashboard-active-pill"
+                  glowDuration={GLOW_OUT_DURATION}
+                />
+              ))}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className={`nav-link relative inline-flex items-center gap-1 rounded-xl px-4 py-2.5 transition-colors duration-300 ${isMoreActive ? "text-primary font-semibold" : ""}`}>
@@ -137,7 +111,7 @@ const DashboardNavigation = () => {
                 {userInitials}
               </AvatarFallback>
             </Avatar>
-            <Button variant="outline" size="sm" onClick={confirmLogout}>
+            <Button variant="outline" size="sm" onClick={() => setShowLogoutConfirm(true)}>
               <LogOut className="w-4 h-4 mr-2" />
               Sign Out
             </Button>
@@ -160,8 +134,18 @@ const DashboardNavigation = () => {
             className="md:hidden bg-background border-b border-border"
           >
             <div className="section-container py-6 flex flex-col gap-4">
-              {allItems.map((item) => renderNavLink(item, "text-lg"))}
-              <Button variant="outline" className="w-full mt-4" onClick={confirmLogout}>
+              {allItems.map((item) => (
+                <NavPill
+                  key={item.path}
+                  item={item}
+                  isActive={isActive(item.path)}
+                  layoutId="dashboard-active-pill"
+                  glowDuration={GLOW_OUT_DURATION}
+                  extraClass="text-lg"
+                  onClick={() => setIsOpen(false)}
+                />
+              ))}
+              <Button variant="outline" className="w-full mt-4" onClick={() => setShowLogoutConfirm(true)}>
                 <LogOut className="w-4 h-4 mr-2" />
                 Sign Out
               </Button>

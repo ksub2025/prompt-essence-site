@@ -25,7 +25,6 @@ const ResetPassword = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check if user arrived via recovery link
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const type = hashParams.get("type");
 
@@ -35,52 +34,31 @@ const ResetPassword = () => {
       return;
     }
 
-    // Also check via auth state
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY") {
-        setIsValidSession(true);
-      }
+      if (event === "PASSWORD_RECOVERY") setIsValidSession(true);
       setChecking(false);
     });
 
-    // Fallback timeout
     const timeout = setTimeout(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
-        if (session) {
-          setIsValidSession(true);
-        }
+        if (session) setIsValidSession(true);
         setChecking(false);
       });
     }, 2000);
 
-    return () => {
-      subscription.unsubscribe();
-      clearTimeout(timeout);
-    };
+    return () => { subscription.unsubscribe(); clearTimeout(timeout); };
   }, []);
 
   const validate = () => {
     const errs: Record<string, string> = {};
-    if (!newPassword) {
-      errs.password = "Password is required";
-    } else if (newPassword.length < 8) {
-      errs.password = "Password must be at least 8 characters long";
-    } else if (newPassword.length > 72) {
-      errs.password = "Password must be less than 72 characters";
-    } else if (!/[A-Z]/.test(newPassword)) {
-      errs.password = "Password must contain at least one uppercase letter";
-    } else if (!/[a-z]/.test(newPassword)) {
-      errs.password = "Password must contain at least one lowercase letter";
-    } else if (!/[0-9]/.test(newPassword)) {
-      errs.password = "Password must contain at least one number";
-    }
-
-    if (!confirmPassword) {
-      errs.confirmPassword = "Please confirm your password";
-    } else if (newPassword !== confirmPassword) {
-      errs.confirmPassword = "Passwords do not match";
-    }
-
+    if (!newPassword) errs.password = "Password is required";
+    else if (newPassword.length < 8) errs.password = "Password must be at least 8 characters long";
+    else if (newPassword.length > 72) errs.password = "Password must be less than 72 characters";
+    else if (!/[A-Z]/.test(newPassword)) errs.password = "Password must contain at least one uppercase letter";
+    else if (!/[a-z]/.test(newPassword)) errs.password = "Password must contain at least one lowercase letter";
+    else if (!/[0-9]/.test(newPassword)) errs.password = "Password must contain at least one number";
+    if (!confirmPassword) errs.confirmPassword = "Please confirm your password";
+    else if (newPassword !== confirmPassword) errs.confirmPassword = "Passwords do not match";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -88,27 +66,13 @@ const ResetPassword = () => {
   const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
     setIsLoading(true);
     try {
       const { error } = await supabase.auth.updateUser({ password: newPassword });
-      if (error) {
-        toast({
-          title: "Password reset failed",
-          description: error.message,
-          variant: "destructive",
-        });
-      } else {
-        setIsSuccess(true);
-        toast({ title: "Password updated successfully!" });
-        setTimeout(() => navigate("/login"), 3000);
-      }
+      if (error) toast({ title: "Password reset failed", description: error.message, variant: "destructive" });
+      else { setIsSuccess(true); toast({ title: "Password updated successfully!" }); setTimeout(() => navigate("/login"), 3000); }
     } catch {
-      toast({
-        title: "Password reset failed",
-        description: "An unexpected error occurred. Please try again.",
-        variant: "destructive",
-      });
+      toast({ title: "Password reset failed", description: "An unexpected error occurred. Please try again.", variant: "destructive" });
     }
     setIsLoading(false);
   };
@@ -138,16 +102,14 @@ const ResetPassword = () => {
 
               {isSuccess ? (
                 <div className="text-center space-y-4">
-                  <CheckCircle className="w-12 h-12 text-green-500 mx-auto" />
+                  <CheckCircle className="w-12 h-12 text-primary mx-auto" />
                   <p className="text-foreground font-medium">Password updated successfully!</p>
                   <p className="text-muted-foreground text-sm">Redirecting you to login...</p>
                 </div>
               ) : !isValidSession ? (
                 <div className="text-center space-y-4">
                   <p className="text-muted-foreground">This link is invalid or has expired.</p>
-                  <Button variant="outline" onClick={() => navigate("/login")}>
-                    Back to Login
-                  </Button>
+                  <Button variant="outline" onClick={() => navigate("/login")}>Back to Login</Button>
                 </div>
               ) : (
                 <form onSubmit={handleReset} className="space-y-4" noValidate>
@@ -160,18 +122,10 @@ const ResetPassword = () => {
                         autoComplete="new-password"
                         placeholder="Min 8 chars, uppercase, lowercase & number"
                         value={newPassword}
-                        onChange={(e) => {
-                          setNewPassword(e.target.value);
-                          if (errors.password) setErrors((p) => ({ ...p, password: "" }));
-                        }}
+                        onChange={(e) => { setNewPassword(e.target.value); if (errors.password) setErrors(p => ({ ...p, password: "" })); }}
                         aria-invalid={!!errors.password}
                       />
-                      <button
-                        type="button"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                        onClick={() => setShowPassword(!showPassword)}
-                        tabIndex={-1}
-                      >
+                      <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors" onClick={() => setShowPassword(!showPassword)} tabIndex={-1}>
                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
@@ -187,18 +141,10 @@ const ResetPassword = () => {
                         autoComplete="new-password"
                         placeholder="Re-enter your new password"
                         value={confirmPassword}
-                        onChange={(e) => {
-                          setConfirmPassword(e.target.value);
-                          if (errors.confirmPassword) setErrors((p) => ({ ...p, confirmPassword: "" }));
-                        }}
+                        onChange={(e) => { setConfirmPassword(e.target.value); if (errors.confirmPassword) setErrors(p => ({ ...p, confirmPassword: "" })); }}
                         aria-invalid={!!errors.confirmPassword}
                       />
-                      <button
-                        type="button"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                        onClick={() => setShowConfirm(!showConfirm)}
-                        tabIndex={-1}
-                      >
+                      <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors" onClick={() => setShowConfirm(!showConfirm)} tabIndex={-1}>
                         {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
