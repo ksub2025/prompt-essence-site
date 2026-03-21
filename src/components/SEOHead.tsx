@@ -46,7 +46,7 @@ const pageMeta: Record<string, { title: string; description: string }> = {
 
 const SEOHead = () => {
   const { pathname } = useLocation();
-  const canonical = `https://venturecapsule.org${pathname === '/' ? '' : pathname}`;
+  const canonical = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
   const meta = pageMeta[pathname] ?? pageMeta['/'];
 
   return (
