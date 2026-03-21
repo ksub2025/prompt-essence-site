@@ -13,7 +13,19 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { countries, subsections } from "@/lib/constants";
 
-interface WaitlistFormProps {
+const waitlistSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100),
+  team_name: z.string().trim().min(2, "Team name must be at least 2 characters").max(100),
+  team_members: z.string().trim().min(2, "Please list your team members").max(500),
+  email: z.string().trim().email("Please enter a valid email address").max(255),
+  phone: z.string().trim().min(5, "Phone number must be at least 5 digits").max(20),
+  country: z.string().min(1, "Please select your country"),
+  subsection: z.string().min(1, "Please select a subsection"),
+  faqs: z.string().max(1000).optional().or(z.literal("")),
+});
+
+type WaitlistFormData = z.infer<typeof waitlistSchema>;
+
   onSuccess?: () => void;
 }
 
