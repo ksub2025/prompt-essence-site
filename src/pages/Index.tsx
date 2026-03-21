@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,8 @@ import { ArrowRight, Briefcase, TrendingUp, FileText, Users } from "lucide-react
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import HeroScene from "@/components/HeroScene";
+const HeroScene = lazy(() => import("@/components/HeroScene"));
+import chessKing from "@/assets/hero-chess-king.png";
 import chessKing from "@/assets/hero-chess-king.png";
 
 
