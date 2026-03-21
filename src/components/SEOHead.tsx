@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { SITE_URL } from '@/lib/constants';
 
 const pageMeta: Record<string, { title: string; description: string }> = {
   '/': {
@@ -46,7 +47,7 @@ const pageMeta: Record<string, { title: string; description: string }> = {
 
 const SEOHead = () => {
   const { pathname } = useLocation();
-  const canonical = `https://venturecapsule.org${pathname === '/' ? '' : pathname}`;
+  const canonical = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
   const meta = pageMeta[pathname] ?? pageMeta['/'];
 
   return (

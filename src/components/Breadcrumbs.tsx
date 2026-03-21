@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { SITE_URL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import {
   Breadcrumb,
@@ -35,7 +36,6 @@ const routeBreadcrumbs: Record<string, BreadcrumbEntry[]> = {
   "/contact": [{ label: "Contact" }],
 };
 
-const SITE_URL = "https://venturecapsule.org";
 
 const Breadcrumbs = () => {
   const { pathname } = useLocation();

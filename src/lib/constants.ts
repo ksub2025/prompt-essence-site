@@ -11,3 +11,7 @@ export const countries = [
 ];
 
 export const subsections = ["Initiation", "Path Drawer", "Operator", "Planned Chaos"];
+
+export const SITE_URL = "https://venturecapsule.org";
+
+export const RECAPTCHA_SITE_KEY = "6LciiH0sAAAAADl8ZKemY4GK5k-Q81n8g1_4kFi0";
