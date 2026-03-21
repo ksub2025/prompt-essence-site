@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { SITE_URL } from '@/lib/constants';
 
 const pageMeta: Record<string, { title: string; description: string }> = {
   '/': {

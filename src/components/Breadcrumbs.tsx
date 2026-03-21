@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { SITE_URL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import {
   Breadcrumb,
