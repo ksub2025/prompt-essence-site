@@ -1,10 +1,10 @@
 import AnimatedSection from "@/components/AnimatedSection";
 
 const pathways = [
-  { emoji: "💡", title: "Initiation", description: "Build business ideas based on your location. Present how you accounted for local challenges and made a thriving business." },
-  { emoji: "📊", title: "Path Drawer", description: "Explore financial literacy, manage your own portfolio, and grow your finances using FinLit — our investing simulation tool." },
-  { emoji: "⚙️", title: "Operator", description: "Handle decisions and operations of a business as an intrapreneur. Analyse the business and provide the best course of action." },
-  { emoji: "🌀", title: "Planned Chaos", description: "Navigate interconnected crisis scenarios across multiple rounds. Each situation links together for a final strategic outcome." },
+  { emoji: "💡", title: "Initiation", description: "Business ideas are made and initiated in this subsection. You make ideas based on your current location to fully develop a business that can survive and make profits within the location you live at." },
+  { emoji: "📊", title: "Path Drawer", description: "Making a portfolio is your key goal. You will be given base resources to develop your portfolio, with daily notifications about market trends and economical changes to base your decisions around." },
+  { emoji: "⚙️", title: "Operator", description: "From a single business, you analyze, manage and develop strategies for its future operations, mapping out the logic behind each action and addressing current problems accordingly." },
+  { emoji: "🌀", title: "Planned Chaos", description: "A case study based competition where you handle a specific project as an intrapreneur, using provided documents and bi-daily updates to develop and adapt your approach." },
 ];
 
 const DashboardSubsections = () => (

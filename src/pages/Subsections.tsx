@@ -29,7 +29,7 @@ const Subsections = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">💡</span></div>
                   <div>
                     <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Initiation</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">A platform where you get to build business ideas and initiate them based on the location you are at. You have to make a business that would thrive well within your location and present how you accounted for all of the challenges presented to you successfully.</p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">Business ideas are made and initiated in this subsection. In order to ensure that these ideas come to fruition, this subsection will require you to make these ideas based on your current location when attempting this competition in order to fully develop a business that can survive in your given location. Hence, you have to make a business that can survive and make profits within the location you live at.</p>
                   </div>
                 </div>
               </div>
@@ -41,7 +41,7 @@ const Subsections = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">📊</span></div>
                   <div>
                     <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Path Drawer</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">A platform where you get to explore different regions of <Link to="/benefits" className="text-primary hover:underline">financial literacy</Link>, accountability for your own finance and growth factors into your portfolio based on the base resources provided to you, using our very own investing tool called FinLit.</p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">Making a portfolio is your key goal if you choose to partake in this subsection. You will be given a base set of resources before you begin, which will require you to use those resources best you can for developing your portfolio. Throughout your rounds for this subsection, you will be notified on a daily basis about different market trends or economical changes in order for you to base the making of your portfolio around them effectively.</p>
                   </div>
                 </div>
               </div>
@@ -53,7 +53,7 @@ const Subsections = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">⚙️</span></div>
                   <div>
                     <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Operator</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">A platform where you get to handle the decisions and operations of a business as an intrapreneur and analyse the business while providing the best course of action. Get <Link to="/about" className="text-primary hover:underline">professional guidance</Link> along the way.</p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">From a single business, you get to analyze, manage and develop strategies for the future operations of that business. You will be mapping out the logic behind each action, and how it can help grow the business. Your decisions and operations will be needing to be based on any problems that the business is currently facing, requiring you to analyze those problems and take action accordingly.</p>
                   </div>
                 </div>
               </div>
@@ -65,7 +65,7 @@ const Subsections = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">🌀</span></div>
                   <div>
                     <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Planned Chaos</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">A platform based upon being put in different situations that link together at the end with multiple separate scenarios occurring in each round. Check the <Link to="/timeline" className="text-primary hover:underline">competition timeline</Link> for round dates.</p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">A more case study based competition, you will be put into a particular case which will revolve around you being an intrapreneur for a company and handling a specific project for the company. You will be given documents to help base your decisions and ideas for developing your project. Throughout rounds, every two days, you will be given updates that can help you change up your approach to the project.</p>
                   </div>
                 </div>
               </div>
