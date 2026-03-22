@@ -53,7 +53,7 @@ const Subsections = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">⚙️</span></div>
                   <div>
                     <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Operator</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">A platform where you get to handle the decisions and operations of a business as an intrapreneur and analyse the business while providing the best course of action. Get <Link to="/about" className="text-primary hover:underline">professional guidance</Link> along the way.</p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">From a single business, you get to analyze, manage and develop strategies for the future operations of that business. You will be mapping out the logic behind each action, and how it can help grow the business. Your decisions and operations will be needing to be based on any problems that the business is currently facing, requiring you to analyze those problems and take action accordingly.</p>
                   </div>
                 </div>
               </div>
