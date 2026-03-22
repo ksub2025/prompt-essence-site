@@ -41,7 +41,7 @@ const Subsections = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">📊</span></div>
                   <div>
                     <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Path Drawer</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">A platform where you get to explore different regions of <Link to="/benefits" className="text-primary hover:underline">financial literacy</Link>, accountability for your own finance and growth factors into your portfolio based on the base resources provided to you, using our very own investing tool called FinLit.</p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">Making a portfolio is your key goal if you choose to partake in this subsection. You will be given a base set of resources before you begin, which will require you to use those resources best you can for developing your portfolio. Throughout your rounds for this subsection, you will be notified on a daily basis about different market trends or economical changes in order for you to base the making of your portfolio around them effectively.</p>
                   </div>
                 </div>
               </div>
