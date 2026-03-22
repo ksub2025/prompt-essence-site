@@ -29,7 +29,7 @@ const Subsections = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">💡</span></div>
                   <div>
                     <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Initiation</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">A platform where you get to build business ideas and initiate them based on the location you are at. You have to make a business that would thrive well within your location and present how you accounted for all of the challenges presented to you successfully.</p>
+                    <p className="text-muted-foreground text-lg leading-relaxed">Business ideas are made and initiated in this subsection. In order to ensure that these ideas come to fruition, this subsection will require you to make these ideas based on your current location when attempting this competition in order to fully develop a business that can survive in your given location. Hence, you have to make a business that can survive and make profits within the location you live at.</p>
                   </div>
                 </div>
               </div>
