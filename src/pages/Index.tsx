@@ -7,7 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 const HeroScene = lazy(() => import("@/components/HeroScene"));
-import chessKing from "@/assets/hero-chess-king.png";
+import chessKing from "@/assets/hero-chess-king-gold.png";
 
 
 const subsectionPreviews = [{
