@@ -40,7 +40,7 @@ const Subsections = () => {
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">📊</span></div>
                   <div>
-                    <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Path Drawer</h2>
+                    <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Portfolio Pathways</h2>
                     <p className="text-muted-foreground text-lg leading-relaxed">Making a portfolio is your key goal if you choose to partake in this subsection. You will be given a base set of resources before you begin, which will require you to use those resources best you can for developing your portfolio. Throughout your rounds for this subsection, you will be notified on a daily basis about different market trends or economical changes in order for you to base the making of your portfolio around them effectively.</p>
                   </div>
                 </div>
