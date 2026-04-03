@@ -10,7 +10,7 @@ export const countries = [
   "United Kingdom", "United States", "Vietnam", "Other",
 ];
 
-export const subsections = ["Initiation", "Path Drawer", "Operator", "Planned Chaos"];
+export const subsections = ["Idea Lab", "Portfolio Pathways", "Intrapreneurship", "Case of Crisis"];
 
 export const SITE_URL = "https://venturecapsule.org";
 

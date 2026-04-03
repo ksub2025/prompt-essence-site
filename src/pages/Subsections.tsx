@@ -64,7 +64,7 @@ const Subsections = () => {
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><span className="text-3xl">🌀</span></div>
                   <div>
-                    <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Planned Chaos</h2>
+                    <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">Case of Crisis</h2>
                     <p className="text-muted-foreground text-lg leading-relaxed">A more case study based competition, you will be put into a particular case which will revolve around you being an intrapreneur for a company and handling a specific project for the company. You will be given documents to help base your decisions and ideas for developing your project. Throughout rounds, every two days, you will be given updates that can help you change up your approach to the project.</p>
                   </div>
                 </div>
