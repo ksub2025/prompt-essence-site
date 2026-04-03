@@ -3,7 +3,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { BookOpen, Users, FileText, Trophy, RefreshCw } from "lucide-react";
 
 const steps = [
-  { icon: Users, title: "1. Form Your Team", description: "Register a team of 2–6 members through the waitlist. Each team selects one subsection (Initiation, Path Drawer, Operator, or Planned Chaos)." },
+  { icon: Users, title: "1. Form Your Team", description: "Register a team of 2–6 members through the waitlist. Each team selects one subsection (Idea Lab, Portfolio Pathways, Intrapreneurship, or Case of Crisis)." },
   { icon: BookOpen, title: "2. Choose a Pathway", description: "Pick the subsection that best matches your team's strengths — business building, financial literacy, operations analysis, or crisis management." },
   { icon: FileText, title: "3. Compete in Rounds", description: "The competition has 4 main rounds. Submit proposals, receive mentor feedback, and refine your work between each round." },
   { icon: RefreshCw, title: "4. Bring-Back Rounds", description: "Eliminated? Don't worry. Two bring-back rounds let you re-enter after improving your submission — just like real startups iterate." },
