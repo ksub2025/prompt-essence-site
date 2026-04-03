@@ -1,10 +1,10 @@
 import AnimatedSection from "@/components/AnimatedSection";
 
 const pathways = [
-  { emoji: "💡", title: "Initiation", description: "Business ideas are made and initiated in this subsection. You make ideas based on your current location to fully develop a business that can survive and make profits within the location you live at." },
-  { emoji: "📊", title: "Path Drawer", description: "Making a portfolio is your key goal. You will be given base resources to develop your portfolio, with daily notifications about market trends and economical changes to base your decisions around." },
-  { emoji: "⚙️", title: "Operator", description: "From a single business, you analyze, manage and develop strategies for its future operations, mapping out the logic behind each action and addressing current problems accordingly." },
-  { emoji: "🌀", title: "Planned Chaos", description: "A case study based competition where you handle a specific project as an intrapreneur, using provided documents and bi-daily updates to develop and adapt your approach." },
+  { emoji: "💡", title: "Idea Lab", description: "Business ideas are made and initiated in this subsection. You make ideas based on your current location to fully develop a business that can survive and make profits within the location you live at." },
+  { emoji: "📊", title: "Portfolio Pathways", description: "Making a portfolio is your key goal. You will be given base resources to develop your portfolio, with daily notifications about market trends and economical changes to base your decisions around." },
+  { emoji: "⚙️", title: "Intrapreneurship", description: "From a single business, you analyze, manage and develop strategies for its future operations, mapping out the logic behind each action and addressing current problems accordingly." },
+  { emoji: "🌀", title: "Case of Crisis", description: "A case study based competition where you handle a specific project as an intrapreneur, using provided documents and bi-daily updates to develop and adapt your approach." },
 ];
 
 const DashboardSubsections = () => (
