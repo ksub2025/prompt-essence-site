@@ -2,7 +2,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Calendar, RefreshCw, Trophy } from "lucide-react";
 
 const events = [
-  { title: "Round 1", date: "May 24th – 26th", icon: Calendar, isBringBack: false, isResults: false },
+  { title: "Round 1", date: "May 28th – 30th", icon: Calendar, isBringBack: false, isResults: false },
   { title: "Round 2", date: "May 28th – June 4th", icon: Calendar, isBringBack: false, isResults: false },
   { title: "Bring-Back Round 1", date: "June 6th – 13th", icon: RefreshCw, isBringBack: true, isResults: false },
   { title: "Round 3", date: "June 15th", icon: Calendar, isBringBack: false, isResults: false },
