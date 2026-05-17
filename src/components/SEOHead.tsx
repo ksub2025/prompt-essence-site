@@ -2,60 +2,126 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { SITE_URL } from '@/lib/constants';
 
-const pageMeta: Record<string, { title: string; description: string }> = {
+type PageMeta = { title: string; description: string };
+
+const pageMeta: Record<string, PageMeta> = {
   '/': {
-    title: 'VentureCapsule | Business Competition for Students & Finance Challenge',
-    description: 'VentureCapsule is a global business competition for students covering finance challenges, economics case competitions, and entrepreneurial pitch contests. Register your team today.',
+    title: 'VentureCapsule | Business Competition for Students',
+    description: 'Global online business, finance & economics competition for students. Teams of 2–6 compete across rounds. Join the waitlist today.',
   },
   '/about': {
-    title: 'About VentureCapsule | Student Business & Finance Competition',
-    description: 'Learn about VentureCapsule — a global business competition for students in finance, economics, and entrepreneurial pitching.',
+    title: 'About | VentureCapsule Student Business Competition',
+    description: 'Learn about VentureCapsule — a global competition for students in finance, economics, and entrepreneurial pitching.',
   },
   '/subsections': {
-    title: 'Competition Tracks | Finance Challenge & Economics Case Competition',
-    description: 'Explore VentureCapsule\'s tracks: business pitching, finance challenge for students, economics case competition, and professional mentoring.',
+    title: 'Pathways | Finance, Economics & Pitch Tracks',
+    description: 'Explore the four VentureCapsule tracks: Idea Lab, Portfolio Pathways, Intrapreneurship, and Case of Crisis.',
   },
   '/structure': {
-    title: 'Competition Structure | VentureCapsule Student Business Pitch',
-    description: 'Understand how VentureCapsule\'s rounds work — 4 main rounds and 2 bring-back rounds for the ultimate student business competition experience.',
+    title: 'Structure | VentureCapsule Competition Rounds',
+    description: 'Four main rounds plus two bring-back rounds — how the VentureCapsule student business competition works.',
   },
   '/timeline': {
-    title: 'Timeline | VentureCapsule Business & Finance Competition 2026',
-    description: 'Key dates for VentureCapsule 2026 — the global business competition for students in finance, economics, and entrepreneurial pitching.',
+    title: 'Timeline | VentureCapsule 2026 Competition',
+    description: 'Key dates for VentureCapsule 2026 — the global online business, finance, and economics competition for students.',
   },
   '/benefits': {
-    title: 'Benefits | Why Join This Student Finance & Economics Competition',
-    description: 'Win cash prizes, earn a global certificate, and get mentored by professionals. Discover what VentureCapsule\'s business competition offers students.',
+    title: 'Benefits | Why Join VentureCapsule',
+    description: 'Cash prizes, global certificates, and professional mentoring — discover what VentureCapsule offers student competitors.',
   },
   '/faqs': {
-    title: 'FAQs | VentureCapsule Business Competition Questions Answered',
-    description: 'Find answers to frequently asked questions about VentureCapsule — eligibility, competition structure, rounds, and how to participate.',
+    title: 'FAQs | VentureCapsule Competition Answers',
+    description: 'Eligibility, structure, rounds, and how to participate in VentureCapsule — answered.',
   },
   '/waitlist': {
-    title: 'Join Waitlist | VentureCapsule Business Competition for Students',
-    description: 'Secure your spot in VentureCapsule — the premier business competition for students featuring finance challenges and economics case competitions.',
+    title: 'Join Waitlist | VentureCapsule 2026',
+    description: 'Secure your team\'s spot in VentureCapsule — the premier business competition for students.',
   },
   '/apply': {
-    title: 'Apply | VentureCapsule Entrepreneurial Pitch Contest',
-    description: 'Apply to VentureCapsule\'s entrepreneurial pitch contest and student finance challenge. Applications opening soon.',
+    title: 'Apply | VentureCapsule Pitch Contest',
+    description: 'Apply to VentureCapsule\'s entrepreneurial pitch contest and student finance challenge.',
   },
   '/contact': {
-    title: 'Contact | VentureCapsule Student Business Competition',
-    description: 'Get in touch with the VentureCapsule team about our student business competition, finance challenge, or economics case competition.',
+    title: 'Contact | VentureCapsule Team',
+    description: 'Get in touch with the VentureCapsule team about the student business and finance competition.',
   },
+  '/login': {
+    title: 'Sign In | VentureCapsule',
+    description: 'Sign in to your VentureCapsule account to manage your team and waitlist.',
+  },
+  '/reset-password': {
+    title: 'Reset Password | VentureCapsule',
+    description: 'Reset the password for your VentureCapsule account.',
+  },
+};
+
+const dashboardMeta: Record<string, PageMeta> = {
+  '/dashboard': { title: 'Dashboard | VentureCapsule', description: 'Your VentureCapsule competitor workspace.' },
+  '/dashboard/supporting-docs': { title: 'Supporting Docs | Dashboard', description: 'Access supporting documents for VentureCapsule competitors.' },
+  '/dashboard/timeline': { title: 'Timeline | Dashboard', description: 'Track competition milestones from your dashboard.' },
+  '/dashboard/community': { title: 'Community | Dashboard', description: 'Connect with other VentureCapsule competitors.' },
+  '/dashboard/guide': { title: 'Guide | Dashboard', description: 'Step-by-step competitor guide.' },
+  '/dashboard/judging-criteria': { title: 'Judging Criteria | Dashboard', description: 'How VentureCapsule entries are judged.' },
+  '/dashboard/my-waitlist': { title: 'My Waitlist | Dashboard', description: 'Manage your team\'s waitlist entry.' },
+  '/dashboard/about': { title: 'About | Dashboard', description: 'About VentureCapsule for competitors.' },
+  '/dashboard/pathways': { title: 'Pathways | Dashboard', description: 'Choose your competition pathway.' },
+  '/dashboard/benefits': { title: 'Benefits | Dashboard', description: 'Competitor benefits overview.' },
+  '/dashboard/faqs': { title: 'FAQs | Dashboard', description: 'Competitor FAQs.' },
+  '/dashboard/contact': { title: 'Contact | Dashboard', description: 'Reach the VentureCapsule team.' },
+};
+
+const eventJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'VentureCapsule — Business Competition for Students: Finance, Economics & Pitch',
+  eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  startDate: '2026-03-01',
+  description: 'VentureCapsule is a global business competition for students. Teams of 2–6 compete across 4 main rounds with bring-back rounds.',
+  organizer: { '@type': 'Organization', name: 'Venture Capsule', url: 'https://venturecapsule.org' },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'What is VentureCapsule and who is it for?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule is a global business competition for students focused on finance challenges, economics case competitions, and entrepreneurial pitch contests. Teams of 2–6 compete across subsections including business pitching, financial literacy, case studies, and professional mentoring.' } },
+    { '@type': 'Question', name: 'Is this competition open to students worldwide?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The competition is open to students worldwide. Teams of 2–6 members register through the waitlist.' } },
+    { '@type': 'Question', name: 'How is the competition structured?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule features 4 main rounds and 2 bring-back rounds. Eliminated teams can re-enter during bring-back rounds.' } },
+    { '@type': 'Question', name: 'When and where does it take place?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule is fully online, starting March 2026.' } },
+    { '@type': 'Question', name: 'What makes VentureCapsule different?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule combines pitch contest, finance challenge, and economics case competition with professional mentoring and a unique bring-back round system.' } },
+  ],
 };
 
 const SEOHead = () => {
   const { pathname } = useLocation();
   const canonical = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
-  const meta = pageMeta[pathname] ?? pageMeta['/'];
+  const isDashboard = pathname.startsWith('/dashboard');
+  const meta =
+    pageMeta[pathname] ??
+    dashboardMeta[pathname] ??
+    (isDashboard ? dashboardMeta['/dashboard'] : pageMeta['/']);
+
+  const includeEvent = pathname === '/';
+  const includeFaq = pathname === '/' || pathname === '/faqs';
 
   return (
     <Helmet>
       <title>{meta.title}</title>
       <meta name="description" content={meta.description} />
-      <meta name="robots" content="index,follow" />
+      <meta name="robots" content={isDashboard ? 'noindex,nofollow' : 'index,follow'} />
       <link rel="canonical" href={canonical} />
+      <meta property="og:title" content={meta.title} />
+      <meta property="og:description" content={meta.description} />
+      <meta property="og:url" content={canonical} />
+      <meta name="twitter:title" content={meta.title} />
+      <meta name="twitter:description" content={meta.description} />
+      {includeEvent && (
+        <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
+      )}
+      {includeFaq && (
+        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+      )}
     </Helmet>
   );
 };
