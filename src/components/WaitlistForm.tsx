@@ -54,7 +54,7 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
       });
       if (error) throw error;
       setSubmitted(true);
-      toast({ title: "Welcome to the waitlist!", description: "We'll keep you updated on VentureCapsule." });
+      toast({ title: "Registration complete!", description: "We'll keep you updated on VentureCapsule." });
       onSuccess?.();
     } catch {
       toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
@@ -72,8 +72,8 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
     return (
       <div className="glass-card p-8 md:p-12 text-center py-8">
         <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
-        <h2 className="font-display text-2xl font-bold mb-4">You're on the list!</h2>
-        <p className="text-muted-foreground">Thank you for joining the VentureCapsule waitlist. We'll send updates to your email.</p>
+        <h2 className="font-display text-2xl font-bold mb-4">Registration complete!</h2>
+        <p className="text-muted-foreground">Thank you for registering for VentureCapsule. We'll send updates to your email.</p>
       </div>
     );
   }
@@ -117,7 +117,7 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
             <FormItem><FormLabel>Any questions for us? (Optional)</FormLabel><FormControl><Textarea placeholder="Ask us anything..." {...field} /></FormControl><FormMessage /></FormItem>
           )} />
           <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
-            {isSubmitting ? <><Loader2 className="mr-2 w-4 h-4 animate-spin" />Submitting...</> : <>Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></>}
+            {isSubmitting ? <><Loader2 className="mr-2 w-4 h-4 animate-spin" />Submitting...</> : <>Register<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></>}
           </Button>
 
           <AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
@@ -143,9 +143,9 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Go Back & Edit</AlertDialogCancel>
-                <AlertDialogAction onClick={() => pendingData && handleConfirmedSubmit(pendingData)}>
-                  Confirm & Join
-                </AlertDialogAction>
+                  <AlertDialogAction onClick={() => pendingData && handleConfirmedSubmit(pendingData)}>
+                    Confirm & Register
+                  </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
