@@ -1,7 +1,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import WaitlistForm from "@/components/WaitlistForm";
 
-const Waitlist = () => {
+const Register = () => {
   return (
     <>
       <section className="pt-8 pb-20">
