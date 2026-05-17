@@ -6,7 +6,7 @@ VentureCapsule lets students create, nurture, and execute solutions to real-worl
 
 ## Pages
 
-- [Home](/): Overview of the competition and waitlist entry.
+- [Home](/): Overview of the competition and registration.
 - [About](/about): What VentureCapsule is and who it's for.
 - [Pathways](/subsections): The four competition tracks.
 - [Structure](/structure): How the 4 main and 2 bring-back rounds work.
