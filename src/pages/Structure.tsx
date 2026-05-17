@@ -96,9 +96,9 @@ const Structure = () => {
                 Join VentureCapsule and take advantage of our unique competition structure. 
                 Explore the <Link to="/benefits" className="text-primary hover:underline">benefits of participating</Link>.
               </p>
-              <Link to="/waitlist">
+              <Link to="/register">
                 <Button size="lg" className="group">
-                  Join Waitlist
+                  Register
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

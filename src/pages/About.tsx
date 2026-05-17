@@ -49,7 +49,7 @@ const About = () => {
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0"><Users className="w-7 h-7 text-primary" /></div>
                   <div>
                     <h3 className="font-display text-2xl font-semibold mb-4">Professional Guidance</h3>
-                    <p className="text-muted-foreground leading-relaxed text-lg">You get to be guided by professionals who have experience in this type of field that allows you to build your project with real-world insights and mentorship. Ready to start? <Link to="/waitlist" className="text-primary hover:underline">Join the waitlist</Link>.</p>
+                    <p className="text-muted-foreground leading-relaxed text-lg">You get to be guided by professionals who have experience in this type of field that allows you to build your project with real-world insights and mentorship. Ready to start? <Link to="/register" className="text-primary hover:underline">Register</Link>.</p>
                   </div>
                 </div>
               </div>

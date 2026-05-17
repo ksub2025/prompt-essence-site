@@ -80,9 +80,9 @@ const Subsections = () => {
             <div className="glass-card p-12 text-center">
               <h2 className="font-display text-3xl font-bold mb-6">Choose Your Pathway</h2>
               <p className="body-large max-w-2xl mx-auto mb-8">Ready to compete? Explore the <Link to="/benefits" className="text-primary hover:underline">benefits</Link> and secure your spot today.</p>
-              <Link to="/waitlist">
+              <Link to="/register">
                 <Button size="lg" className="group">
-                  Join Waitlist
+                  Register
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

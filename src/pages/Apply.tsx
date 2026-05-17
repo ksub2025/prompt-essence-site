@@ -41,7 +41,7 @@ const Apply = () => {
             <div className="glass-card p-12 md:p-20 text-center max-w-2xl mx-auto">
               <p className="text-6xl mb-6">📝</p>
               <h2 className="font-display text-3xl font-bold mb-4">Applications Opening Soon</h2>
-              <p className="text-muted-foreground text-lg mb-8">The application form will be available shortly. In the meantime, <Link to="/waitlist" className="text-primary hover:underline">join the waitlist</Link> to secure early access.</p>
+              <p className="text-muted-foreground text-lg mb-8">The application form will be available shortly. In the meantime, <Link to="/register" className="text-primary hover:underline">register</Link> to secure early access.</p>
               <Link to="/contact"><Button variant="outline" size="lg">Contact Us for Updates</Button></Link>
             </div>
           </AnimatedSection>
