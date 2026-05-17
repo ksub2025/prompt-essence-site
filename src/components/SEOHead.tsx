@@ -33,9 +33,9 @@ const pageMeta: Record<string, PageMeta> = {
     title: 'FAQs | VentureCapsule Competition Answers',
     description: 'Eligibility, structure, rounds, and how to participate in VentureCapsule — answered.',
   },
-  '/waitlist': {
-    title: 'Join Waitlist | VentureCapsule 2026',
-    description: 'Secure your team\'s spot in VentureCapsule — the premier business competition for students.',
+  '/register': {
+    title: 'Register | VentureCapsule 2026',
+    description: 'Register your team for VentureCapsule — the premier business competition for students.',
   },
   '/apply': {
     title: 'Apply | VentureCapsule Pitch Contest',
@@ -62,7 +62,7 @@ const dashboardMeta: Record<string, PageMeta> = {
   '/dashboard/community': { title: 'Community | Dashboard', description: 'Connect with other VentureCapsule competitors.' },
   '/dashboard/guide': { title: 'Guide | Dashboard', description: 'Step-by-step competitor guide.' },
   '/dashboard/judging-criteria': { title: 'Judging Criteria | Dashboard', description: 'How VentureCapsule entries are judged.' },
-  '/dashboard/my-waitlist': { title: 'My Waitlist | Dashboard', description: 'Manage your team\'s waitlist entry.' },
+  '/dashboard/my-registration': { title: 'My Registration | Dashboard', description: 'Manage your team\'s registration.' },
   '/dashboard/about': { title: 'About | Dashboard', description: 'About VentureCapsule for competitors.' },
   '/dashboard/pathways': { title: 'Pathways | Dashboard', description: 'Choose your competition pathway.' },
   '/dashboard/benefits': { title: 'Benefits | Dashboard', description: 'Competitor benefits overview.' },

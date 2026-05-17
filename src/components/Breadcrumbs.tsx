@@ -31,7 +31,7 @@ const routeBreadcrumbs: Record<string, BreadcrumbEntry[]> = {
   ],
   "/benefits": [{ label: "Benefits" }],
   "/faqs": [{ label: "FAQs" }],
-  "/waitlist": [{ label: "Join Waitlist" }],
+  "/register": [{ label: "Register" }],
   "/apply": [{ label: "Apply" }],
   "/contact": [{ label: "Contact" }],
 };

@@ -16,7 +16,7 @@ const primaryItems = [
   { label: "Timeline", path: "/dashboard/timeline" },
   { label: "Guide", path: "/dashboard/guide" },
   { label: "Judging", path: "/dashboard/judging-criteria" },
-  { label: "My Waitlist", path: "/dashboard/my-waitlist" },
+  { label: "My Registration", path: "/dashboard/my-registration" },
 ];
 
 const moreItems = [

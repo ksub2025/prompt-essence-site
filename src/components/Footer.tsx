@@ -9,7 +9,7 @@ const footerLinks = {
   ],
   Participate: [
     { label: "Benefits", path: "/benefits" },
-    { label: "Join Waitlist", path: "/waitlist" },
+    { label: "Register", path: "/register" },
     
   ],
   Support: [
