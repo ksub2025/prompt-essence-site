@@ -37,4 +37,4 @@ const Register = () => {
   );
 };
 
-export default Waitlist;
+export default Register;
