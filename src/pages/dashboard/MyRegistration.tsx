@@ -28,7 +28,7 @@ const DetailRow = ({ icon: Icon, label, value }: { icon: React.ElementType; labe
   );
 };
 
-const MyWaitlist = () => {
+const MyRegistration = () => {
   const [entry, setEntry] = useState<WaitlistEntry | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -65,8 +65,8 @@ const MyWaitlist = () => {
   if (notFound) {
     return (
       <div className="max-w-xl mx-auto">
-        <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">Join the Waitlist</h1>
-        <p className="text-muted-foreground mb-8">You haven't joined the waitlist yet. Sign up below!</p>
+        <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">Register Your Team</h1>
+        <p className="text-muted-foreground mb-8">You haven't registered yet. Sign up below!</p>
         <WaitlistForm onSuccess={fetchEntry} />
       </div>
     );
@@ -74,7 +74,7 @@ const MyWaitlist = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">My Waitlist Details</h1>
+      <h1 className="font-display text-2xl md:text-3xl font-bold mb-2">My Registration</h1>
       <p className="text-muted-foreground mb-8">Your registration information for VentureCapsule.</p>
 
       <div className="glass-card p-6 md:p-8 space-y-0">
@@ -100,4 +100,4 @@ const MyWaitlist = () => {
   );
 };
 
-export default MyWaitlist;
+export default MyRegistration;

@@ -61,7 +61,7 @@ const Index = () => {
                 <h1 className="hero-line hero-headline mb-8 font-headline">Venture Capsule</h1>
                 <p className="hero-line body-large max-w-2xl mb-10 font-body">Create, nurture, and execute solutions to real-life challenges through our round-based competition system.</p>
                 <div className="hero-line flex flex-wrap gap-4 pointer-events-auto">
-                  <Link to="/waitlist"><Button size="lg" className="group">Join Waitlist<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
+                  <Link to="/register"><Button size="lg" className="group">Register<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button></Link>
                   <Link to="/structure"><Button variant="outline" size="lg">How It Works</Button></Link>
                 </div>
               </div>
@@ -112,7 +112,7 @@ const Index = () => {
               <div className="space-y-6">
                 {[
                   { q: "What is VentureCapsule?", a: "VentureCapsule is a business, finance and economics competition for students. Participants create, nurture and execute solutions to real-life challenges across subsections including business pitching, financial literacy, case studies and professional mentoring." },
-                  { q: "Who can participate?", a: "The competition is open to youth worldwide who are interested in business, finance and economics. Teams of 2–6 members register through the waitlist and select a subsection such as Idea Lab, Portfolio Pathways, Intrapreneurship or Case of Crisis." },
+                  { q: "Who can participate?", a: "The competition is open to youth worldwide who are interested in business, finance and economics. Teams of 2–6 members register and select a subsection such as Idea Lab, Portfolio Pathways, Intrapreneurship or Case of Crisis." },
                   { q: "How is the competition structured?", a: "VentureCapsule features 4 main rounds and 2 bring-back rounds. Eliminated teams can re-enter during bring-back rounds, reflecting the 'nurture and execute' philosophy for refining ideas." },
                   { q: "Where and when does it take place?", a: "Check the timeline page for the latest dates and details." },
                   { q: "What makes VentureCapsule different?", a: "VentureCapsule goes beyond pitching with diverse subsections, professional mentoring, idea incubation opportunities after the competition, and a unique bring-back round system that gives participants multiple chances to succeed." },

@@ -13,7 +13,7 @@ import Subsections from "./pages/Subsections";
 import Benefits from "./pages/Benefits";
 import FAQ from "./pages/FAQ";
 import Apply from "./pages/Apply";
-import Waitlist from "./pages/Waitlist";
+import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import Timeline from "./pages/Timeline";
@@ -28,7 +28,7 @@ import DashboardTimeline from "./pages/dashboard/DashboardTimeline";
 import Community from "./pages/dashboard/Community";
 import Guide from "./pages/dashboard/Guide";
 import JudgingCriteria from "./pages/dashboard/JudgingCriteria";
-import MyWaitlist from "./pages/dashboard/MyWaitlist";
+import MyRegistration from "./pages/dashboard/MyRegistration";
 import DashboardAbout from "./pages/dashboard/DashboardAbout";
 import DashboardSubsections from "./pages/dashboard/DashboardSubsections";
 import DashboardBenefits from "./pages/dashboard/DashboardBenefits";
@@ -61,7 +61,7 @@ const App = () => (
                 <Route path="/benefits" element={<Benefits />} />
                 <Route path="/faqs" element={<FAQ />} />
                 <Route path="/apply" element={<Apply />} />
-                <Route path="/waitlist" element={<Waitlist />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/timeline" element={<Timeline />} />
               </Route>
@@ -74,7 +74,7 @@ const App = () => (
                 <Route path="community" element={<Community />} />
                 <Route path="guide" element={<Guide />} />
                 <Route path="judging-criteria" element={<JudgingCriteria />} />
-                <Route path="my-waitlist" element={<MyWaitlist />} />
+                <Route path="my-registration" element={<MyRegistration />} />
                 <Route path="about" element={<DashboardAbout />} />
                 <Route path="pathways" element={<DashboardSubsections />} />
                 <Route path="benefits" element={<DashboardBenefits />} />

@@ -70,7 +70,7 @@ const Contact = () => {
                 <div className="glass-card p-6">
                   <h3 className="font-display font-semibold mb-3">Quick Links</h3>
                   <ul className="space-y-2 text-sm">
-                    <li><Link to="/waitlist" className="text-primary hover:underline">Join the waitlist</Link></li>
+                    <li><Link to="/register" className="text-primary hover:underline">Register</Link></li>
                     <li><Link to="/about" className="text-primary hover:underline">Learn about VentureCapsule</Link></li>
                     <li><Link to="/subsections" className="text-primary hover:underline">Explore competition pathways</Link></li>
                     <li><Link to="/timeline" className="text-primary hover:underline">View competition timeline</Link></li>

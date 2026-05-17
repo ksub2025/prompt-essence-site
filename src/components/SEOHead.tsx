@@ -7,7 +7,7 @@ type PageMeta = { title: string; description: string };
 const pageMeta: Record<string, PageMeta> = {
   '/': {
     title: 'VentureCapsule | Business Competition for Students',
-    description: 'Global online business, finance & economics competition for students. Teams of 2–6 compete across rounds. Join the waitlist today.',
+    description: 'Global online business, finance & economics competition for students. Teams of 2–6 compete across rounds. Register today.',
   },
   '/about': {
     title: 'About | VentureCapsule Student Business Competition',
@@ -33,9 +33,9 @@ const pageMeta: Record<string, PageMeta> = {
     title: 'FAQs | VentureCapsule Competition Answers',
     description: 'Eligibility, structure, rounds, and how to participate in VentureCapsule — answered.',
   },
-  '/waitlist': {
-    title: 'Join Waitlist | VentureCapsule 2026',
-    description: 'Secure your team\'s spot in VentureCapsule — the premier business competition for students.',
+  '/register': {
+    title: 'Register | VentureCapsule 2026',
+    description: 'Register your team for VentureCapsule — the premier business competition for students.',
   },
   '/apply': {
     title: 'Apply | VentureCapsule Pitch Contest',
@@ -47,7 +47,7 @@ const pageMeta: Record<string, PageMeta> = {
   },
   '/login': {
     title: 'Sign In | VentureCapsule',
-    description: 'Sign in to your VentureCapsule account to manage your team and waitlist.',
+    description: 'Sign in to your VentureCapsule account to manage your team and registration.',
   },
   '/reset-password': {
     title: 'Reset Password | VentureCapsule',
@@ -62,7 +62,7 @@ const dashboardMeta: Record<string, PageMeta> = {
   '/dashboard/community': { title: 'Community | Dashboard', description: 'Connect with other VentureCapsule competitors.' },
   '/dashboard/guide': { title: 'Guide | Dashboard', description: 'Step-by-step competitor guide.' },
   '/dashboard/judging-criteria': { title: 'Judging Criteria | Dashboard', description: 'How VentureCapsule entries are judged.' },
-  '/dashboard/my-waitlist': { title: 'My Waitlist | Dashboard', description: 'Manage your team\'s waitlist entry.' },
+  '/dashboard/my-registration': { title: 'My Registration | Dashboard', description: 'Manage your team\'s registration.' },
   '/dashboard/about': { title: 'About | Dashboard', description: 'About VentureCapsule for competitors.' },
   '/dashboard/pathways': { title: 'Pathways | Dashboard', description: 'Choose your competition pathway.' },
   '/dashboard/benefits': { title: 'Benefits | Dashboard', description: 'Competitor benefits overview.' },
@@ -86,7 +86,7 @@ const faqJsonLd = {
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: 'What is VentureCapsule and who is it for?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule is a global business competition for students focused on finance challenges, economics case competitions, and entrepreneurial pitch contests. Teams of 2–6 compete across subsections including business pitching, financial literacy, case studies, and professional mentoring.' } },
-    { '@type': 'Question', name: 'Is this competition open to students worldwide?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The competition is open to students worldwide. Teams of 2–6 members register through the waitlist.' } },
+    { '@type': 'Question', name: 'Is this competition open to students worldwide?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The competition is open to students worldwide. Teams of 2–6 members register.' } },
     { '@type': 'Question', name: 'How is the competition structured?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule features 4 main rounds and 2 bring-back rounds. Eliminated teams can re-enter during bring-back rounds.' } },
     { '@type': 'Question', name: 'When and where does it take place?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule is fully online, starting March 2026.' } },
     { '@type': 'Question', name: 'What makes VentureCapsule different?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule combines pitch contest, finance challenge, and economics case competition with professional mentoring and a unique bring-back round system.' } },

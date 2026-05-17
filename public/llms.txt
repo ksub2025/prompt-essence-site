@@ -6,13 +6,13 @@ VentureCapsule lets students create, nurture, and execute solutions to real-worl
 
 ## Pages
 
-- [Home](/): Overview of the competition and waitlist entry.
+- [Home](/): Overview of the competition and registration.
 - [About](/about): What VentureCapsule is and who it's for.
 - [Pathways](/subsections): The four competition tracks.
 - [Structure](/structure): How the 4 main and 2 bring-back rounds work.
 - [Timeline](/timeline): Key dates for the 2026 season.
 - [Benefits](/benefits): Prizes, certificates, and mentoring on offer.
 - [FAQs](/faqs): Eligibility, format, and participation questions.
-- [Waitlist](/waitlist): Reserve your team's spot.
+- [Register](/register): Reserve your team's spot.
 - [Apply](/apply): Submit your team application.
 - [Contact](/contact): Get in touch with the team.

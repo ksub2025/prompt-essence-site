@@ -73,8 +73,8 @@ const Navigation = () => {
             <Link to="/login">
               <Button variant="outline" size="sm">Log In</Button>
             </Link>
-            <Link to="/waitlist">
-              <Button variant="hero" size="sm">Join Waitlist</Button>
+            <Link to="/register">
+              <Button variant="hero" size="sm">Register</Button>
             </Link>
           </div>
 
@@ -110,8 +110,8 @@ const Navigation = () => {
                 <Link to="/login" onClick={() => setIsOpen(false)}>
                   <Button variant="outline" className="w-full">Log In</Button>
                 </Link>
-                <Link to="/waitlist" onClick={() => setIsOpen(false)}>
-                  <Button variant="hero" className="w-full">Join Waitlist</Button>
+                <Link to="/register" onClick={() => setIsOpen(false)}>
+                  <Button variant="hero" className="w-full">Register</Button>
                 </Link>
               </div>
             </div>
