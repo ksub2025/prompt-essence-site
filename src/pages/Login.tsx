@@ -10,7 +10,6 @@ import OTPVerification from "@/components/auth/OTPVerification";
 import ForgotPasswordForm from "@/components/auth/ForgotPasswordForm";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
 import vcLogo from "@/assets/vc-logo.png";
 
 type Mode = "login" | "signup" | "forgot" | "verify";
@@ -112,10 +111,13 @@ const Login = () => {
     setGoogleLoading(true);
     toast({ title: "Connecting to Google...", description: "Please wait while we redirect you." });
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin + "/login",
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: window.location.origin + "/login",
+        },
       });
-      if (result.error) {
+      if (error) {
         toast({ title: "Google sign-in failed", description: "Could not connect to Google. Please try again.", variant: "destructive" });
         setGoogleLoading(false);
       }

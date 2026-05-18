@@ -1,73 +1,88 @@
-# Welcome to your Lovable project
+# VentureCapsule
 
-## Project info
+Marketing site and participant portal for the VentureCapsule competition.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Tech Stack
 
-## How can I edit this code?
+- **Framework**: React 18 + Vite 5 + TypeScript
+- **Routing**: React Router v6
+- **UI**: shadcn/ui (Radix) + Tailwind CSS
+- **Data**: TanStack Query + Supabase (Postgres + Auth + Edge Functions)
+- **Forms**: react-hook-form + zod
+- **Animation/3D**: framer-motion, gsap, three / @react-three/fiber
 
-There are several ways of editing your application.
+## Local Development
 
-**Use Lovable**
+Requirements: Node 20 LTS (or >= 18), npm.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+git clone <your-repo>
+cd prompt-essence-site
+npm install
+cp .env.example .env       # fill in Supabase values from your dashboard
+npm run dev                # serves on http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+Get the env values from your Supabase project: **Settings -> API**.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Build
 
-**Use GitHub Codespaces**
+```bash
+npm run build              # outputs to dist/
+npm run preview            # preview the production build locally
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Deployment (Vercel)
 
-## What technologies are used for this project?
+1. Import the repo in Vercel - it auto-detects Vite.
+2. Add the three `VITE_*` env vars in **Project Settings -> Environment Variables** (Production, Preview, Development).
+3. Deploy. The included `vercel.json` handles SPA routing.
 
-This project is built with:
+After the first deploy:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Supabase -> Auth -> URL Configuration**: set **Site URL** to your custom domain and add both the Vercel preview URL and the production domain to **Additional Redirect URLs**.
+- **Google reCAPTCHA admin**: add your Vercel URL(s) and custom domain to allowed domains.
+- **Supabase -> Auth -> Providers -> Google**: ensure the Authorized redirect URI on the Google Cloud OAuth client side is `https://<your-supabase-ref>.supabase.co/auth/v1/callback`.
 
-## How can I deploy this project?
+## Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```
+src/
+  pages/                React Router routes
+  components/           UI components (shadcn + custom)
+  layouts/              PublicLayout, DashboardLayout
+  integrations/
+    supabase/           Supabase client + generated types
+  hooks/                Custom React hooks
+  lib/                  Utilities
+supabase/
+  functions/            Edge Functions (verify-recaptcha, report-comment)
+  migrations/           SQL migrations (source of truth for schema)
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Database Schema
 
-Yes, you can!
+Tables (all in `public`, all with RLS enabled):
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- `profiles` - one row per auth user, auto-created via the `on_auth_user_created` trigger
+- `waitlist` - public registration submissions
+- `comments`, `comment_likes`, `comment_reports` - community discussion thread
+- `contact_messages` - contact form submissions
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Edge Functions:
+
+- `verify-recaptcha` - verifies Google reCAPTCHA v2 tokens (uses `RECAPTCHA_SECRET_KEY` secret)
+- `report-comment` - authenticated insert into `comment_reports`
+
+### Regenerating types after schema changes
+
+```bash
+npx supabase login
+npx supabase gen types typescript --project-id <your-project-ref> > src/integrations/supabase/types.ts
+```
+
+## Notes
+
+- `VITE_*` env vars are public (embedded in the bundle). Never put service-role keys in them.
+- The reCAPTCHA site key is currently in `src/components/ReCaptcha.tsx`; the secret key lives only in Supabase Edge Function secrets.
+- 3D hero (`HeroScene.tsx`) is desktop-only; mobile gets a static fallback.
