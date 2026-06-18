@@ -3,11 +3,10 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { RefreshCw, Trophy, Calendar } from "lucide-react";
 
 const timelineEvents = [
-  { id: 1, title: "Round 1", date: "June 17th - 20th", position: "top", icon: Calendar, isBringBack: false },
-  { id: 3, title: "Bring-Back Round 1", date: "June 23rd - 24th", position: "bottom", icon: RefreshCw, isBringBack: true },
-  { id: 2, title: "Round 2", date: "June 27th - July 1st", position: "top", icon: Calendar, isBringBack: false },
-  { id: 6, title: "Final Round", date: "July 4th - 7th", position: "bottom", icon: Trophy, isBringBack: false },
-  { id: 7, title: "Results Day", date: "July 10th", position: "top", icon: Trophy, isBringBack: false, isResults: true },
+  { id: 1, title: "Round 1", date: "July 14th", position: "top", icon: Calendar, isBringBack: false },
+  { id: 3, title: "Bring-Back Round 1", date: "July 16th", position: "bottom", icon: RefreshCw, isBringBack: true },
+  { id: 2, title: "Round 2", date: "July 18th", position: "top", icon: Calendar, isBringBack: false },
+  { id: 6, title: "Final Round", date: "July 20th", position: "bottom", icon: Trophy, isBringBack: false },
 ];
 
 const Timeline = () => {
@@ -39,9 +38,9 @@ const Timeline = () => {
                   <AnimatedSection key={event.id} delay={index * 0.08}>
                     <div className={`flex items-center gap-6 md:gap-8 ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}>
                       <div className={`flex-1 ml-16 md:ml-0 ${isEven ? "md:text-right" : "md:text-left"}`}>
-                        <div className={`glass-card p-6 inline-block w-full md:w-auto md:min-w-64 ${event.isResults ? "border-primary/50 ring-2 ring-primary/20" : ""} ${isEven ? "md:ml-auto" : "md:mr-auto"}`}>
+                        <div className={`glass-card p-6 inline-block w-full md:w-auto md:min-w-64 ${isEven ? "md:ml-auto" : "md:mr-auto"}`}>
                           <div className={`flex items-center gap-3 mb-2 ${isEven ? "md:flex-row-reverse" : ""}`}>
-                            <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${event.isBringBack ? "bg-accent text-accent-foreground" : event.isResults ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}>
+                            <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${event.isBringBack ? "bg-accent text-accent-foreground" : "bg-primary/10 text-primary"}`}>
                               <Icon className="w-5 h-5" />
                             </div>
                             <h3 className="font-display font-semibold text-lg">{event.title}</h3>
@@ -49,7 +48,7 @@ const Timeline = () => {
                           <p className="text-muted-foreground">{event.date}</p>
                         </div>
                       </div>
-                      <div className={`absolute left-6 md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full border-3 z-10 ${event.isResults ? "bg-primary border-primary" : event.isBringBack ? "bg-accent border-accent" : "bg-background border-primary"}`} style={{ borderWidth: '3px' }} />
+                      <div className={`absolute left-6 md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full border-3 z-10 ${event.isBringBack ? "bg-accent border-accent" : "bg-background border-primary"}`} style={{ borderWidth: '3px' }} />
                       <div className="hidden md:block flex-1" />
                     </div>
                   </AnimatedSection>
