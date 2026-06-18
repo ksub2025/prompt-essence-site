@@ -48,7 +48,7 @@ const Timeline = () => {
                           <p className="text-muted-foreground">{event.date}</p>
                         </div>
                       </div>
-                      <div className={`absolute left-6 md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full border-3 z-10 ${event.isResults ? "bg-primary border-primary" : event.isBringBack ? "bg-accent border-accent" : "bg-background border-primary"}`} style={{ borderWidth: '3px' }} />
+                      <div className={`absolute left-6 md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full border-3 z-10 ${event.isBringBack ? "bg-accent border-accent" : "bg-background border-primary"}`} style={{ borderWidth: '3px' }} />
                       <div className="hidden md:block flex-1" />
                     </div>
                   </AnimatedSection>
