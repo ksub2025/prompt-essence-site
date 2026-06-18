@@ -40,7 +40,7 @@ const Timeline = () => {
                       <div className={`flex-1 ml-16 md:ml-0 ${isEven ? "md:text-right" : "md:text-left"}`}>
                         <div className={`glass-card p-6 inline-block w-full md:w-auto md:min-w-64 ${isEven ? "md:ml-auto" : "md:mr-auto"}`}>
                           <div className={`flex items-center gap-3 mb-2 ${isEven ? "md:flex-row-reverse" : ""}`}>
-                            <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${event.isBringBack ? "bg-accent text-accent-foreground" : event.isResults ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}>
+                            <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${event.isBringBack ? "bg-accent text-accent-foreground" : "bg-primary/10 text-primary"}`}>
                               <Icon className="w-5 h-5" />
                             </div>
                             <h3 className="font-display font-semibold text-lg">{event.title}</h3>
