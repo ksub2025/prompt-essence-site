@@ -10,7 +10,7 @@ const Register = () => {
             <div className="max-w-3xl mx-auto text-center">
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Register</p>
               <h1 className="section-headline mb-8">Register Your Team</h1>
-              <p className="body-large">Be the first to know when VentureCapsule opens applications. Get exclusive updates and early access.</p>
+              <p className="body-large">Get exclusive updates and early access.</p>
               <div className="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20 text-left max-w-md mx-auto">
                 <p className="text-primary font-semibold text-sm uppercase tracking-wide mb-2">Early Registration Pricing</p>
                 <ul className="text-muted-foreground space-y-1 text-sm">
