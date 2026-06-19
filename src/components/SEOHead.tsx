@@ -19,7 +19,7 @@ const pageMeta: Record<string, PageMeta> = {
   },
   '/structure': {
     title: 'Structure | VentureCapsule Competition Rounds',
-    description: 'Four main rounds plus two bring-back rounds — how the VentureCapsule student business competition works.',
+    description: 'Three main rounds plus one bring-back round — how the VentureCapsule student business competition works.',
   },
   '/timeline': {
     title: 'Timeline | VentureCapsule 2026 Competition',
@@ -77,7 +77,7 @@ const eventJsonLd = {
   eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
   eventStatus: 'https://schema.org/EventScheduled',
   startDate: '2026-03-01',
-  description: 'VentureCapsule is a global business competition for students. Teams of 2–6 compete across 4 main rounds with bring-back rounds.',
+  description: 'VentureCapsule is a global business competition for students. Teams of 2–6 compete across 3 main rounds with a bring-back round.',
   organizer: { '@type': 'Organization', name: 'Venture Capsule', url: 'https://venturecapsule.org' },
 };
 
@@ -87,7 +87,7 @@ const faqJsonLd = {
   mainEntity: [
     { '@type': 'Question', name: 'What is VentureCapsule and who is it for?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule is a global business competition for students focused on finance challenges, economics case competitions, and entrepreneurial pitch contests. Teams of 2–6 compete across subsections including business pitching, financial literacy, case studies, and professional mentoring.' } },
     { '@type': 'Question', name: 'Is this competition open to students worldwide?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The competition is open to students worldwide. Teams of 2–6 members register.' } },
-    { '@type': 'Question', name: 'How is the competition structured?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule features 4 main rounds and 2 bring-back rounds. Eliminated teams can re-enter during bring-back rounds.' } },
+    { '@type': 'Question', name: 'How is the competition structured?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule features 3 main rounds and 1 bring-back round. Eliminated teams can re-enter during the bring-back round.' } },
     { '@type': 'Question', name: 'When and where does it take place?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule is fully online, starting March 2026.' } },
     { '@type': 'Question', name: 'What makes VentureCapsule different?', acceptedAnswer: { '@type': 'Answer', text: 'VentureCapsule combines pitch contest, finance challenge, and economics case competition with professional mentoring and a unique bring-back round system.' } },
   ],

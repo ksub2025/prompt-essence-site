@@ -6,8 +6,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 const rounds = [
   { number: "01", title: "Round 1", description: "The opening round of the competition where all participants submit their initial proposals.", hasBringBack: false },
   { number: "02", title: "Round 2", description: "Second round of evaluation with refined submissions from successful Round 1 participants.", hasBringBack: true },
-  { number: "03", title: "Round 3", description: "Advanced round where participants further develop their projects with mentor guidance.", hasBringBack: true },
-  { number: "04", title: "Final Round", description: "The grand finale where top participants present their completed projects to the judging panel.", hasBringBack: false },
+  { number: "03", title: "Final Round", description: "The grand finale where top participants present their completed projects to the judging panel.", hasBringBack: false },
 ];
 
 const Structure = () => {
@@ -20,7 +19,7 @@ const Structure = () => {
               <p className="text-primary text-sm font-medium mb-4 uppercase tracking-widest">Competition Structure</p>
               <h1 className="section-headline mb-8">Round-Based Competition</h1>
               <p className="body-large">
-                This competition is a round-based competition with 4 rounds and 2 bring back rounds. 
+                This competition is a round-based competition with 3 rounds and 1 bring back round. 
                 Check the <Link to="/timeline" className="text-primary hover:underline">competition timeline</Link> for exact dates.
                 Each <Link to="/subsections" className="text-primary hover:underline">pathway</Link> follows the same round structure.
               </p>

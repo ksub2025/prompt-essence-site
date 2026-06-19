@@ -1,6 +1,6 @@
 # VentureCapsule
 
-> Global online business, finance, and economics competition for students. Teams of 2–6 compete across 4 main rounds plus 2 bring-back rounds.
+> Global online business, finance, and economics competition for students. Teams of 2–6 compete across 3 main rounds plus 1 bring-back round.
 
 VentureCapsule lets students create, nurture, and execute solutions to real-world challenges across four pathways — Idea Lab, Portfolio Pathways, Intrapreneurship, and Case of Crisis — with professional mentoring and cash prizes.
 
@@ -9,7 +9,7 @@ VentureCapsule lets students create, nurture, and execute solutions to real-worl
 - [Home](/): Overview of the competition and registration.
 - [About](/about): What VentureCapsule is and who it's for.
 - [Pathways](/subsections): The four competition tracks.
-- [Structure](/structure): How the 4 main and 2 bring-back rounds work.
+- [Structure](/structure): How the 3 main and 1 bring-back round work.
 - [Timeline](/timeline): Key dates for the 2026 season.
 - [Benefits](/benefits): Prizes, certificates, and mentoring on offer.
 - [FAQs](/faqs): Eligibility, format, and participation questions.
