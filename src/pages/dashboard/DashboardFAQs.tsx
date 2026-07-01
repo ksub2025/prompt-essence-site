@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   { q: "What is VentureCapsule?", a: "VentureCapsule is a business, finance and economics competition for students. Participants create, nurture and execute solutions to real-life challenges across subsections including business pitching, financial literacy, case studies and professional mentoring." },
-  { q: "Who can participate?", a: "The competition is open to youth worldwide who are interested in business, finance and economics. Teams of 2–6 members register and select a subsection such as Idea Lab, Portfolio Pathways, Intrapreneurship or Case of Crisis." },
+  { q: "Who can participate?", a: "The competition is open to youth worldwide who are interested in business, finance and economics. Teams of 1–6 members register and select a subsection such as Idea Lab, Portfolio Pathways, Intrapreneurship or Case of Crisis." },
   { q: "How is the competition structured?", a: "VentureCapsule features 3 main rounds and 1 bring-back round. Eliminated teams can re-enter during the bring-back round to refine their ideas and come back stronger." },
   { q: "Where and when does it take place?", a: "The competition is held online. Check the Timeline page in your dashboard for the latest dates and details." },
   { q: "What makes VentureCapsule different?", a: "VentureCapsule goes beyond pitching with diverse competition pathways, professional mentoring, idea incubation opportunities after the competition, and a unique bring-back round." },

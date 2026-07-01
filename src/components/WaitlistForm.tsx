@@ -89,7 +89,7 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
             <FormItem><FormLabel>Team Name</FormLabel><FormControl><Input placeholder="Enter your team name" {...field} /></FormControl><FormMessage /></FormItem>
           )} />
           <FormField control={form.control} name="team_members" render={({ field }) => (
-            <FormItem><FormLabel>Team Members (2-6 members)</FormLabel><FormControl><Textarea placeholder="List your team members' names, separated by commas" {...field} /></FormControl><FormMessage /></FormItem>
+            <FormItem><FormLabel>Team Members (1-6 members)</FormLabel><FormControl><Textarea placeholder="List your team members' names, separated by commas" {...field} /></FormControl><FormMessage /></FormItem>
           )} />
           <FormField control={form.control} name="email" render={({ field }) => (
             <FormItem><FormLabel>Email Address</FormLabel><FormControl><Input type="email" placeholder="Enter your email" {...field} /></FormControl><FormMessage /></FormItem>
